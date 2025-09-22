@@ -1,14 +1,32 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 
-namespace Reclutamiento.WebApp.Controllers
+namespace ReclutamientoFrontend.WebApp.Controllers
 {
     public class AuthController : Controller
     {
-        // GET: AuthController
-        public ActionResult Index()
+        private readonly IConfiguration _config;
+
+        public AuthController(IConfiguration config)
         {
+            _config = config;
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            ViewData["SupabaseUrl"] = _config["Supabase:Url"];
+            ViewData["SupabaseAnonKey"] = _config["Supabase:AnonKey"];
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            // Eliminar cookies de sesión
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
