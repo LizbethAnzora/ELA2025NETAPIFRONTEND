@@ -1,31 +1,22 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Reclutamiento.WebApp.Models;
+using ReclutamientoFrontend.WebApp.Services;
+using System.Threading.Tasks;
 
-namespace Reclutamiento.WebApp.Controllers;
-
-public class HomeController : Controller
+namespace ReclutamientoFrontend.WebApp.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    public class HomeController : Controller
     {
-        _logger = logger;
-    }
+        private readonly VacanteService _vacanteService;
 
-    public IActionResult Index()
-    {
-        return View();
-    }
+        public HomeController(VacanteService vacanteService)
+        {
+            _vacanteService = vacanteService;
+        }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        public async Task<IActionResult> Index()
+        {
+            var vacantes = await _vacanteService.ObtenerVacantesPublicasAsync();
+            return View(vacantes);
+        }
     }
 }
