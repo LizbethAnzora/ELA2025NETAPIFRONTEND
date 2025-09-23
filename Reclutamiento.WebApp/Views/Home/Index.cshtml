@@ -1,8 +1,46 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<ReclutamientoFrontend.WebApp.Models.Dtos.VacanteDto>
+
+@{
+    ViewData["Title"] = "Inicio - Vacantes Disponibles";
+    var userRole = User?.FindFirst("role")?.Value ?? "Guest";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1 class="mb-4 text-primary">
+    <i class="fa-solid fa-briefcase"></i> Vacantes Disponibles
+</h1>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        <i class="fa-solid fa-circle-info"></i> Actualmente no hay vacantes disponibles.
+    </div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var vacante in Model)
+        {
+            <div class="col">
+                <div class="card shadow-sm h-100 border-0">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-primary">
+                            <i class="fa-solid fa-user-tie"></i> @vacante.Titulo
+                        </h5>
+                        <p class="card-text flex-grow-1">@vacante.Descripcion</p>
+                        <p class="text-muted">
+                            <i class="fa-solid fa-building"></i> Publicada por: @vacante.AdministradorNombre
+                        </p>
+
+                        @if (userRole == "Solicitante")
+                        {
+                            <a asp-controller="Solicitudes" asp-action="Create" asp-route-vacanteId="@vacante.Id"
+                                class="btn btn-success mt-2">
+                                <i class="fa-solid fa-paper-plane"></i> Aplicar
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
