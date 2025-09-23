@@ -9,16 +9,16 @@ namespace ReclutamientoFrontend.WebApp.Models.Dtos
         [Required]
         public int VacanteId { get; set; }
 
-        public string VacanteTitulo { get; set; }
+        public string? VacanteTitulo { get; set; }
 
         [Required(ErrorMessage = "El nombre del solicitante es obligatorio")]
-        public string NombreSolicitante { get; set; }
+        public string? NombreSolicitante { get; set; }
 
         [Required(ErrorMessage = "El correo del solicitante es obligatorio")]
         [EmailAddress(ErrorMessage = "Ingrese un correo válido")]
-        public string EmailSolicitante { get; set; }
+        public string? EmailSolicitante { get; set; }
 
         [Required(ErrorMessage = "El campo de experiencia es obligatorio")]
-        public string Experiencia { get; set; }
+        public string? Experiencia { get; set; }
     }
 }
