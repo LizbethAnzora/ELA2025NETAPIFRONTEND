@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Iniciar Sesión";
+}
+
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4" style="max-width: 420px; width: 100%;">
+        <div class="text-center mb-4">
+            <i class="bi bi-github display-3 text-dark"></i>
+            <h2 class="mt-3">Bienvenido</h2>
+            <p class="text-muted">Inicia sesión para continuar</p>
+        </div>
+
+        <form asp-action="Login" method="post">
+            <div class="d-grid">
+                <button type="submit" class="btn btn-dark btn-lg">
+                    <i class="bi bi-github"></i> Iniciar sesión con GitHub
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
