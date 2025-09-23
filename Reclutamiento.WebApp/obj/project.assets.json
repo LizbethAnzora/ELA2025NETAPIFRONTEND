@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\esmer\\.nuget\\packages\\": {}
+    "C:\\Users\\anzor\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\esmer\\OneDrive\\Escritorio\\RECLUTAMIENTOFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj",
+      "projectUniqueName": "C:\\Users\\anzor\\OneDrive\\Documents\\ELA2025NETAPIFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj",
       "projectName": "Reclutamiento.WebApp",
-      "projectPath": "C:\\Users\\esmer\\OneDrive\\Escritorio\\RECLUTAMIENTOFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj",
-      "packagesPath": "C:\\Users\\esmer\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\esmer\\OneDrive\\Escritorio\\RECLUTAMIENTOFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\obj\\",
+      "projectPath": "C:\\Users\\anzor\\OneDrive\\Documents\\ELA2025NETAPIFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj",
+      "packagesPath": "C:\\Users\\anzor\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\anzor\\OneDrive\\Documents\\ELA2025NETAPIFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\esmer\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\anzor\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
