@@ -1,26 +1,46 @@
-using ReclutamientoFrontend.WebApp.Models.Dtos;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ReclutamientoFrontend.WebApp.Models.Dtos;
 
 namespace ReclutamientoFrontend.WebApp.Services
 {
-    public class UsuarioService : ApiServiceBase
+    public class UsuarioService
     {
-        public UsuarioService(HttpClient httpClient) : base(httpClient) { }
+        private readonly HttpClient _http;
 
-        public Task<List<UsuarioDto>> GetUsuariosAsync()
-            => GetAsync<List<UsuarioDto>>("api/usuarios");
+        public UsuarioService(HttpClient http)
+        {
+            _http = http;
+        }
 
-        public Task<UsuarioDto> GetUsuarioByIdAsync(int id)
-            => GetAsync<UsuarioDto>($"api/usuarios/{id}");
+        public async Task<IEnumerable<UsuarioDto>> ObtenerUsuariosAsync()
+        {
+            return await _http.GetFromJsonAsync<IEnumerable<UsuarioDto>>("api/usuarios");
+        }
 
-        public Task<UsuarioDto> CrearUsuarioAsync(UsuarioDto usuario)
-            => PostAsync<UsuarioDto>("api/usuarios", usuario);
+        public async Task<UsuarioDto> ObtenerUsuarioPorIdAsync(int id)
+        {
+            return await _http.GetFromJsonAsync<UsuarioDto>($"api/usuarios/{id}");
+        }
 
-        public Task<UsuarioDto> ActualizarUsuarioAsync(int id, UsuarioDto usuario)
-            => PutAsync<UsuarioDto>($"api/usuarios/{id}", usuario);
+        public async Task<bool> CrearUsuarioAsync(UsuarioDto usuario)
+        {
+            var response = await _http.PostAsJsonAsync("api/usuarios", usuario);
+            return response.IsSuccessStatusCode;
+        }
 
-        public Task EliminarUsuarioAsync(int id)
-            => DeleteAsync($"api/usuarios/{id}");
+        public async Task<bool> EditarUsuarioAsync(int id, UsuarioDto usuario)
+        {
+            var response = await _http.PutAsJsonAsync($"api/usuarios/{id}", usuario);
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> EliminarUsuarioAsync(int id)
+        {
+            var response = await _http.DeleteAsync($"api/usuarios/{id}");
+            return response.IsSuccessStatusCode;
+        }
     }
 }

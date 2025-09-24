@@ -10,10 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Configuration
 var configuration = builder.Configuration;
-var apiBase = configuration["ApiBaseUrl"] ?? "http://localhost:5000/";
+var apiBase = configuration["ApiBaseUrl"] ?? "http://localhost:5148/";
 
 // Add services
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<SolicitudService>();
+builder.Services.AddTransient<VacanteService>();
+builder.Services.AddTransient<UsuarioService>();
 
 // Session & HttpContext accessor
 builder.Services.AddDistributedMemoryCache();

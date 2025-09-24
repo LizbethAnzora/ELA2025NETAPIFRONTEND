@@ -7,8 +7,6 @@ c:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\bin\D
 c:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\bin\Debug\net8.0\Reclutamiento.WebApp.dll
 c:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\bin\Debug\net8.0\Reclutamiento.WebApp.pdb
 c:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\obj\Debug\net8.0\Reclutamiento.WebApp.GeneratedMSBuildEditorConfig.editorconfig
-c:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\obj\Debug\net8.0\Reclutamiento.WebApp.AssemblyInfoInputs.cache
-c:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\obj\Debug\net8.0\Reclutamiento.WebApp.AssemblyInfo.cs
 c:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\obj\Debug\net8.0\Reclutamiento.WebApp.csproj.CoreCompileInputs.cache
 c:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\obj\Debug\net8.0\Reclutamiento.WebApp.MvcApplicationPartsAssemblyInfo.cache
 c:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\obj\Debug\net8.0\Reclutamiento.WebApp.RazorAssemblyInfo.cache
@@ -28,3 +26,7 @@ c:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\obj\D
 c:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\obj\Debug\net8.0\Reclutamiento.WebApp.pdb
 c:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\obj\Debug\net8.0\Reclutamiento.WebApp.genruntimeconfig.cache
 c:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\obj\Debug\net8.0\ref\Reclutamiento.WebApp.dll
+C:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\obj\Debug\net8.0\Reclutamiento.WebApp.csproj.AssemblyReference.cache
+C:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\obj\Debug\net8.0\Reclutamiento.WebApp.sourcelink.json
+C:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\bin\Debug\net8.0\System.Security.Permissions.dll
+C:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\obj\Debug\net8.0\Reclutam.4E59AA76.Up2Date

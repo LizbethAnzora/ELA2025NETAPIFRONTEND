@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using ReclutamientoFrontend.WebApp.Services;
 using ReclutamientoFrontend.WebApp.Models.Dtos;
-using System.Threading.Tasks;
 
 namespace ReclutamientoFrontend.WebApp.Controllers
 {
@@ -14,62 +14,69 @@ namespace ReclutamientoFrontend.WebApp.Controllers
             _vacanteService = vacanteService;
         }
 
-        public async Task<IActionResult> Index(string filtroTitulo, string filtroAdmin)
+        public async Task<IActionResult> Index()
         {
-            var vacantes = await _vacanteService.ObtenerVacantesAsync(filtroTitulo, filtroAdmin);
+            var vacantes = await _vacanteService.ObtenerVacantesAsync();
             return View(vacantes);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Detalles(int id)
+        {
+            var vacante = await _vacanteService.ObtenerVacantePorIdAsync(id);
+            if (vacante == null) return NotFound();
+            return View(vacante);
+        }
+
+        [HttpGet]
+        public IActionResult Crear()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(VacanteDto dto)
+        public async Task<IActionResult> Crear(VacanteDto vacante)
         {
-            if (!ModelState.IsValid) return View(dto);
+            if (!ModelState.IsValid) return View(vacante);
 
-            var creado = await _vacanteService.CrearVacanteAsync(dto);
-            if (creado)
-                return RedirectToAction(nameof(Index));
+            var ok = await _vacanteService.CrearVacanteAsync(vacante);
+            if (ok) return RedirectToAction(nameof(Index));
 
             ModelState.AddModelError("", "No se pudo crear la vacante.");
-            return View(dto);
+            return View(vacante);
         }
 
-        public async Task<IActionResult> Edit(int id)
+        [HttpGet]
+        public async Task<IActionResult> Editar(int id)
         {
             var vacante = await _vacanteService.ObtenerVacantePorIdAsync(id);
             if (vacante == null) return NotFound();
-
             return View(vacante);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, VacanteDto dto)
+        public async Task<IActionResult> Editar(int id, VacanteDto vacante)
         {
-            if (!ModelState.IsValid) return View(dto);
+            if (!ModelState.IsValid) return View(vacante);
 
-            var actualizado = await _vacanteService.EditarVacanteAsync(id, dto);
-            if (actualizado)
-                return RedirectToAction(nameof(Index));
+            var ok = await _vacanteService.EditarVacanteAsync(id, vacante);
+            if (ok) return RedirectToAction(nameof(Index));
 
-            ModelState.AddModelError("", "No se pudo actualizar la vacante.");
-            return View(dto);
-        }
-
-        public async Task<IActionResult> Details(int id)
-        {
-            var vacante = await _vacanteService.ObtenerVacantePorIdAsync(id);
-            if (vacante == null) return NotFound();
-
+            ModelState.AddModelError("", "No se pudo editar la vacante.");
             return View(vacante);
         }
 
-        public async Task<IActionResult> Solicitudes(int id)
+        [HttpPost]
+        public async Task<IActionResult> Eliminar(int id)
         {
-            var solicitudes = await _vacanteService.ObtenerSolicitudesPorVacanteAsync(id);
+            var ok = await _vacanteService.EliminarVacanteAsync(id);
+            if (!ok) return BadRequest();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Solicitudes(int vacanteId)
+        {
+            var solicitudes = await _vacanteService.ObtenerSolicitudesPorVacanteAsync(vacanteId);
             return View(solicitudes);
         }
     }

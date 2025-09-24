@@ -15,7 +15,7 @@ namespace ReclutamientoFrontend.WebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var vacantes = await _vacanteService.ObtenerVacantesPublicasAsync();
+            var vacantes = await _vacanteService.ObtenerVacantesAsync();
             return View(vacantes);
         }
     }

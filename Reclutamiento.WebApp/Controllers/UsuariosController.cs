@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using ReclutamientoFrontend.WebApp.Services;
 using ReclutamientoFrontend.WebApp.Models.Dtos;
-using System.Threading.Tasks;
 
 namespace ReclutamientoFrontend.WebApp.Controllers
 {
@@ -14,74 +14,64 @@ namespace ReclutamientoFrontend.WebApp.Controllers
             _usuarioService = usuarioService;
         }
 
-        public async Task<IActionResult> Index(string filtroNombre)
+        public async Task<IActionResult> Index()
         {
-            var usuarios = await _usuarioService.ObtenerUsuariosAsync(filtroNombre);
+            var usuarios = await _usuarioService.ObtenerUsuariosAsync();
             return View(usuarios);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Detalles(int id)
+        {
+            var usuario = await _usuarioService.ObtenerUsuarioPorIdAsync(id);
+            if (usuario == null) return NotFound();
+            return View(usuario);
+        }
+
+        [HttpGet]
+        public IActionResult Crear()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(UsuarioDto dto)
+        public async Task<IActionResult> Crear(UsuarioDto usuario)
         {
-            if (!ModelState.IsValid) return View(dto);
+            if (!ModelState.IsValid) return View(usuario);
 
-            var creado = await _usuarioService.CrearUsuarioAsync(dto);
-            if (creado)
-                return RedirectToAction(nameof(Index));
+            var ok = await _usuarioService.CrearUsuarioAsync(usuario);
+            if (ok) return RedirectToAction(nameof(Index));
 
             ModelState.AddModelError("", "No se pudo crear el usuario.");
-            return View(dto);
+            return View(usuario);
         }
 
-        public async Task<IActionResult> Edit(int id)
+        [HttpGet]
+        public async Task<IActionResult> Editar(int id)
         {
             var usuario = await _usuarioService.ObtenerUsuarioPorIdAsync(id);
             if (usuario == null) return NotFound();
-
             return View(usuario);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, UsuarioDto dto)
+        public async Task<IActionResult> Editar(int id, UsuarioDto usuario)
         {
-            if (!ModelState.IsValid) return View(dto);
+            if (!ModelState.IsValid) return View(usuario);
 
-            var actualizado = await _usuarioService.EditarUsuarioAsync(id, dto);
-            if (actualizado)
-                return RedirectToAction(nameof(Index));
+            var ok = await _usuarioService.EditarUsuarioAsync(id, usuario);
+            if (ok) return RedirectToAction(nameof(Index));
 
-            ModelState.AddModelError("", "No se pudo actualizar el usuario.");
-            return View(dto);
-        }
-
-        public async Task<IActionResult> Details(int id)
-        {
-            var usuario = await _usuarioService.ObtenerUsuarioPorIdAsync(id);
-            if (usuario == null) return NotFound();
+            ModelState.AddModelError("", "No se pudo editar el usuario.");
             return View(usuario);
         }
 
-        public async Task<IActionResult> Delete(int id)
+        [HttpPost]
+        public async Task<IActionResult> Eliminar(int id)
         {
-            var usuario = await _usuarioService.ObtenerUsuarioPorIdAsync(id);
-            if (usuario == null) return NotFound();
-            return View(usuario);
-        }
+            var ok = await _usuarioService.EliminarUsuarioAsync(id);
+            if (!ok) return BadRequest();
 
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var eliminado = await _usuarioService.EliminarUsuarioAsync(id);
-            if (eliminado)
-                return RedirectToAction(nameof(Index));
-
-            ModelState.AddModelError("", "No se pudo eliminar el usuario.");
-            return View();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

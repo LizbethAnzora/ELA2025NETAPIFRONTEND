@@ -1,26 +1,51 @@
-using ReclutamientoFrontend.WebApp.Models.Dtos;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ReclutamientoFrontend.WebApp.Models.Dtos;
 
 namespace ReclutamientoFrontend.WebApp.Services
 {
-    public class VacanteService : ApiServiceBase
+    public class VacanteService
     {
-        public VacanteService(HttpClient httpClient) : base(httpClient) { }
+        private readonly HttpClient _http;
 
-        public Task<List<VacanteDto>> GetVacantesAsync()
-            => GetAsync<List<VacanteDto>>("api/vacantes");
+        public VacanteService(HttpClient http)
+        {
+            _http = http;
+        }
 
-        public Task<VacanteDto> GetVacanteByIdAsync(int id)
-            => GetAsync<VacanteDto>($"api/vacantes/{id}");
+        public async Task<IEnumerable<VacanteDto>> ObtenerVacantesAsync()
+        {
+            return await _http.GetFromJsonAsync<IEnumerable<VacanteDto>>("api/vacantes");
+        }
 
-        public Task<VacanteDto> CrearVacanteAsync(VacanteDto vacante)
-            => PostAsync<VacanteDto>("api/vacantes", vacante);
+        public async Task<VacanteDto> ObtenerVacantePorIdAsync(int id)
+        {
+            return await _http.GetFromJsonAsync<VacanteDto>($"api/vacantes/{id}");
+        }
 
-        public Task<VacanteDto> ActualizarVacanteAsync(int id, VacanteDto vacante)
-            => PutAsync<VacanteDto>($"api/vacantes/{id}", vacante);
+        public async Task<bool> CrearVacanteAsync(VacanteDto vacante)
+        {
+            var response = await _http.PostAsJsonAsync("api/vacantes", vacante);
+            return response.IsSuccessStatusCode;
+        }
 
-        public Task EliminarVacanteAsync(int id)
-            => DeleteAsync($"api/vacantes/{id}");
+        public async Task<bool> EditarVacanteAsync(int id, VacanteDto vacante)
+        {
+            var response = await _http.PutAsJsonAsync($"api/vacantes/{id}", vacante);
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> EliminarVacanteAsync(int id)
+        {
+            var response = await _http.DeleteAsync($"api/vacantes/{id}");
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<IEnumerable<SolicitudDto>> ObtenerSolicitudesPorVacanteAsync(int vacanteId)
+        {
+            return await _http.GetFromJsonAsync<IEnumerable<SolicitudDto>>($"api/vacantes/{vacanteId}/solicitudes");
+        }
     }
 }
