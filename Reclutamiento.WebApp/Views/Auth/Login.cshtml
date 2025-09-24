@@ -2,20 +2,35 @@
     ViewData["Title"] = "Iniciar Sesión";
 }
 
-<div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="card shadow-lg p-4" style="max-width: 420px; width: 100%;">
-        <div class="text-center mb-4">
-            <i class="bi bi-github display-3 text-dark"></i>
-            <h2 class="mt-3">Bienvenido</h2>
-            <p class="text-muted">Inicia sesión para continuar</p>
-        </div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-dark text-white text-center">
+                    <h3><i class="fa-brands fa-github"></i> Iniciar Sesión</h3>
+                </div>
+                <div class="card-body text-center">
 
-        <form asp-action="Login" method="post">
-            <div class="d-grid">
-                <button type="submit" class="btn btn-dark btn-lg">
-                    <i class="bi bi-github"></i> Iniciar sesión con GitHub
-                </button>
+                    <p class="mb-4">Accede con tu cuenta de GitHub para continuar.</p>
+
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            @TempData["Error"]
+                        </div>
+                    }
+
+                    <!-- Botón que redirige al controlador -->
+                    <a asp-controller="Auth" asp-action="LoginWithGithub" 
+                       class="btn btn-dark btn-lg w-100">
+                        <i class="fa-brands fa-github"></i> Iniciar sesión con GitHub
+                    </a>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+}

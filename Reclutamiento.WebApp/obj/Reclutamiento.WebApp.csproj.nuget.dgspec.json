@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\anzor\\OneDrive\\Documents\\ELA2025NETAPIFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj": {}
+    "C:\\Users\\josue\\OneDrive\\Desktop\\ReclutamientoFrontend\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\anzor\\OneDrive\\Documents\\ELA2025NETAPIFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj": {
+    "C:\\Users\\josue\\OneDrive\\Desktop\\ReclutamientoFrontend\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\anzor\\OneDrive\\Documents\\ELA2025NETAPIFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj",
+        "projectUniqueName": "C:\\Users\\josue\\OneDrive\\Desktop\\ReclutamientoFrontend\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj",
         "projectName": "Reclutamiento.WebApp",
-        "projectPath": "C:\\Users\\anzor\\OneDrive\\Documents\\ELA2025NETAPIFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj",
-        "packagesPath": "C:\\Users\\anzor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\anzor\\OneDrive\\Documents\\ELA2025NETAPIFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\obj\\",
+        "projectPath": "C:\\Users\\josue\\OneDrive\\Desktop\\ReclutamientoFrontend\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj",
+        "packagesPath": "C:\\Users\\josue\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\josue\\OneDrive\\Desktop\\ReclutamientoFrontend\\Reclutamiento.WebApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\anzor\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\josue\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -42,6 +42,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Session": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
