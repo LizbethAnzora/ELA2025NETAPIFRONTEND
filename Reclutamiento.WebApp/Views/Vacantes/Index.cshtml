@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ReclutamientoFrontend.WebApp.Models.Dtos.VacanteDto>
+
+@{
+    ViewData["Title"] = "Vacantes";
+}
+
+<h1 class="mb-4 text-primary"><i class="fa-solid fa-briefcase"></i> Vacantes</h1>
+
+<div class="card shadow-sm p-4 mb-4">
+    <form method="get" asp-action="Index" class="row g-3">
+        <div class="col-md-5">
+            <input type="text" name="titulo" class="form-control" placeholder="Buscar por título de vacante" />
+        </div>
+        <div class="col-md-5">
+            <input type="text" name="administrador" class="form-control" placeholder="Buscar por administrador" />
+        </div>
+        <div class="col-md-2 d-grid">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa-solid fa-search"></i> Buscar
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-success">
+        <i class="fa-solid fa-plus"></i> Crear Vacante
+    </a>
+</div>
+
+<table class="table table-hover shadow-sm">
+    <thead class="table-primary">
+        <tr>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Administrador</th>
+            <th>Estado</th>
+            <th class="text-center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vacante in Model)
+        {
+            <tr>
+                <td>@vacante.Titulo</td>
+                <td>@vacante.Descripcion</td>
+                <td>@vacante.AdministradorNombre</td>
+                <td>
+                    @if (vacante.Estado == "Activa")
+                    {
+                        <span class="badge bg-success">Activa</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Inactiva</span>
+                    }
+                </td>
+                <td class="text-center">
+                    <a asp-action="Details" asp-route-id="@vacante.Id" class="btn btn-info btn-sm">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@vacante.Id" class="btn btn-warning btn-sm">
+                        <i class="fa-solid fa-edit"></i>
+                    </a>
+                    <a asp-action="Disable" asp-route-id="@vacante.Id" class="btn btn-secondary btn-sm">
+                        <i class="fa-solid fa-ban"></i>
+                    </a>
+                    <a asp-action="Solicitudes" asp-route-id="@vacante.Id" class="btn btn-primary btn-sm">
+                        <i class="fa-solid fa-envelope"></i> Solicitudes
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

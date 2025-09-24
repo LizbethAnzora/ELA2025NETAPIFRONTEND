@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ReclutamientoFrontend.WebApp.Models.Dtos.SolicitudDto>
+
+@{
+    ViewData["Title"] = "Solicitudes";
+}
+
+<h1 class="mb-4 text-primary"><i class="fa-solid fa-envelope"></i> Solicitudes</h1>
+
+<table class="table table-hover shadow-sm">
+    <thead class="table-primary">
+        <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Fecha</th>
+            <th class="text-center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var solicitud in Model)
+        {
+            <tr>
+                <td>@solicitud.NombreSolicitante</td>
+                <td>@solicitud.EmailSolicitante</td>
+                <td class="text-center">
+                    <a asp-action="DetailsSolicitud" asp-route-id="@solicitud.Id" class="btn btn-info btn-sm">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#responderModal-@solicitud.Id">
+                        <i class="fa-solid fa-reply"></i> Responder
+                    </button>
+                </td>
+            </tr>
+
+            <!-- Modal para responder -->
+            <div class="modal fade" id="responderModal-@solicitud.Id" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <form asp-action="Responder" method="post">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Responder a @solicitud.NombreSolicitante</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="SolicitudId" value="@solicitud.Id" />
+                                <div class="mb-3">
+                                    <label for="Mensaje" class="form-label">Mensaje de Respuesta</label>
+                                    <textarea name="Mensaje" class="form-control" required></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    <i class="fa-solid fa-xmark"></i> Cancelar
+                                </button>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa-solid fa-paper-plane"></i> Enviar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </tbody>
+</table>

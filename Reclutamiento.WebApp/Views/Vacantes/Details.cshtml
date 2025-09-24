@@ -1,0 +1,41 @@
+﻿@model ReclutamientoFrontend.WebApp.Models.Dtos.VacanteDto
+
+@{
+    ViewData["Title"] = "Detalles de la Vacante";
+}
+
+<h1 class="mb-4 text-info"><i class="fa-solid fa-eye"></i> Detalles de la Vacante</h1>
+
+<div class="card shadow-sm p-4">
+    <dl class="row">
+        <dt class="col-sm-3">Título</dt>
+        <dd class="col-sm-9">@Model.Titulo</dd>
+
+        <dt class="col-sm-3">Descripción</dt>
+        <dd class="col-sm-9">@Model.Descripcion</dd>
+
+        <dt class="col-sm-3">Administrador</dt>
+        <dd class="col-sm-9">@Model.AdministradorNombre</dd>
+
+        <dt class="col-sm-3">Estado</dt>
+        <dd class="col-sm-9">
+            @if (Model.Estado == "Activa")
+            {
+                <span class="badge bg-success">Activa</span>
+            }
+            else
+            {
+                <span class="badge bg-secondary">Inactiva</span>
+            }
+        </dd>
+    </dl>
+
+    <div class="d-flex justify-content-between mt-3">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+            <i class="fa-solid fa-edit"></i> Editar
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fa-solid fa-arrow-left"></i> Volver
+        </a>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@model ReclutamientoFrontend.WebApp.Models.Dtos.VacanteDto
+
+@{
+    ViewData["Title"] = "Crear Vacante";
+}
+
+<h1 class="mb-4 text-success"><i class="fa-solid fa-plus"></i> Crear Vacante</h1>
+
+<div class="card shadow-sm p-4">
+    <form asp-action="Create" method="post">
+        <div class="mb-3">
+            <label asp-for="Titulo" class="form-label"></label>
+            <input asp-for="Titulo" class="form-control" />
+            <span asp-validation-for="Titulo" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Descripcion" class="form-label"></label>
+            <textarea asp-for="Descripcion" class="form-control"></textarea>
+            <span asp-validation-for="Descripcion" class="text-danger"></span>
+        </div>
+        <div class="d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fa-solid fa-arrow-left"></i> Volver
+            </a>
+            <button type="submit" class="btn btn-success">
+                <i class="fa-solid fa-save"></i> Guardar
+            </button>
+        </div>
+    </form>
+</div>
