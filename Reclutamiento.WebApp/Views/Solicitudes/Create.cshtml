@@ -1,0 +1,44 @@
+﻿@model Frontend.Models.SolicitudCreateDto
+
+@{
+    ViewData["Title"] = "Aplicar a Vacante";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mb-4 text-success"><i class="fa-solid fa-paper-plane"></i> Aplicar a Vacante</h1>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form asp-action="Create" method="post">
+            <div class="mb-3">
+                <label asp-for="VacanteId" class="form-label">Vacante</label>
+                <input asp-for="VacanteTitulo" class="form-control" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="NombreSolicitante" class="form-label">Nombre</label>
+                <input asp-for="NombreSolicitante" class="form-control" required />
+                <span asp-validation-for="NombreSolicitante" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Correo" class="form-label">Correo Electrónico</label>
+                <input asp-for="Correo" type="email" class="form-control" required />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CVUrl" class="form-label">Enlace a CV</label>
+                <input asp-for="CVUrl" class="form-control" placeholder="https://..." required />
+                <span asp-validation-for="CVUrl" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                <i class="fa-solid fa-paper-plane"></i> Enviar Solicitud
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fa-solid fa-arrow-left"></i> Volver
+            </a>
+        </form>
+    </div>
+</div>
