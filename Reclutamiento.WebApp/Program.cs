@@ -60,7 +60,20 @@ builder.Services.AddHttpClient<IAuthService, AuthService>(client =>
 }).AddHttpMessageHandler<AuthHeaderHandler>();
 
 // Add other scoped/utility services if needed (e.g., ApiClient) here...
-
+//configuraci�n de la autenticaci�n de la aplicaci�n usando cookies
+builder.Services.AddAuthentication("AuthCookie")
+.AddCookie("AuthCookie", options =>
+{
+    options.LoginPath = "/Auth/Login";   // Aqu� siempre envia a la vista login
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+})
+.AddGitHub(options =>
+{
+    options.ClientId = "Ov23li9wcxHhAXYkGvco";
+    options.ClientSecret = "4a5d6036d1e5500c8671917fffe133555d4918e0";
+    options.CallbackPath = new PathString("/auth/github-callback");
+    options.SaveTokens = true;
+});
 var app = builder.Build();
 
 // Configure middleware
@@ -75,6 +88,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Auth}/{action=Login}/{id?}");
 
 app.Run();

@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <!-- Si necesitas bibliotecas adicionales agrégalas aquí. -->
+    <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
   </ItemGroup>
 

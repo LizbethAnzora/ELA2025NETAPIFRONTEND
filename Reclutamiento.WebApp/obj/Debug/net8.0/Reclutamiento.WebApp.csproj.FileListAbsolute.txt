@@ -30,3 +30,4 @@ C:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\obj\D
 C:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\obj\Debug\net8.0\Reclutamiento.WebApp.sourcelink.json
 C:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\bin\Debug\net8.0\System.Security.Permissions.dll
 C:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\obj\Debug\net8.0\Reclutam.4E59AA76.Up2Date
+C:\Users\josue\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.WebApp\bin\Debug\net8.0\AspNet.Security.OAuth.GitHub.dll

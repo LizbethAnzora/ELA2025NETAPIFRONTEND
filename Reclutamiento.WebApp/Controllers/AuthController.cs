@@ -1,6 +1,10 @@
+using FrontAuth.WebApp.DTOs.UsuarioDTOs;
+using FrontAuth.WebApp.Helpers;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Reclutamiento.WebApp.Services;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ReclutamientoFrontend.WebApp.Controllers
@@ -16,7 +20,7 @@ namespace ReclutamientoFrontend.WebApp.Controllers
             _authService = authService;
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Login()
         {
             // Pasamos la configuración de Supabase a la vista
@@ -25,21 +29,42 @@ namespace ReclutamientoFrontend.WebApp.Controllers
             return View();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> LoginWithGithub()
+
+        [HttpPost]
+        public IActionResult LoginWithGitHub()
         {
-            // Llamamos al servicio que conecta con el backend (Supabase via API)
-            var result = await _authService.LoginWithGithub();
+            var redirectUrl = Url.Action("GitHubCallback", "Auth");
+            var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
+            return Challenge(properties, "GitHub");  
+        }
 
-            if (!string.IsNullOrEmpty(result))
+
+        [HttpGet]
+        public async Task<IActionResult> GitHubCallback()
+        {
+            //  Obtener los datos del esquema GitHub
+            var authenticateResult = await HttpContext.AuthenticateAsync("GitHub");
+
+            if (!authenticateResult.Succeeded)
+                return RedirectToAction("Login");
+
+            var user = authenticateResult.Principal;
+            var email = user.FindFirstValue(ClaimTypes.Email);
+            var name = user.Identity?.Name ?? "GitHub User";
+
+            // Aquí  registrar o autenticar en la base de datos
+            // var usuarioDto = await _authService.LoginOrRegisterExternalAsync(email, name);
+            var usuarioDto = new LoginResponseDTO
             {
-                // Guardar token en sesión o cookie (dependiendo de tu backend)
-                HttpContext.Session.SetString("AuthToken", result);
-                return RedirectToAction("Index", "Home");
-            }
+                Id = 1,
+                Nombre = name,
+                Email = email
+            };
 
-            TempData["Error"] = "No se pudo iniciar sesión con GitHub.";
-            return RedirectToAction("Login");
+            var principal = ClaimsHelper.CrearClaimsPrincipal(usuarioDto);
+            await HttpContext.SignInAsync("AuthCookie", principal);
+
+            return RedirectToAction("Home/Index");
         }
 
         [HttpPost]
@@ -51,7 +76,7 @@ namespace ReclutamientoFrontend.WebApp.Controllers
             // Limpiar sesión en frontend
             HttpContext.Session.Clear();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Home/Index");
         }
     }
 }
