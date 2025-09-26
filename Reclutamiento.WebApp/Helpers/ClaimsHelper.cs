@@ -9,8 +9,9 @@ namespace FrontAuth.WebApp.Helpers
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, usuario.Nombre ?? string.Empty),
-                new Claim(ClaimTypes.Email, usuario.Email ?? string.Empty),
+                new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
+                new Claim(ClaimTypes.Name, usuario.NombreCompleto ?? "Usuario"), // Nombre completo
+                new Claim(ClaimTypes.Email, usuario.CorreoElectronico ?? string.Empty),
                 new Claim(ClaimTypes.Role, usuario.Rol ?? "User"), // rol por defecto
                 new Claim("Token", usuario.Token ?? string.Empty)
             };

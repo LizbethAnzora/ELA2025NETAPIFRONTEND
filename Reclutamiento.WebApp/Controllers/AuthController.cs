@@ -71,8 +71,9 @@ namespace ReclutamientoFrontend.WebApp.Controllers
             var usuarioDto = new LoginResponseDTO
             {
                 Id = 1,
-                Nombre = name,
-                Email = email
+                NombreCompleto = name,
+                CorreoElectronico = email,
+
             };
 
             var principal = ClaimsHelper.CrearClaimsPrincipal(usuarioDto);

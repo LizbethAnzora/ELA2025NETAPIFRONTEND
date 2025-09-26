@@ -4,39 +4,35 @@
     ViewData["Title"] = "Crear Usuario";
 }
 
-<h1 class="mb-4 text-success"><i class="bi bi-person-plus-fill"></i> Crear Usuario</h1>
-
-<div class="card shadow-sm p-4">
-    <form asp-action="Create">
-        <div class="mb-3">
-            <label asp-for="Nombre" class="form-label"></label>
-            <input asp-for="Nombre" class="form-control" />
-            <span asp-validation-for="Nombre" class="text-danger"></span>
+<div class="container py-5">
+    <h1 class="mb-4 text-success"><i class="bi bi-person-plus-fill"></i> Crear Usuario</h1>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form asp-action="Create">
+                <div class="mb-3">
+                    <label asp-for="NombreCompleto" class="form-label">Nombre Completo</label>
+                    <input asp-for="NombreCompleto" class="form-control" placeholder="Ingresa el nombre completo" />
+                    <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CorreoElectronico" class="form-label">Correo Electrónico</label>
+                    <input asp-for="CorreoElectronico" class="form-control" placeholder="correo@ejemplo.com"/>
+                    <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Contrasena" class="form-label">Contraseña</label>
+                    <input asp-for="Contrasena" type="password" class="form-control" placeholder="********"/>
+                    <span asp-validation-for="Contrasena" class="text-danger"></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Volver
+                    </a>
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-check-circle"></i> Guardar
+                    </button>
+                </div>
+            </form>
         </div>
-
-        <div class="mb-3">
-            <label asp-for="Email" class="form-label"></label>
-            <input asp-for="Email" class="form-control" type="email"/>
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="Rol" class="form-label"></label>
-            <select asp-for="Rol" class="form-select">
-                <option value="Administrador">Administrador</option>
-                <option value="Reclutador">Reclutador</option>
-                <option value="Candidato">Candidato</option>
-            </select>
-            <span asp-validation-for="Rol" class="text-danger"></span>
-        </div>
-
-        <div class="d-flex justify-content-between">
-            <a asp-action="Index" class="btn btn-secondary">
-                <i class="bi bi-arrow-left"></i> Volver
-            </a>
-            <button type="submit" class="btn btn-success">
-                <i class="bi bi-check-circle"></i> Guardar
-            </button>
-        </div>
-    </form>
+    </div>
 </div>

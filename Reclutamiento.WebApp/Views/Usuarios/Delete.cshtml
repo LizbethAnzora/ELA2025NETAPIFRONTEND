@@ -4,34 +4,27 @@
     ViewData["Title"] = "Eliminar Usuario";
 }
 
-<h1 class="mb-4 text-danger"><i class="bi bi-trash"></i> Eliminar Usuario</h1>
-
-<div class="alert alert-warning">
-    <i class="bi bi-exclamation-triangle"></i> ¿Estás seguro de que deseas eliminar este usuario?
-</div>
-
-<div class="card shadow-sm p-4">
-    <dl class="row">
-        <dt class="col-sm-3">Nombre</dt>
-        <dd class="col-sm-9">@Model.Nombre</dd>
-
-        <dt class="col-sm-3">Email</dt>
-        <dd class="col-sm-9">@Model.Email</dd>
-
-        <dt class="col-sm-3">Rol</dt>
-        <dd class="col-sm-9">@Model.Rol</dd>
-    </dl>
-
-    <form asp-action="Delete" method="post">
-        <input type="hidden" asp-for="Id" />
-
-        <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-danger">
-                <i class="bi bi-trash"></i> Eliminar
-            </button>
-            <a asp-action="Index" class="btn btn-secondary">
-                <i class="bi bi-arrow-left"></i> Cancelar
-            </a>
+<div class="container py-5">
+    <h1 class="mb-4 text-danger"><i class="bi bi-trash-fill"></i> Eliminar Usuario</h1>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">¿Está seguro de eliminar este usuario?</h5>
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item"><strong>Nombre Completo:</strong> @Model.NombreCompleto</li>
+                <li class="list-group-item"><strong>Correo Electrónico:</strong> @Model.CorreoElectronico</li>
+                <li class="list-group-item"><strong>Rol:</strong> @Model.Rol</li>
+            </ul>
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Cancelar
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash"></i> Eliminar
+                    </button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>

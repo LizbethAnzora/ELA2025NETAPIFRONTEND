@@ -17,7 +17,7 @@ namespace Reclutamiento.WebApp.Services
 
         public async Task<LoginResponseDTO> LoginAsync(UsuarioDto dto)
         {
-            return await _apiServiceBase.PostAsync<UsuarioDto, LoginResponseDTO>("auth/login/admin", dto);
+            return await _apiServiceBase.PostAsync<UsuarioDto, LoginResponseDTO>("/api/Auth/login/admin", dto);
 
         }
         
