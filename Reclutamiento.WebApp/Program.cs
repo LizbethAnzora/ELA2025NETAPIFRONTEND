@@ -6,6 +6,8 @@ using Reclutamiento.WebApp.Services;
 using ReclutamientoFrontend.WebApp.Services;
 using System;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Configuration
@@ -18,6 +20,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<SolicitudService>();
 builder.Services.AddTransient<VacanteService>();
 builder.Services.AddTransient<UsuarioService>();
+builder.Services.AddScoped<AuthService>();
+
 
 // Session & HttpContext accessor
 builder.Services.AddDistributedMemoryCache();
@@ -54,7 +58,7 @@ builder.Services.AddHttpClient<RespuestaService>(client =>
 }).AddHttpMessageHandler<AuthHeaderHandler>();
 
 // Auth service (for login endpoints). It may not need the handler, but we can still attach it.
-builder.Services.AddHttpClient<IAuthService, AuthService>(client =>
+builder.Services.AddHttpClient< ApiServiceBase>(client =>
 {
     client.BaseAddress = new Uri(apiBase);
 }).AddHttpMessageHandler<AuthHeaderHandler>();
@@ -69,8 +73,8 @@ builder.Services.AddAuthentication("AuthCookie")
 })
 .AddGitHub(options =>
 {
-    options.ClientId = "Ov23li9wcxHhAXYkGvco";
-    options.ClientSecret = "4a5d6036d1e5500c8671917fffe133555d4918e0";
+    options.ClientId = "Ov23licjw1vVCz8v41XQ";
+    options.ClientSecret = "becdf732a78b69e626d45fca5b682d79c4e37cba";
     options.CallbackPath = new PathString("/auth/github-callback");
     options.SaveTokens = true;
 });
@@ -88,6 +92,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Auth}/{action=Login}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

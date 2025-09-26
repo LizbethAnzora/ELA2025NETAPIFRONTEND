@@ -4,23 +4,27 @@ using System.Threading.Tasks;
 
 namespace ReclutamientoFrontend.WebApp.Services
 {
-    public class RespuestaService : ApiServiceBase
+    public class RespuestaService
     {
-        public RespuestaService(HttpClient httpClient) : base(httpClient) { }
+        private readonly ApiServiceBase _apiServiceBase;
+        public RespuestaService(ApiServiceBase apiServiceBase)
+        { 
+            _apiServiceBase = apiServiceBase;
+        }
 
         public Task<List<RespuestaDto>> GetRespuestasAsync()
-            => GetAsync<List<RespuestaDto>>("api/respuestas");
+            => _apiServiceBase.GetAllAsync<RespuestaDto>("api/respuestas");
 
         public Task<RespuestaDto> GetRespuestaByIdAsync(int id)
-            => GetAsync<RespuestaDto>($"api/respuestas/{id}");
+            => _apiServiceBase.GetByIdAsync<RespuestaDto>($"api/respuestas/{id}", id, null);
 
         public Task<RespuestaDto> CrearRespuestaAsync(RespuestaDto respuesta)
-            => PostAsync<RespuestaDto>("api/respuestas", respuesta);
+            => _apiServiceBase.PostAsync<RespuestaDto, RespuestaDto>("api/respuestas", respuesta, null);
 
         public Task<RespuestaDto> ActualizarRespuestaAsync(int id, RespuestaDto respuesta)
-            => PutAsync<RespuestaDto>($"api/respuestas/{id}", respuesta);
+            => _apiServiceBase.PutAsync<RespuestaDto>($"api/respuestas/{id}", respuesta);
 
         public Task EliminarRespuestaAsync(int id)
-            => DeleteAsync($"api/respuestas/{id}");
+            => _apiServiceBase.DeleteAsync($"api/respuestas/{id}");
     }
 }

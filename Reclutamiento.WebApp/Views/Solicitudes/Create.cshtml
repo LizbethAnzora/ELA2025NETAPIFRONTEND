@@ -1,4 +1,4 @@
-﻿@model Frontend.Models.SolicitudCreateDto
+﻿@model ReclutamientoFrontend.WebApp.Models.Dtos.SolicitudDto
 
 @{
     ViewData["Title"] = "Aplicar a Vacante";
@@ -22,15 +22,9 @@
             </div>
 
             <div class="mb-3">
-                <label asp-for="Correo" class="form-label">Correo Electrónico</label>
-                <input asp-for="Correo" type="email" class="form-control" required />
-                <span asp-validation-for="Correo" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="CVUrl" class="form-label">Enlace a CV</label>
-                <input asp-for="CVUrl" class="form-control" placeholder="https://..." required />
-                <span asp-validation-for="CVUrl" class="text-danger"></span>
+                <label asp-for="EmailSolicitante" class="form-label">Correo Electrónico</label>
+                <input asp-for="EmailSolicitante" type="email" class="form-control" required />
+                <span asp-validation-for="EmailSolicitante" class="text-danger"></span>
             </div>
 
             <button type="submit" class="btn btn-success">

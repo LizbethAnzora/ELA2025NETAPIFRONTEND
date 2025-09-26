@@ -3,43 +3,85 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.Data;
+using System.Text;
+using Microsoft.AspNetCore.Http.Json;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ReclutamientoFrontend.WebApp.Services
 {
-    public abstract class ApiServiceBase
+    public class ApiServiceBase
     {
-        protected readonly HttpClient _httpClient;
-
-        protected ApiServiceBase(HttpClient httpClient)
+        private readonly HttpClient _httpClient;
+        private readonly JsonSerializerOptions _jsonOption;
+        public ApiServiceBase(HttpClient httpClient)
         {
             _httpClient = httpClient;
+
+            _jsonOption = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
         }
 
-        protected async Task<T> GetAsync<T>(string url)
+        public async Task<List<T>> GetAllAsync<T>(string endpoint, string token = null)
         {
-            var response = await _httpClient.GetAsync(url);
+            AddAuthorizationHeader(token);
+            var response = await _httpClient.GetAsync(endpoint);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<T>();
+
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<List<T>>(json, _jsonOption);
         }
 
-        protected async Task<T> PostAsync<T>(string url, object data)
+        public async Task<TResponse> PostAsync<TRequest, TResponse>(string endpoint, TRequest data, string token = null)
         {
-            var response = await _httpClient.PostAsJsonAsync(url, data);
+            AddAuthorizationHeader(token);
+            var content = new StringContent(JsonSerializer.Serialize(data, _jsonOption), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync(endpoint, content);
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<T>();
+
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<TResponse>(json, _jsonOption);
         }
 
-        protected async Task<T> PutAsync<T>(string url, object data)
+        public async Task<T> GetByIdAsync<T>(string endpoint, int id, string token = null)
         {
-            var response = await _httpClient.PutAsJsonAsync(url, data);
+            AddAuthorizationHeader(token);
+            var response = await _httpClient.GetAsync($"{endpoint}/{id}");
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<T>();
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<T>(json, _jsonOption);
+        }
+        
+        public async Task<T> PutAsync<T>(string endpoint, T data, string token = null)
+        {
+            AddAuthorizationHeader(token);
+            var content = new StringContent(JsonSerializer.Serialize(data, _jsonOption), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync(endpoint, content);
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<T>(json, _jsonOption);
         }
 
-        protected async Task DeleteAsync(string url)
+        public async Task DeleteAsync(string endpoint, string token = null)
         {
-            var response = await _httpClient.DeleteAsync(url);
+            AddAuthorizationHeader(token);
+            var response = await _httpClient.DeleteAsync(endpoint);
             response.EnsureSuccessStatusCode();
+        }
+
+        private void AddAuthorizationHeader(string token)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = null;
+            if (!string.IsNullOrEmpty(token))
+            {
+                _httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            }
+            
         }
     }
 }

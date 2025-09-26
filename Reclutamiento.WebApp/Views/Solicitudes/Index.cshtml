@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Frontend.Models.SolicitudDto>
+﻿@model IEnumerable<ReclutamientoFrontend.WebApp.Models.Dtos.SolicitudDto>
 
 @{
     ViewData["Title"] = "Mis Solicitudes";
@@ -22,14 +22,7 @@
                 @foreach (var solicitud in Model)
                 {
                     <tr>
-                        <td>@solicitud.VacanteTitulo</td>
-                        <td>@solicitud.FechaSolicitud.ToString("dd/MM/yyyy")</td>
-                        <td>
-                            <span class="badge @(solicitud.Estado == "Pendiente" ? "bg-warning text-dark" :
-                                                 solicitud.Estado == "Aprobada" ? "bg-success" : "bg-danger")">
-                                @solicitud.Estado
-                            </span>
-                        </td>
+                        
                         <td>
                             <a asp-action="Details" asp-route-id="@solicitud.Id" class="btn btn-sm btn-info">
                                 <i class="fa-solid fa-eye"></i> Ver Detalles

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Reclutamiento.WebApp.Services;
+using ReclutamientoFrontend.WebApp.Models.Dtos;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -12,25 +13,38 @@ namespace ReclutamientoFrontend.WebApp.Controllers
     public class AuthController : Controller
     {
         private readonly IConfiguration _config;
-        private readonly IAuthService _authService;
+        private readonly AuthService _authService;
 
-        public AuthController(IConfiguration config, IAuthService authService)
+        public AuthController(AuthService authService)
         {
-            _config = config;
             _authService = authService;
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Login()
         {
-            // Pasamos la configuración de Supabase a la vista
-            ViewData["SupabaseUrl"] = _config["Supabase:Url"];
-            ViewData["SupabaseAnonKey"] = _config["Supabase:AnonKey"];
+
             return View();
         }
 
-
         [HttpPost]
+        public async Task<IActionResult> Login(UsuarioDto dto)
+        {
+            var result = await _authService.LoginAsync(dto);
+            if (result == null)
+            {
+                ModelState.AddModelError(string.Empty, "Credenciales inválidas");
+                return View();
+            }
+
+            var principal = ClaimsHelper.CrearClaimsPrincipal(result);
+            await HttpContext.SignInAsync("AuthCookie", principal);
+            return RedirectToAction("Index", "Home");
+            
+        }
+
+
+        [HttpGet]
         public IActionResult LoginWithGitHub()
         {
             var redirectUrl = Url.Action("GitHubCallback", "Auth");
@@ -70,8 +84,7 @@ namespace ReclutamientoFrontend.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            // Avisamos al backend que cierre sesión
-            await _authService.Logout();
+            // Avisamos al backend que cierre sesión await _authService.Logout();
 
             // Limpiar sesión en frontend
             HttpContext.Session.Clear();

@@ -1,4 +1,4 @@
-﻿@model Frontend.Models.SolicitudDto
+﻿@model ReclutamientoFrontend.WebApp.Models.Dtos.SolicitudDto
 
 @{
     ViewData["Title"] = "Detalles de Solicitud";
@@ -17,25 +17,8 @@
             <dd class="col-sm-9">@Model.NombreSolicitante</dd>
 
             <dt class="col-sm-3">Correo</dt>
-            <dd class="col-sm-9">@Model.Correo</dd>
+            <dd class="col-sm-9">@Model.EmailSolicitante</dd>
 
-            <dt class="col-sm-3">Fecha</dt>
-            <dd class="col-sm-9">@Model.FechaSolicitud.ToString("dd/MM/yyyy")</dd>
-
-            <dt class="col-sm-3">Estado</dt>
-            <dd class="col-sm-9">
-                <span class="badge @(Model.Estado == "Pendiente" ? "bg-warning text-dark" :
-                                     Model.Estado == "Aprobada" ? "bg-success" : "bg-danger")">
-                    @Model.Estado
-                </span>
-            </dd>
-
-            <dt class="col-sm-3">CV</dt>
-            <dd class="col-sm-9">
-                <a href="@Model.CVUrl" target="_blank" class="btn btn-outline-primary btn-sm">
-                    <i class="fa-solid fa-file"></i> Ver CV
-                </a>
-            </dd>
         </dl>
 
         <a asp-action="Index" class="btn btn-secondary">
