@@ -24,8 +24,7 @@
         <div id="page-content-wrapper" class="flex-grow-1">
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
                 <div class="container-fluid">
-                    <a class="navbar-brand fw-bold text-primary" href="/">EteriumTech</a>
-                    <div class="d-flex align-items-center gap-3">
+                    <div class="d-flex w-100 justify-content-end align-items-center gap-3">
                         @if (isAuthenticated)
                         {
                             var rawRol = "";
@@ -35,19 +34,12 @@
                             <span class="me-2 text-secondary">
                                 <i class="fa-solid fa-user"></i> @(User?.Identity?.Name ?? "")
                                 <span class="badge bg-primary ms-2">@userRole</span>
-                                
                             </span>
                             <form asp-controller="Auth" asp-action="Logout" method="post" class="d-inline">
                                 <button type="submit" class="btn btn-outline-danger">
                                     <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
                                 </button>
                             </form>
-                        }
-                        else
-                        {
-                            <a class="btn btn-outline-primary" asp-controller="Auth" asp-action="Login">
-                                <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
-                            </a>
                         }
                     </div>
                 </div>
