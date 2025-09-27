@@ -4,7 +4,6 @@ namespace FrontAuth.WebApp.DTOs.UsuarioDTOs
 {
     public class LoginResponseDTO : UsuarioDto
     {
-        public string Token { get; set; }
-
+    public string? Token { get; set; }
     }
 }

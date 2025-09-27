@@ -17,6 +17,10 @@ namespace ReclutamientoFrontend.WebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
+            if (!(User?.Identity?.IsAuthenticated ?? false))
+            {
+                return RedirectToAction("Login", "Auth");
+            }
             var vacantes = await _vacanteService.ObtenerVacantesAsync();
             return View(vacantes);
         }

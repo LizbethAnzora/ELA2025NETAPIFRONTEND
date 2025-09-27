@@ -73,24 +73,22 @@ namespace ReclutamientoFrontend.WebApp.Controllers
                 Id = 1,
                 NombreCompleto = name,
                 CorreoElectronico = email,
-
             };
 
             var principal = ClaimsHelper.CrearClaimsPrincipal(usuarioDto);
             await HttpContext.SignInAsync("AuthCookie", principal);
 
-            return RedirectToAction("Home/Index");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            // Avisamos al backend que cierre sesión await _authService.Logout();
-
             // Limpiar sesión en frontend
             HttpContext.Session.Clear();
-
-            return RedirectToAction("Home/Index");
+            // Cerrar cookie de autenticación
+            await HttpContext.SignOutAsync("AuthCookie");
+            return RedirectToAction("Login", "Auth");
         }
     }
 }

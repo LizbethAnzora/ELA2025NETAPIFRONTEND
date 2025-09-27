@@ -1,4 +1,6 @@
+
 using System.ComponentModel.DataAnnotations;
+using Reclutamiento.WebApp.Models.Dtos;
 
 namespace ReclutamientoFrontend.WebApp.Models.Dtos
 {
@@ -17,7 +19,7 @@ namespace ReclutamientoFrontend.WebApp.Models.Dtos
         [Required(ErrorMessage = "La contraseña es obligatoria")]
         public string? Contrasena { get; set; }
 
-        [Required(ErrorMessage = "El rol es obligatorio")]
-        public string? Rol { get; set; } // Ejemplo: "Admin" o "Solicitante"
+    [Required(ErrorMessage = "El rol es obligatorio")]
+    public object? Rol { get; set; } // Puede ser objeto, string o int
     }
 }
