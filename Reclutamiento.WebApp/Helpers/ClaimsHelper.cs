@@ -8,6 +8,7 @@ namespace FrontAuth.WebApp.Helpers
     {
         public static ClaimsPrincipal CrearClaimsPrincipal(LoginResponseDTO usuario)
         {
+            // Código de depuración eliminado para evitar errores en ASP.NET Core
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),

@@ -1,12 +1,30 @@
 ﻿
 @model IEnumerable<ReclutamientoFrontend.WebApp.Models.Dtos.VacanteDto>
+@using System.Text.Json
 @{
     ViewData["Title"] = "Inicio";
     var userRole = User?.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value ?? "Guest";
     var userName = User?.Identity?.Name ?? "";
+    // Obtener el valor crudo de rol desde la sesión si existe (solo para depuración)
+    var rawRol = "";
+    if (Context.Session != null && Context.Session.Keys.Contains("RawRol"))
+    {
+        rawRol = Context.Session.GetString("RawRol") ?? "";
+    }
 }
 
+@using System.Text.Json
 <div class="container py-5">
+    <!-- Visualización extra de usuario/rol eliminada -->
+    <div class="mb-3">
+        <span class="text-secondary">
+           
+            @if (!string.IsNullOrEmpty(rawRol))
+            {
+                
+            }
+        </span>
+    </div>
     @if (userRole == "Admin")
     {
         <div class="text-center mt-5">

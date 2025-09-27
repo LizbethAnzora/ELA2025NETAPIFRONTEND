@@ -37,6 +37,15 @@ namespace ReclutamientoFrontend.WebApp.Controllers
                 return View();
             }
 
+            // Guardar el valor crudo de Rol en sesión para depuración
+            if (result.Rol != null)
+            {
+                HttpContext.Session.SetString("RawRol", System.Text.Json.JsonSerializer.Serialize(result.Rol));
+            }
+            else
+            {
+                HttpContext.Session.Remove("RawRol");
+            }
             var principal = ClaimsHelper.CrearClaimsPrincipal(result);
             await HttpContext.SignInAsync("AuthCookie", principal);
             return RedirectToAction("Index", "Home");

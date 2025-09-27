@@ -5,36 +5,29 @@ namespace FrontAuth.WebApp.Helpers
         public static string GetRoleName(object rol)
         {
             if (rol == null) return "Solicitante";
-            // Si es int y es 1
-            if (rol is int intRol)
-                return intRol == 1 ? "Admin" : "Solicitante";
-            // Si es string
             if (rol is string strRol)
             {
-                var normalized = strRol.Trim().ToLower();
-                if (normalized == "admin" || normalized == "1" || normalized.Contains("admin"))
+                if (strRol == "Admin" || strRol == "1")
                     return "Admin";
             }
-            // Si es un objeto complejo con propiedad Nombre/nombre o Id/id
-            var type = rol.GetType();
-            var nombreProp = type.GetProperty("Nombre") ?? type.GetProperty("nombre");
-            if (nombreProp != null)
+            if (rol is int intRol)
             {
-                var nombreValue = nombreProp.GetValue(rol)?.ToString()?.Trim().ToLower();
-                if (!string.IsNullOrEmpty(nombreValue) && (nombreValue == "admin" || nombreValue.Contains("admin")))
+                if (intRol == 1)
                     return "Admin";
             }
-            var idProp = type.GetProperty("Id") ?? type.GetProperty("id");
-            if (idProp != null)
+            // Si el claim viene como JsonElement string
+            if (rol is System.Text.Json.JsonElement json)
             {
-                var idValue = idProp.GetValue(rol)?.ToString()?.Trim();
-                if (idValue == "1")
+                if (json.ValueKind == System.Text.Json.JsonValueKind.String && json.GetString() == "Admin")
+                    return "Admin";
+                if (json.ValueKind == System.Text.Json.JsonValueKind.String && json.GetString() == "1")
+                    return "Admin";
+                if (json.ValueKind == System.Text.Json.JsonValueKind.Number && json.GetInt32() == 1)
                     return "Admin";
             }
-            // Si el ToString() del objeto contiene admin
-            if (rol.ToString()?.ToLower().Contains("admin") == true)
-                return "Admin";
             return "Solicitante";
         }
+
+        // Método recursivo eliminado: ya no es necesario
     }
 }

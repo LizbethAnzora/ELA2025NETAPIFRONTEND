@@ -21,6 +21,7 @@ namespace ReclutamientoFrontend.WebApp.Controllers
             {
                 return RedirectToAction("Login", "Auth");
             }
+            // ...
             var vacantes = await _vacanteService.ObtenerVacantesAsync();
             return View(vacantes);
         }
