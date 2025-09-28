@@ -1,64 +1,150 @@
 ﻿@model IEnumerable<ReclutamientoFrontend.WebApp.Models.Dtos.SolicitudDto>
+@using ReclutamientoFrontend.WebApp.Models.ViewModels
 
 @{
-    ViewData["Title"] = "Solicitudes";
+    var vacanteTitulo = ViewData["VacanteTitulo"] as string ?? "Vacante Desconocida";
+    var vacanteId = Model.FirstOrDefault()?.VacanteId ?? 0;
+
+    ViewData["Title"] = $"Solicitudes para: {vacanteTitulo}";
 }
 
-<h1 class="mb-4 text-primary"><i class="fa-solid fa-envelope"></i> Solicitudes</h1>
+<div class="container py-4">
+    
+    <h4 class="mb-2 text-primary fw-bold"><i class="fa-solid fa-users me-2"></i> Solicitudes</h4>
+    <p class="text-muted border-bottom pb-3 mb-4">
+        Gestión de postulaciones para la vacante: <strong class="text-dark">@vacanteTitulo</strong>
+    </p>
 
-<table class="table table-hover shadow-sm">
-    <thead class="table-primary">
-        <tr>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Fecha</th>
-            <th class="text-center">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var solicitud in Model)
-        {
-            <tr>
-                <td>@solicitud.NombreSolicitante</td>
-                <td>@solicitud.EmailSolicitante</td>
-                <td class="text-center">
-                    <a asp-action="DetailsSolicitud" asp-route-id="@solicitud.Id" class="btn btn-info btn-sm">
-                        <i class="fa-solid fa-eye"></i>
-                    </a>
-                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#responderModal-@solicitud.Id">
-                        <i class="fa-solid fa-reply"></i> Responder
-                    </button>
-                </td>
-            </tr>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fa-solid fa-check-circle me-2"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fa-solid fa-triangle-exclamation me-2"></i> @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
 
-            <!-- Modal para responder -->
-            <div class="modal fade" id="responderModal-@solicitud.Id" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <form asp-action="Responder" method="post">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Responder a @solicitud.NombreSolicitante</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                                <input type="hidden" name="SolicitudId" value="@solicitud.Id" />
-                                <div class="mb-3">
-                                    <label for="Mensaje" class="form-label">Mensaje de Respuesta</label>
-                                    <textarea name="Mensaje" class="form-control" required></textarea>
+    <div class="mb-4">
+        <a asp-action="Index" class="btn btn-secondary btn-sm">
+            <i class="fa-solid fa-arrow-left"></i> Volver a Vacantes
+        </a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center mt-5 p-4 shadow-lg" role="alert">
+            <i class="fa-solid fa-bell fa-2x mb-2"></i><br>
+            <h4 class="alert-heading">¡Aún no hay Solicitudes!</h4>
+            <p class="mb-0">Esta vacante no ha recibido postulaciones hasta el momento.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive d-none d-md-block">
+            <table class="table table-hover align-middle bg-white shadow-lg rounded">
+                <thead class="bg-light text-muted border-bottom border-secondary border-2">
+                    <tr>
+                        <th style="width: 25%;" class="py-3">Nombre del Solicitante</th>
+                        <th style="width: 25%;" class="py-3">Correo Electrónico</th>
+                        <th style="width: 15%;" class="py-3 text-center">Estado</th>
+                        <th style="width: 10%;" class="py-3">Fecha</th>
+                        <th class="text-center py-3" style="width: 25%;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var solicitud in Model)
+                    {
+                        <tr class="border-bottom">
+                            <td class="fw-bold text-primary">@solicitud.NombreSolicitante</td>
+                            <td>@solicitud.EmailSolicitante</td>
+                            <td class="text-center">
+                                @{
+                                    var badgeClass = solicitud.EstadoSolicitud switch
+                                    {
+                                        "Aceptada" => "bg-success",
+                                        "Rechazada" => "bg-danger",
+                                        "Respondida" => "bg-warning text-dark",
+                                        _ => "bg-secondary" // Pendiente o Desconocida
+                                    };
+                                }
+                                <span class="badge @badgeClass py-2 px-3">@solicitud.EstadoSolicitud</span>
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a asp-action="DetallesSolicitud" asp-route-id="@solicitud.Id" class="btn btn-outline-info" title="Ver CV/Experiencia">
+                                        <i class="fa-solid fa-eye"></i> Experiencia
+                                    </a>
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#responderModal-@solicitud.Id" title="Enviar respuesta al candidato">
+                                        <i class="fa-solid fa-reply"></i> Responder
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                    <i class="fa-solid fa-xmark"></i> Cancelar
-                                </button>
-                                <button type="submit" class="btn btn-success">
-                                    <i class="fa-solid fa-paper-plane"></i> Enviar
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
         }
-    </tbody>
-</table>
+</div>
+
+@foreach (var solicitud in Model)
+{
+    <div class="modal fade" id="responderModal-@solicitud.Id" tabindex="-1" aria-labelledby="responderModalLabel-@solicitud.Id" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form asp-action="Responder" method="post" novalidate>
+                    
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title" id="responderModalLabel-@solicitud.Id">
+                            <i class="fa-solid fa-hand-paper me-2"></i> Responder a @solicitud.NombreSolicitante
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        
+                        <input type="hidden" name="@nameof(RespuestaSolicitudViewModel.SolicitudId)" value="@solicitud.Id" />
+                        <input type="hidden" name="@nameof(RespuestaSolicitudViewModel.VacanteId)" value="@vacanteId" />
+
+                        <div class="alert alert-info py-2 small">
+                            Estás respondiendo la solicitud de **@solicitud.NombreSolicitante** (<a href="mailto:@solicitud.EmailSolicitante" class="alert-link">@solicitud.EmailSolicitante</a>)
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="@nameof(RespuestaSolicitudViewModel.NuevoEstado)" class="form-label fw-bold">Decisión <span class="text-danger">*</span></label>
+                            <select name="@nameof(RespuestaSolicitudViewModel.NuevoEstado)" class="form-select" required>
+                                <option value="" disabled selected>-- Seleccione una decisión --</option>
+                                <option value="Aceptada">Aceptar/Avanzar en el proceso</option>
+                                <option value="Rechazada">Rechazar</option>
+                                <option value="Respondida">Marcar como Respondida</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="@nameof(RespuestaSolicitudViewModel.MensajeRespuesta)" class="form-label fw-bold">Mensaje al Solicitante <span class="text-danger">*</span></label>
+                            <textarea name="@nameof(RespuestaSolicitudViewModel.MensajeRespuesta)" class="form-control" rows="4" placeholder="Escriba un mensaje profesional para el candidato..." required></textarea>
+                            <div class="form-text">Este mensaje se guardará como la respuesta oficial.</div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="fa-solid fa-xmark"></i> Cerrar
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa-solid fa-paper-plane"></i> Enviar Respuesta
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}

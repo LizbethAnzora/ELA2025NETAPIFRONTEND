@@ -10,14 +10,10 @@
         <div class="col-lg-6 col-md-8 col-sm-12">
             <div class="card shadow-lg border-0">
                 <div class="card-header bg-warning text-dark">
-                    <h3 class="mb-0"><i class="fa-solid fa-user-pen me-2"></i> Editar Nombre</h3>
+                    <h4 class="mb-0"><i class="fa-solid fa-user-pen me-2"></i> Editar Nombre</h4>
                 </div>
                 <div class="card-body p-4">
-                    
-                    <div class="alert alert-warning small mb-4" role="alert">
-                        <i class="fa-solid fa-lock"></i> **Recuerda:** Solo puedes modificar el **Nombre Completo**.
-                    </div>
-
+                
                     <form asp-action="Editar" method="post" autocomplete="off" novalidate>
                         
                         <input type="hidden" asp-for="Id" />

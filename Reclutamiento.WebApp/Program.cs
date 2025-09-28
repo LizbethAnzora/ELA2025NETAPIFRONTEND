@@ -6,8 +6,6 @@ using Reclutamiento.WebApp.Services;
 using ReclutamientoFrontend.WebApp.Services;
 using System;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Configuration

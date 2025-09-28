@@ -17,35 +17,36 @@ namespace ReclutamientoFrontend.WebApp.Services
 
         public async Task<IEnumerable<VacanteDto>> ObtenerVacantesAsync()
         {
-            return await _http.GetFromJsonAsync<IEnumerable<VacanteDto>>("api/vacantes");
+            return await _http.GetFromJsonAsync<IEnumerable<VacanteDto>>("api/Vacantes");
         }
 
         public async Task<VacanteDto> ObtenerVacantePorIdAsync(int id)
         {
-            return await _http.GetFromJsonAsync<VacanteDto>($"api/vacantes/{id}");
+            return await _http.GetFromJsonAsync<VacanteDto>($"api/Vacantes/{id}");
         }
 
         public async Task<bool> CrearVacanteAsync(VacanteDto vacante)
         {
-            var response = await _http.PostAsJsonAsync("api/vacantes", vacante);
+          
+            var response = await _http.PostAsJsonAsync("api/Vacantes", vacante);
             return response.IsSuccessStatusCode;
         }
 
         public async Task<bool> EditarVacanteAsync(int id, VacanteDto vacante)
         {
-            var response = await _http.PutAsJsonAsync($"api/vacantes/{id}", vacante);
+            var response = await _http.PutAsJsonAsync($"api/Vacantes/{id}", vacante);
             return response.IsSuccessStatusCode;
         }
 
         public async Task<bool> EliminarVacanteAsync(int id)
         {
-            var response = await _http.DeleteAsync($"api/vacantes/{id}");
+            var response = await _http.DeleteAsync($"api/Vacantes/{id}");
             return response.IsSuccessStatusCode;
         }
 
         public async Task<IEnumerable<SolicitudDto>> ObtenerSolicitudesPorVacanteAsync(int vacanteId)
         {
-            return await _http.GetFromJsonAsync<IEnumerable<SolicitudDto>>($"api/vacantes/{vacanteId}/solicitudes");
+            return await _http.GetFromJsonAsync<IEnumerable<SolicitudDto>>($"api/Vacantes/{vacanteId}/solicitudes");
         }
     }
 }

@@ -18,6 +18,9 @@ namespace ReclutamientoFrontend.WebApp.Models.Dtos
         [EmailAddress(ErrorMessage = "Ingrese un correo válido")]
         public string? EmailSolicitante { get; set; }
 
+        public string? EstadoSolicitud { get; set; } 
+        // ----------------------------------------------------
+        
         [Required(ErrorMessage = "El campo de experiencia es obligatorio")]
         public string? Experiencia { get; set; }
     }

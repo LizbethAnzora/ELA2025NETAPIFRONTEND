@@ -4,38 +4,54 @@
     ViewData["Title"] = "Detalles de la Vacante";
 }
 
-<h1 class="mb-4 text-info"><i class="fa-solid fa-eye"></i> Detalles de la Vacante</h1>
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9 col-sm-12">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0"><i class="fa-solid fa-file-invoice me-2"></i> Detalles de la Vacante</h4>
+                </div>
+                <div class="card-body p-4">
+                    
+                    <h5 class="card-title text-primary mb-4 border-bottom pb-2">@Model.Titulo</h5>
 
-<div class="card shadow-sm p-4">
-    <dl class="row">
-        <dt class="col-sm-3">Título</dt>
-        <dd class="col-sm-9">@Model.Titulo</dd>
+                    <dl class="row mb-4">
+                        <dt class="col-sm-4 fw-normal text-muted">Administrador a Cargo</dt>
+                        <dd class="col-sm-8 fw-bold text-dark">@Model.AdministradorNombre</dd>
 
-        <dt class="col-sm-3">Descripción</dt>
-        <dd class="col-sm-9">@Model.Descripcion</dd>
+                        <dt class="col-sm-4 fw-normal text-muted">Estado Actual</dt>
+                        <dd class="col-sm-8">
+                            @if (Model.Estado == "Activa")
+                            {
+                                <span class="badge bg-success fw-bold py-2 px-3">Activa</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary fw-bold py-2 px-3">Inactiva</span>
+                            }
+                        </dd>
+                    </dl>
+                    
+                    <h5 class="card-title text-primary mb-3 border-bottom pb-2">Descripción del Puesto</h5>
+                    
+                    <div class="card bg-light border-0 mb-4 p-3">
+                        <p class="card-text text-dark">@Html.Raw(Model.Descripcion.Replace("\n", "<br/>"))</p>
+                    </div>
 
-        <dt class="col-sm-3">Administrador</dt>
-        <dd class="col-sm-9">@Model.AdministradorNombre</dd>
-
-        <dt class="col-sm-3">Estado</dt>
-        <dd class="col-sm-9">
-            @if (Model.Estado == "Activa")
-            {
-                <span class="badge bg-success">Activa</span>
-            }
-            else
-            {
-                <span class="badge bg-secondary">Inactiva</span>
-            }
-        </dd>
-    </dl>
-
-    <div class="d-flex justify-content-between mt-3">
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
-            <i class="fa-solid fa-edit"></i> Editar
-        </a>
-        <a asp-action="Index" class="btn btn-secondary">
-            <i class="fa-solid fa-arrow-left"></i> Volver
-        </a>
+                    
+                    <div class="d-flex flex-column flex-md-row justify-content-end gap-2 pt-3 border-top">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning order-2 order-md-1">
+                            <i class="fa-solid fa-edit"></i> Editar
+                        </a>
+                        <a asp-action="Solicitudes" asp-route-vacanteId="@Model.Id" class="btn btn-info text-white order-3 order-md-2">
+                             <i class="fa-solid fa-users"></i> Ver Solicitudes
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary order-1 order-md-3">
+                            <i class="fa-solid fa-arrow-left"></i> Regresar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

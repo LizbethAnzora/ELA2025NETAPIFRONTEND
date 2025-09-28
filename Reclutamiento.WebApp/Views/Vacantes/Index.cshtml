@@ -1,75 +1,166 @@
 ﻿@model IEnumerable<ReclutamientoFrontend.WebApp.Models.Dtos.VacanteDto>
-
 @{
-    ViewData["Title"] = "Vacantes";
+    ViewData["Title"] = "Gestión de Vacantes";
+    var filtroActual = ViewData["FiltroActual"] as string;
 }
 
-<h1 class="mb-4 text-primary"><i class="fa-solid fa-briefcase"></i> Vacantes</h1>
+<div class="container py-4">
+    
+    <h3 class="mb-4 text-primary fw-bold"><i class="fa-solid fa-briefcase me-2"></i> Panel de Gestión de Vacantes</h3>
 
-<div class="card shadow-sm p-4 mb-4">
-    <form method="get" asp-action="Index" class="row g-3">
-        <div class="col-md-5">
-            <input type="text" name="titulo" class="form-control" placeholder="Buscar por título de vacante" />
-        </div>
-        <div class="col-md-5">
-            <input type="text" name="administrador" class="form-control" placeholder="Buscar por administrador" />
-        </div>
-        <div class="col-md-2 d-grid">
-            <button type="submit" class="btn btn-primary">
-                <i class="fa-solid fa-search"></i> Buscar
-            </button>
-        </div>
-    </form>
-</div>
+    <div class="card shadow-lg mb-4 border-0">
+        <div class="card-body py-3">
+            <div class="row g-2 align-items-center justify-content-between">
+                
+                <div class="col-12 col-md-3 order-md-2 d-grid">
+                    <a asp-action="Crear" class="btn btn-success shadow-sm btn-md">
+                        <i class="fa-solid fa-plus me-2"></i> Crear Vacante
+                    </a>
+                </div>
 
-<div class="mb-3">
-    <a asp-action="Create" class="btn btn-success">
-        <i class="fa-solid fa-plus"></i> Crear Vacante
-    </a>
-</div>
+                <div class="col-12 col-md-9 order-md-1">
+                    <form method="get" asp-action="Index" class="input-group">
+                        <input 
+                            type="text" 
+                            id="filtroTitulo" 
+                            name="titulo" 
+                            class="form-control" 
+                            placeholder="Buscar por Título o Administrador..." 
+                            value="@filtroActual" 
+                        />
+                        <button type="submit" class="btn btn-primary btn-md" title="Aplicar filtro">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-md" title="Limpiar filtros">
+                            <i class="fa-solid fa-xmark"></i> Limpiar
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<table class="table table-hover shadow-sm">
-    <thead class="table-primary">
-        <tr>
-            <th>Título</th>
-            <th>Descripción</th>
-            <th>Administrador</th>
-            <th>Estado</th>
-            <th class="text-center">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var vacante in Model)
-        {
-            <tr>
-                <td>@vacante.Titulo</td>
-                <td>@vacante.Descripcion</td>
-                <td>@vacante.AdministradorNombre</td>
-                <td>
-                    @if (vacante.Estado == "Activa")
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fa-solid fa-check-circle me-2"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fa-solid fa-triangle-exclamation me-2"></i> @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center mt-5 p-4 shadow-lg" role="alert">
+            <i class="fa-solid fa-box-open fa-2x mb-2"></i><br>
+            <h4 class="alert-heading">No hay Vacantes</h4>
+            <p class="mb-0">No se encontraron vacantes con los criterios de búsqueda.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive d-none d-md-block">
+            <table class="table table-hover align-middle bg-white shadow-lg rounded">
+                <thead class="bg-light text-muted border-bottom border-secondary border-2">
+                    <tr>
+                        <th style="width: 30%;" class="py-3">Título</th>
+                        <th style="width: 20%;" class="py-3">Administrador</th>
+                        <th style="width: 15%;" class="py-3 text-center">Estado</th>
+                        <th class="text-center py-3" style="width: 35%;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var vacante in Model)
                     {
-                        <span class="badge bg-success">Activa</span>
+                        <tr class="border-bottom">
+                            <td class="fw-bold text-primary">@vacante.Titulo</td>
+                            <td>@vacante.AdministradorNombre</td>
+                            <td class="text-center">
+                                @if (vacante.Estado == "Activa")
+                                {
+                                    <span class="badge bg-success py-2 px-3">Activa</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary py-2 px-3">Inactiva</span>
+                                }
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Acciones de vacante">
+                                    
+                                    <a asp-action="Solicitudes" asp-route-vacanteId="@vacante.Id" class="btn btn-info text-white" title="Ver Solicitudes">
+                                        <i class="fa-solid fa-users"></i>
+                                    </a>
+                                    
+                                    <a asp-action="Detalles" asp-route-id="@vacante.Id" class="btn btn-outline-info" title="Ver Detalles">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a asp-action="Editar" asp-route-id="@vacante.Id" class="btn btn-outline-warning" title="Editar Vacante">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    @if (vacante.Estado == "Activa")
+                                    {
+                                        <a asp-action="Editar" asp-route-id="@vacante.Id" class="btn btn-outline-danger" title="Desactivar Vacante (Editar)">
+                                            <i class="fa-solid fa-ban"></i>
+                                        </a>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
                     }
-                    else
-                    {
-                        <span class="badge bg-secondary">Inactiva</span>
-                    }
-                </td>
-                <td class="text-center">
-                    <a asp-action="Details" asp-route-id="@vacante.Id" class="btn btn-info btn-sm">
-                        <i class="fa-solid fa-eye"></i>
-                    </a>
-                    <a asp-action="Edit" asp-route-id="@vacante.Id" class="btn btn-warning btn-sm">
-                        <i class="fa-solid fa-edit"></i>
-                    </a>
-                    <a asp-action="Disable" asp-route-id="@vacante.Id" class="btn btn-secondary btn-sm">
-                        <i class="fa-solid fa-ban"></i>
-                    </a>
-                    <a asp-action="Solicitudes" asp-route-id="@vacante.Id" class="btn btn-primary btn-sm">
-                        <i class="fa-solid fa-envelope"></i> Solicitudes
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-md-none">
+            <h5 class="mb-3 text-muted">Vacantes:</h5>
+            @foreach (var vacante in Model)
+            {
+                <div class="card mb-3 shadow-sm border-start border-primary border-4">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary"><i class="fa-solid fa-tag me-2"></i> @vacante.Titulo</h5>
+                        <p class="card-text text-muted mb-2 small"><i class="fa-solid fa-user-tie me-2"></i> Creada por: @vacante.AdministradorNombre</p>
+                        
+                        <div class="mb-3">
+                            <strong class="me-2">Estado:</strong>
+                            @if (vacante.Estado == "Activa")
+                            {
+                                <span class="badge bg-success py-1 px-2">Activa</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary py-1 px-2">Inactiva</span>
+                            }
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <a asp-action="Solicitudes" asp-route-vacanteId="@vacante.Id" class="btn btn-info text-white btn-sm">
+                                <i class="fa-solid fa-users me-2"></i> Ver Solicitudes
+                            </a>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <a asp-action="Detalles" asp-route-id="@vacante.Id" class="btn btn-outline-info flex-fill">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                                <a asp-action="Editar" asp-route-id="@vacante.Id" class="btn btn-outline-warning flex-fill">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                @if (vacante.Estado == "Activa")
+                                {
+                                    <a asp-action="Editar" asp-route-id="@vacante.Id" class="btn btn-outline-danger flex-fill">
+                                        <i class="fa-solid fa-ban"></i>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

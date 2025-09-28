@@ -4,27 +4,60 @@
     ViewData["Title"] = "Crear Vacante";
 }
 
-<h1 class="mb-4 text-success"><i class="fa-solid fa-plus"></i> Crear Vacante</h1>
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9 col-sm-12">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0"><i class="fa-solid fa-plus-circle me-2"></i> Registrar Nueva Vacante</h4>
+                </div>
+                <div class="card-body p-4">
+                    
+                    <form asp-action="Crear" method="post" autocomplete="off" novalidate>
+                     
+                        <div class="mb-3">
+                            <label asp-for="Titulo" class="form-label fw-bold">Título de la Vacante <span class="text-danger">*</span></label>
+                            <input asp-for="Titulo" class="form-control" placeholder="Ej: Desarrollador Backend Senior" />
+                            <span asp-validation-for="Titulo" class="text-danger small"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label asp-for="Descripcion" class="form-label fw-bold">Descripción Completa <span class="text-danger">*</span></label>
+                            <textarea asp-for="Descripcion" class="form-control" rows="5" placeholder="Detalle las responsabilidades y requisitos..."></textarea>
+                            <span asp-validation-for="Descripcion" class="text-danger small"></span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label asp-for="Estado" class="form-label fw-bold">Estado Inicial <span class="text-danger">*</span></label>
+                            <select asp-for="Estado" class="form-select">
+                                <option value="Activa">Activa</option>
+                                <option value="Inactiva">Inactiva</option>
+                            </select>
+                            <span asp-validation-for="Estado" class="text-danger small"></span>
+                        </div>
+                        
+                        <div class="alert alert-info small py-2" role="alert">
+                            <i class="fa-solid fa-info-circle"></i> Los campos marcados con <span class="text-danger">*</span> son obligatorios.
+                        </div>
 
-<div class="card shadow-sm p-4">
-    <form asp-action="Create" method="post">
-        <div class="mb-3">
-            <label asp-for="Titulo" class="form-label"></label>
-            <input asp-for="Titulo" class="form-control" />
-            <span asp-validation-for="Titulo" class="text-danger"></span>
+                        <div class="d-flex flex-column flex-md-row justify-content-end gap-2 pt-3 border-top">
+                            <a asp-action="Index" class="btn btn-secondary order-2 order-md-1">
+                                <i class="fa-solid fa-circle-xmark"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-success order-1 order-md-2">
+                                <i class="fa-solid fa-save"></i> Crear y Publicar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label asp-for="Descripcion" class="form-label"></label>
-            <textarea asp-for="Descripcion" class="form-control"></textarea>
-            <span asp-validation-for="Descripcion" class="text-danger"></span>
-        </div>
-        <div class="d-flex justify-content-between">
-            <a asp-action="Index" class="btn btn-secondary">
-                <i class="fa-solid fa-arrow-left"></i> Volver
-            </a>
-            <button type="submit" class="btn btn-success">
-                <i class="fa-solid fa-save"></i> Guardar
-            </button>
-        </div>
-    </form>
+    </div>
 </div>
+
+@section Scripts {
+    @{
+        // Asegura que la validación del lado del cliente funcione
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

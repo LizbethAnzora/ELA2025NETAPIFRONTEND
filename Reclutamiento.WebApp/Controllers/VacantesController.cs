@@ -36,13 +36,13 @@ namespace ReclutamientoFrontend.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear(VacanteDto vacante)
         {
-            if (!ModelState.IsValid) return View(vacante);
+            if (!ModelState.IsValid) return View("Create",vacante);
 
             var ok = await _vacanteService.CrearVacanteAsync(vacante);
             if (ok) return RedirectToAction(nameof(Index));
 
             ModelState.AddModelError("", "No se pudo crear la vacante.");
-            return View(vacante);
+            return View("Create",vacante);
         }
 
         [HttpGet]
@@ -50,22 +50,22 @@ namespace ReclutamientoFrontend.WebApp.Controllers
         {
             var vacante = await _vacanteService.ObtenerVacantePorIdAsync(id);
             if (vacante == null) return NotFound();
-            return View(vacante);
+            return View("Edit",vacante);
         }
 
         [HttpPost]
         public async Task<IActionResult> Editar(int id, VacanteDto vacante)
         {
-            if (!ModelState.IsValid) return View(vacante);
+            if (!ModelState.IsValid) return View("Edit",vacante);
 
             var ok = await _vacanteService.EditarVacanteAsync(id, vacante);
             if (ok) return RedirectToAction(nameof(Index));
 
             ModelState.AddModelError("", "No se pudo editar la vacante.");
-            return View(vacante);
+            return View("Edit",vacante);
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Eliminar")]
         public async Task<IActionResult> Eliminar(int id)
         {
             var ok = await _vacanteService.EliminarVacanteAsync(id);
