@@ -8,6 +8,7 @@ namespace ReclutamientoFrontend.WebApp.Controllers
 {
     public class UsuariosController : Controller
     {
+        
         private readonly UsuarioService _usuarioService;
 
         public UsuariosController(UsuarioService usuarioService)
