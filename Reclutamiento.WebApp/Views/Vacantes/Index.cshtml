@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<ReclutamientoFrontend.WebApp.Models.Dtos.VacanteDto>
+@using System.Text.Json;
 @{
     ViewData["Title"] = "Gestión de Vacantes";
     var filtroActual = ViewData["FiltroActual"] as string;
@@ -13,7 +14,7 @@
             <div class="row g-2 align-items-center justify-content-between">
                 
                 <div class="col-12 col-md-3 order-md-2 d-grid">
-                    <a asp-action="Crear" class="btn btn-success shadow-sm btn-md">
+                    <a asp-action="Create" class="btn btn-success shadow-sm btn-md">
                         <i class="fa-solid fa-plus me-2"></i> Crear Vacante
                     </a>
                 </div>
@@ -25,7 +26,7 @@
                             id="filtroTitulo" 
                             name="titulo" 
                             class="form-control" 
-                            placeholder="Buscar por Título o Administrador..." 
+                            placeholder="Buscar por Título..." 
                             value="@filtroActual" 
                         />
                         <button type="submit" class="btn btn-primary btn-md" title="Aplicar filtro">
@@ -69,10 +70,9 @@
             <table class="table table-hover align-middle bg-white shadow-lg rounded">
                 <thead class="bg-light text-muted border-bottom border-secondary border-2">
                     <tr>
-                        <th style="width: 30%;" class="py-3">Título</th>
-                        <th style="width: 20%;" class="py-3">Administrador</th>
+                        <th style="width: 45%;" class="py-3">Título</th>
                         <th style="width: 15%;" class="py-3 text-center">Estado</th>
-                        <th class="text-center py-3" style="width: 35%;">Acciones</th>
+                        <th class="text-center py-3" style="width: 40%;">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,9 +80,8 @@
                     {
                         <tr class="border-bottom">
                             <td class="fw-bold text-primary">@vacante.Titulo</td>
-                            <td>@vacante.AdministradorNombre</td>
                             <td class="text-center">
-                                @if (vacante.Estado == "Activa")
+                                @if (vacante.EstaActiva)
                                 {
                                     <span class="badge bg-success py-2 px-3">Activa</span>
                                 }
@@ -98,18 +97,32 @@
                                         <i class="fa-solid fa-users"></i>
                                     </a>
                                     
-                                    <a asp-action="Detalles" asp-route-id="@vacante.Id" class="btn btn-outline-info" title="Ver Detalles">
+                                    <a asp-action="Details" asp-route-id="@vacante.Id" class="btn btn-outline-info" title="Ver Detalles">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
-                                    <a asp-action="Editar" asp-route-id="@vacante.Id" class="btn btn-outline-warning" title="Editar Vacante">
+                                    <a asp-action="Edit" asp-route-id="@vacante.Id" class="btn btn-outline-warning" title="Editar Vacante">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
-                                    @if (vacante.Estado == "Activa")
+
+                                    @if (vacante.EstaActiva)
                                     {
-                                        <a asp-action="Editar" asp-route-id="@vacante.Id" class="btn btn-outline-danger" title="Desactivar Vacante (Editar)">
+                                        @* BOTÓN DESHABILITAR: Activa el modal de confirmación *@
+                                        <button type="button" class="btn btn-outline-danger" title="Deshabilitar Vacante"
+                                                data-bs-toggle="modal" data-bs-target="#deshabilitarModal" 
+                                                data-vacante-id="@vacante.Id" data-vacante-titulo="@vacante.Titulo">
                                             <i class="fa-solid fa-ban"></i>
-                                        </a>
+                                        </button>
                                     }
+                                    else
+                                    {
+                                        @* BOTÓN HABILITAR: Activa el nuevo modal de confirmación *@
+                                        <button type="button" class="btn btn-outline-success" title="Habilitar Vacante (Re-activar)"
+                                                data-bs-toggle="modal" data-bs-target="#habilitarModal" 
+                                                data-vacante-id="@vacante.Id" data-vacante-titulo="@vacante.Titulo">
+                                            <i class="fa-solid fa-circle-check"></i>
+                                        </button>
+                                    }
+
                                 </div>
                             </td>
                         </tr>
@@ -118,18 +131,18 @@
             </table>
         </div>
 
+        @* Versión Móvil: Se ajusta para usar el modal en ambas acciones *@
         <div class="d-md-none">
             <h5 class="mb-3 text-muted">Vacantes:</h5>
             @foreach (var vacante in Model)
             {
-                <div class="card mb-3 shadow-sm border-start border-primary border-4">
+                <div class="card mb-3 shadow-sm border-start @(vacante.EstaActiva ? "border-success" : "border-secondary") border-4">
                     <div class="card-body">
                         <h5 class="card-title text-primary"><i class="fa-solid fa-tag me-2"></i> @vacante.Titulo</h5>
-                        <p class="card-text text-muted mb-2 small"><i class="fa-solid fa-user-tie me-2"></i> Creada por: @vacante.AdministradorNombre</p>
                         
                         <div class="mb-3">
                             <strong class="me-2">Estado:</strong>
-                            @if (vacante.Estado == "Activa")
+                            @if (vacante.EstaActiva)
                             {
                                 <span class="badge bg-success py-1 px-2">Activa</span>
                             }
@@ -144,17 +157,30 @@
                                 <i class="fa-solid fa-users me-2"></i> Ver Solicitudes
                             </a>
                             <div class="btn-group btn-group-sm" role="group">
-                                <a asp-action="Detalles" asp-route-id="@vacante.Id" class="btn btn-outline-info flex-fill">
+                                <a asp-action="Details" asp-route-id="@vacante.Id" class="btn btn-outline-info flex-fill">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
-                                <a asp-action="Editar" asp-route-id="@vacante.Id" class="btn btn-outline-warning flex-fill">
+                                <a asp-action="Edit" asp-route-id="@vacante.Id" class="btn btn-outline-warning flex-fill">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
-                                @if (vacante.Estado == "Activa")
+                                
+                                @if (vacante.EstaActiva)
                                 {
-                                    <a asp-action="Editar" asp-route-id="@vacante.Id" class="btn btn-outline-danger flex-fill">
+                                    @* MÓVIL: BOTÓN DESHABILITAR (Activa modal) *@
+                                    <button type="button" class="btn btn-outline-danger flex-fill" title="Deshabilitar Vacante"
+                                            data-bs-toggle="modal" data-bs-target="#deshabilitarModal" 
+                                            data-vacante-id="@vacante.Id" data-vacante-titulo="@vacante.Titulo">
                                         <i class="fa-solid fa-ban"></i>
-                                    </a>
+                                    </button>
+                                }
+                                else
+                                {
+                                    @* MÓVIL: BOTÓN HABILITAR (Activa modal) *@
+                                    <button type="button" class="btn btn-outline-success flex-fill" title="Habilitar Vacante (Re-activar)"
+                                            data-bs-toggle="modal" data-bs-target="#habilitarModal" 
+                                            data-vacante-id="@vacante.Id" data-vacante-titulo="@vacante.Titulo">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                    </button>
                                 }
                             </div>
                         </div>
@@ -164,3 +190,99 @@
         </div>
     }
 </div>
+
+@* ======================================== *@
+@* MODAL DE CONFIRMACIÓN PARA DESHABILITAR *@
+@* ======================================== *@
+<div class="modal fade" id="deshabilitarModal" tabindex="-1" aria-labelledby="deshabilitarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deshabilitarModalLabel"><i class="fa-solid fa-triangle-exclamation me-2"></i> Confirmar Deshabilitación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="deshabilitar-modal-message"></p>
+                <p class="small text-muted">Esta acción oculta el puesto de los solicitantes. Puede reactivarlo más tarde.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form id="deshabilitarForm" asp-action="Deshabilitar" method="post" style="display:inline;">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="deshabilitarIdInput" value="" />
+                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-ban me-1"></i> Confirmar Deshabilitación</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* ======================================== *@
+@* MODAL DE CONFIRMACIÓN PARA HABILITAR (NUEVO) *@
+@* ======================================== *@
+<div class="modal fade" id="habilitarModal" tabindex="-1" aria-labelledby="habilitarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="habilitarModalLabel"><i class="fa-solid fa-circle-check me-2"></i> Confirmar Habilitación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="habilitar-modal-message"></p>
+                <p class="small text-muted">Esta acción reactivará el puesto, haciéndolo visible inmediatamente para los solicitantes.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form id="habilitarForm" asp-action="Habilitar" method="post" style="display:inline;">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="habilitarIdInput" value="" />
+                    <button type="submit" class="btn btn-success"><i class="fa-solid fa-circle-check me-1"></i> Confirmar Habilitación</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+---
+
+@section Scripts {
+    <script>
+        // Script para manejar los dos modales de confirmación (Bootstrap 5)
+
+        // ------------------------------------
+        // Lógica para el modal de DESHABILITAR
+        // ------------------------------------
+        var deshabilitarModal = document.getElementById('deshabilitarModal');
+        if (deshabilitarModal) {
+            deshabilitarModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget; 
+                var vacanteId = button.getAttribute('data-vacante-id');
+                var vacanteTitulo = button.getAttribute('data-vacante-titulo');
+
+                var modalMessage = deshabilitarModal.querySelector('#deshabilitar-modal-message');
+                var vacanteIdInput = deshabilitarModal.querySelector('#deshabilitarIdInput');
+
+                modalMessage.innerHTML = `¿Está seguro de querer **Deshabilitar** la vacante: <strong>${vacanteTitulo}</strong>?`;
+                vacanteIdInput.value = vacanteId;
+            });
+        }
+        
+        // ------------------------------------
+        // Lógica para el modal de HABILITAR (NUEVO)
+        // ------------------------------------
+        var habilitarModal = document.getElementById('habilitarModal');
+        if (habilitarModal) {
+            habilitarModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget; 
+                var vacanteId = button.getAttribute('data-vacante-id');
+                var vacanteTitulo = button.getAttribute('data-vacante-titulo');
+
+                var modalMessage = habilitarModal.querySelector('#habilitar-modal-message');
+                var vacanteIdInput = habilitarModal.querySelector('#habilitarIdInput');
+
+                modalMessage.innerHTML = `¿Está seguro de querer **Habilitar** (Re-activar) la vacante: <strong>${vacanteTitulo}</strong>?`;
+                vacanteIdInput.value = vacanteId;
+            });
+        }
+    </script>
+}

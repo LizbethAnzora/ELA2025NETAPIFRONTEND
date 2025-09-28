@@ -13,12 +13,15 @@
                 </div>
                 <div class="card-body p-4">
                     
-                    <form asp-action="Editar" method="post" autocomplete="off" novalidate>
-                      
-                        <div class="mb-3">
-                            <label class="form-label text-muted fw-bold">Administrador Creador</label>
-                            <p class="form-control-plaintext fw-bold text-primary border-bottom pb-2">@Model.AdministradorNombre</p>
-                        </div>
+                    @* 1. Acción Corregida a "Edit" (convención) *@
+                    <form asp-action="Edit" method="post" autocomplete="off" novalidate>
+                        @Html.AntiForgeryToken()
+                        
+                        @* 2. Campos Ocultos para mantener el ID y el Estado actual. ELIMINAMOS EL CAMPO DE ESTADO VISIBLE. *@
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="EstaActiva" />
+                        
+                        @* 3. Referencia al Administrador Creador ELIMINADA *@
                         
                         <div class="mb-3">
                             <label asp-for="Titulo" class="form-label fw-bold">Título de la Vacante <span class="text-danger">*</span></label>
@@ -26,23 +29,30 @@
                             <span asp-validation-for="Titulo" class="text-danger small"></span>
                         </div>
                         
+                        @* 4. Campo Ubicación Añadido *@
+                        <div class="mb-3">
+                            <label asp-for="Ubicacion" class="form-label fw-bold">Ubicación</label>
+                            <input asp-for="Ubicacion" class="form-control" placeholder="Ej: Remoto, San Salvador, etc." />
+                            <span asp-validation-for="Ubicacion" class="text-danger small"></span>
+                        </div>
+                        
                         <div class="mb-3">
                             <label asp-for="Descripcion" class="form-label fw-bold">Descripción Completa <span class="text-danger">*</span></label>
-                            <textarea asp-for="Descripcion" class="form-control" rows="5" placeholder="Detalle las responsabilidades y requisitos..."></textarea>
+                            <textarea asp-for="Descripcion" class="form-control" rows="5" placeholder="Detalle las responsabilidades y el rol..."></textarea>
                             <span asp-validation-for="Descripcion" class="text-danger small"></span>
                         </div>
                         
+                        @* 5. Campo Requisitos Añadido *@
                         <div class="mb-4">
-                            <label asp-for="Estado" class="form-label fw-bold">Estado Actual <span class="text-danger">*</span></label>
-                            <select asp-for="Estado" class="form-select">
-                                <option value="Activa">Activa (Pública)</option>
-                                <option value="Inactiva">Inactiva (Desactivada)</option>
-                            </select>
-                            <span asp-validation-for="Estado" class="text-danger small"></span>
+                            <label asp-for="Requisitos" class="form-label fw-bold">Requisitos / Perfil</label>
+                            <textarea asp-for="Requisitos" class="form-control" rows="4" placeholder="Lista de requisitos mínimos, tecnologías, experiencia, etc."></textarea>
+                            <span asp-validation-for="Requisitos" class="text-danger small"></span>
                         </div>
                         
+                        @* 6. Campo de Estado Anterior ELIMINADO *@
+                        
                         <div class="alert alert-info small py-2" role="alert">
-                            <i class="fa-solid fa-info-circle"></i> Los campos marcados con <span class="text-danger">*</span> son obligatorios.
+                            <i class="fa-solid fa-info-circle"></i> El estado de la vacante (Activa/Inactiva) se gestiona únicamente desde la vista principal (Index).
                         </div>
 
                         <div class="d-flex flex-column flex-md-row justify-content-end gap-2 pt-3 border-top">

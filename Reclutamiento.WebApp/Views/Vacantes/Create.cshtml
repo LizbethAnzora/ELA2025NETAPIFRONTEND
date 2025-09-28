@@ -13,8 +13,10 @@
                 </div>
                 <div class="card-body p-4">
                     
-                    <form asp-action="Crear" method="post" autocomplete="off" novalidate>
-                     
+                    @* 1. Acción Corregida: asp-action="Create" *@
+                    <form asp-action="Create" method="post" autocomplete="off" novalidate>
+                        @Html.AntiForgeryToken()
+                        
                         <div class="mb-3">
                             <label asp-for="Titulo" class="form-label fw-bold">Título de la Vacante <span class="text-danger">*</span></label>
                             <input asp-for="Titulo" class="form-control" placeholder="Ej: Desarrollador Backend Senior" />
@@ -22,22 +24,32 @@
                         </div>
                         
                         <div class="mb-3">
+                            <label asp-for="Ubicacion" class="form-label fw-bold">Ubicación</label>
+                            <input asp-for="Ubicacion" class="form-control" placeholder="Ej: Remoto, San Salvador, etc." />
+                            <span asp-validation-for="Ubicacion" class="text-danger small"></span>
+                        </div>
+                        
+                        <div class="mb-3">
                             <label asp-for="Descripcion" class="form-label fw-bold">Descripción Completa <span class="text-danger">*</span></label>
-                            <textarea asp-for="Descripcion" class="form-control" rows="5" placeholder="Detalle las responsabilidades y requisitos..."></textarea>
+                            <textarea asp-for="Descripcion" class="form-control" rows="5" placeholder="Detalle las responsabilidades y el rol..."></textarea>
                             <span asp-validation-for="Descripcion" class="text-danger small"></span>
                         </div>
                         
+                        @* 2. Campo Requisitos añadido, que es parte del DTO y el POST del backend. *@
                         <div class="mb-4">
-                            <label asp-for="Estado" class="form-label fw-bold">Estado Inicial <span class="text-danger">*</span></label>
-                            <select asp-for="Estado" class="form-select">
-                                <option value="Activa">Activa</option>
-                                <option value="Inactiva">Inactiva</option>
-                            </select>
-                            <span asp-validation-for="Estado" class="text-danger small"></span>
+                            <label asp-for="Requisitos" class="form-label fw-bold">Requisitos / Perfil</label>
+                            <textarea asp-for="Requisitos" class="form-control" rows="4" placeholder="Lista de requisitos mínimos, tecnologías, experiencia, etc."></textarea>
+                            <span asp-validation-for="Requisitos" class="text-danger small"></span>
                         </div>
                         
+                        @* 3. Campo de Estado ELIMINADO: El controlador VacantesController lo fuerza a 'true' al crear. *@
+                        
+                        @* Campo oculto para asegurar que 'EstaActiva' se envíe como 'true' si el Controller no lo setea, aunque ya lo forzamos en el Controller. *@
+                        <input type="hidden" asp-for="EstaActiva" value="true" />
+
+
                         <div class="alert alert-info small py-2" role="alert">
-                            <i class="fa-solid fa-info-circle"></i> Los campos marcados con <span class="text-danger">*</span> son obligatorios.
+                            <i class="fa-solid fa-info-circle"></i> Los campos marcados con <span class="text-danger">*</span> son obligatorios. Las vacantes se crean **Activas** por defecto.
                         </div>
 
                         <div class="d-flex flex-column flex-md-row justify-content-end gap-2 pt-3 border-top">
