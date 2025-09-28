@@ -1145,31 +1145,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\josue\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ELA2025NETAPIFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj",
+      "projectUniqueName": "C:\\Users\\josue\\OneDrive\\Desktop\\ReclutamientoFrontend\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj",
       "projectName": "Reclutamiento.WebApp",
-      "projectPath": "D:\\ELA2025NETAPIFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\ELA2025NETAPIFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\obj\\",
+      "projectPath": "C:\\Users\\josue\\OneDrive\\Desktop\\ReclutamientoFrontend\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj",
+      "packagesPath": "C:\\Users\\josue\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\josue\\OneDrive\\Desktop\\ReclutamientoFrontend\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\josue\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1187,8 +1180,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.300"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -1222,7 +1214,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.413/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

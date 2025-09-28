@@ -1,59 +1,111 @@
 ﻿@model IEnumerable<ReclutamientoFrontend.WebApp.Models.Dtos.UsuarioDto>
 
 @{
-    ViewData["Title"] = "Usuarios";
+    ViewData["Title"] = "Gestión de Administradores";
 }
 
-<h1 class="mb-4 text-primary"><i class="fa-solid fa-users"></i> Usuarios</h1>
+<div class="container py-4">
+    <h1 class="mb-4 text-primary fw-bold"><i class="fa-solid fa-users-cog me-2"></i> Panel de Administradores</h1>
 
-<div class="card shadow-sm p-4 mb-4">
-    <form method="get" asp-action="Index" class="row g-3">
-        <div class="col-md-5">
-            <input type="text" name="nombre" class="form-control" placeholder="Buscar por nombre" />
+    <div class="card shadow-lg mb-5 border-0">
+        <div class="card-body">
+            <div class="row g-3 align-items-center justify-content-between">
+                
+                <div class="col-12 col-md-4 order-md-2 d-grid">
+                    <a asp-action="Crear" class="btn btn-success btn-lg shadow-sm">
+                        <i class="fa-solid fa-user-plus me-2"></i> Añadir Nuevo Admin
+                    </a>
+                </div>
+
+                <div class="col-12 col-md-8 order-md-1">
+                    <form method="get" asp-action="Index" class="input-group">
+                        <input 
+                            type="text" 
+                            id="filtroNombre" 
+                            name="nombre" 
+                            class="form-control form-control-lg" 
+                            placeholder="Buscar por Nombre Completo..." 
+                            value="@Context.Request.Query["nombre"]" 
+                        />
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-magnifying-glass"></i> Buscar
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary" title="Limpiar filtros">
+                            <i class="fa-solid fa-xmark"></i>
+                        </a>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="col-md-5">
-            <input type="text" name="correo" class="form-control" placeholder="Buscar por correo" />
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center mt-5 p-4 shadow-lg" role="alert">
+            <i class="fa-solid fa-box-open fa-2x mb-2"></i><br>
+            <h4 class="alert-heading">Sin Administradores Registrados</h4>
+            <p class="mb-0">No se encontraron usuarios con los criterios de búsqueda aplicados.</p>
         </div>
-        <div class="col-md-2 d-grid">
-            <button type="submit" class="btn btn-primary">
-                <i class="fa-solid fa-search"></i> Buscar
-            </button>
+    }
+    else
+    {
+        <div class="table-responsive d-none d-md-block">
+            <table class="table table-hover align-middle bg-white shadow-lg rounded">
+                <thead class="bg-light text-muted border-bottom border-secondary border-2">
+                    <tr>
+                        <th style="width: 35%;" class="py-3">Nombre Completo</th>
+                        <th style="width: 35%;" class="py-3">Correo Electrónico</th>
+                        <th class="text-center py-3" style="width: 30%;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var usuario in Model)
+                    {
+                        <tr class="border-bottom">
+                            <td class="fw-bold text-primary">@usuario.NombreCompleto</td>
+                            <td>@usuario.CorreoElectronico</td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Acciones de usuario">
+                                    <a asp-action="Detalles" asp-route-id="@usuario.Id" class="btn btn-outline-info" title="Ver Detalles">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a asp-action="Editar" asp-route-id="@usuario.Id" class="btn btn-outline-warning" title="Editar Nombre">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a asp-action="Eliminar" asp-route-id="@usuario.Id" class="btn btn-outline-danger" title="Eliminar Usuario">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
-    </form>
+
+        <div class="d-md-none">
+            <h5 class="mb-3 text-muted">Resultados:</h5>
+            @foreach (var usuario in Model)
+            {
+                <div class="card mb-3 shadow-sm border-start border-primary border-4">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary"><i class="fa-solid fa-user me-2"></i> @usuario.NombreCompleto</h5>
+                        <p class="card-text text-muted mb-3 small"><i class="fa-solid fa-envelope me-2"></i> @usuario.CorreoElectronico</p>
+                        
+                        <div class="d-flex justify-content-between gap-2">
+                            <a asp-action="Detalles" asp-route-id="@usuario.Id" class="btn btn-info btn-sm flex-fill">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                            <a asp-action="Editar" asp-route-id="@usuario.Id" class="btn btn-warning btn-sm flex-fill">
+                                <i class="fa-solid fa-edit"></i>
+                            </a>
+                            <a asp-action="Eliminar" asp-route-id="@usuario.Id" class="btn btn-danger btn-sm flex-fill">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
 </div>
-
-<div class="mb-3">
-    <a asp-action="Crear" class="btn btn-success">
-        <i class="fa-solid fa-plus"></i> Crear Usuario
-    </a>
-</div>
-
-<table class="table table-hover shadow-sm">
-    <thead class="table-primary">
-        <tr>
-            <th>Nombre Completo</th>
-            <th>Correo Electrónico</th>
-            <th class="text-center">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var usuario in Model)
-        {
-            <tr>
-                <td>@usuario.NombreCompleto</td>
-                <td>@usuario.CorreoElectronico</td>
-                <td class="text-center">
-                    <a asp-action="Detalles" asp-route-id="@usuario.Id" class="btn btn-info btn-sm">
-                        <i class="fa-solid fa-eye"></i>
-                    </a>
-                    <a asp-action="Editar" asp-route-id="@usuario.Id" class="btn btn-warning btn-sm">
-                        <i class="fa-solid fa-edit"></i>
-                    </a>
-                    <a asp-action="Eliminar" asp-route-id="@usuario.Id" class="btn btn-danger btn-sm">
-                        <i class="fa-solid fa-trash"></i>
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>

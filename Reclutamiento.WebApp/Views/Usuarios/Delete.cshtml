@@ -1,30 +1,55 @@
 ﻿@model ReclutamientoFrontend.WebApp.Models.Dtos.UsuarioDto
 
 @{
-    ViewData["Title"] = "Eliminar Usuario";
+    ViewData["Title"] = "Confirmar Eliminación";
 }
 
-<div class="container py-5">
-    <h1 class="mb-4 text-danger"><i class="bi bi-trash-fill"></i> Eliminar Usuario</h1>
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <h5 class="card-title">¿Está seguro de eliminar este usuario?</h5>
-            <ul class="list-group list-group-flush mb-3">
-                <li class="list-group-item"><strong>Nombre Completo:</strong> @Model.NombreCompleto</li>
-                <li class="list-group-item"><strong>Correo Electrónico:</strong> @Model.CorreoElectronico</li>
-                <li class="list-group-item"><strong>Rol:</strong> @Model.Rol</li>
-            </ul>
-            <form asp-action="Eliminar">
-                <input type="hidden" asp-for="Id" />
-                <div class="d-flex justify-content-between">
-                    <a asp-action="Index" class="btn btn-secondary">
-                        <i class="bi bi-arrow-left"></i> Cancelar
-                    </a>
-                    <button type="submit" class="btn btn-danger">
-                        <i class="bi bi-trash"></i> Eliminar
-                    </button>
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-danger text-white">
+                    <h3 class="mb-0"><i class="fa-solid fa-user-slash me-2"></i> Confirmar Eliminación</h3>
                 </div>
-            </form>
+                <div class="card-body p-4">
+                    
+                    <div class="alert alert-danger text-center mb-4 border-2 border-danger" role="alert">
+                        <h4 class="alert-heading text-danger"><i class="fa-solid fa-triangle-exclamation fa-lg me-2"></i> ¡Acción Irreversible!</h4>
+                        <p class="mb-0 fw-bold">¿Estás seguro de que quieres eliminar permanentemente a este administrador?</p>
+                    </div>
+
+                    <h5 class="text-muted mb-3">Detalles del Registro:</h5>
+                    
+                    <ul class="list-group list-group-flush mb-4 border rounded">
+                        <li class="list-group-item">
+                            <strong>Nombre Completo:</strong> 
+                            <span class="float-end text-dark">@Model.NombreCompleto</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Correo Electrónico:</strong> 
+                            <span class="float-end text-dark">@Model.CorreoElectronico</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Rol:</strong> 
+                            <span class="float-end text-danger fw-bold">ADMINISTRADOR</span>
+                        </li>
+                    </ul>
+                    
+                    <form asp-action="Eliminar" method="post">
+                        <input type="hidden" name="id" value="@Model.Id" /> 
+
+                        <div class="d-flex flex-column flex-md-row justify-content-end gap-2 pt-3 border-top">
+                            <a asp-action="Index" class="btn btn-secondary order-2 order-md-1">
+                                <i class="fa-solid fa-arrow-left"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-danger btn-lg order-1 order-md-2">
+                                <i class="fa-solid fa-trash-can"></i> **Eliminar Ahora**
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
