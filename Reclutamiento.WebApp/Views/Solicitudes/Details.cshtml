@@ -7,22 +7,89 @@
 
 <h1 class="mb-4 text-info"><i class="fa-solid fa-info-circle"></i> Detalles de Solicitud</h1>
 
-<div class="card shadow-sm">
+<div class="card shadow-lg mb-4" id="contentToPdf">
+    <div class="card-header bg-info text-white">
+        <h3 class="mb-0">Vacante: @Model.VacanteTitulo</h3>
+    </div>
     <div class="card-body">
-        <h4 class="text-primary"><i class="fa-solid fa-user"></i> Información del Solicitante</h4>
+        
+        <h4 class="text-primary mt-2"><i class="fa-solid fa-user"></i> Información del Solicitante</h4>
         <hr />
 
         <dl class="row mb-4">
-            <dt class="col-sm-3">Nombre</dt>
+            <dt class="col-sm-3">Nombre Completo</dt>
             <dd class="col-sm-9">@Model.NombreSolicitante</dd>
-
-            <dt class="col-sm-3">Correo</dt>
+            
+            <dt class="col-sm-3">Correo Electrónico</dt>
             <dd class="col-sm-9">@Model.EmailSolicitante</dd>
 
+            @* ⚠️ ASUMIMOS que el DTO en el GET devuelve el Número de Teléfono. *@
+            @* Si el campo es requerido, debe existir en SolicitudDto. Usaré un placeholder si no lo tiene: *@
+            <dt class="col-sm-3">Número de Teléfono</dt>
+            <dd class="col-sm-9">
+                @if (ViewBag.NumeroTelefono != null) { @ViewBag.NumeroTelefono } else { <span class="text-muted">No disponible en DTO de detalle</span> }
+            </dd>
         </dl>
+        
+        <h4 class="text-primary mt-4"><i class="fa-solid fa-graduation-cap"></i> Experiencia</h4>
+        <hr />
+        <div class="p-3 bg-light rounded mb-4">
+            <p style="white-space: pre-wrap;">@Model.Experiencia</p>
+        </div>
+        
+        <h4 class="text-primary mt-4"><i class="fa-solid fa-image"></i> Foto Adjunta</h4>
+        <hr />
+        <div class="text-center">
+            @* Asumimos que Model.Foto contiene la URL o el Base64 de la imagen *@
+            @if (!string.IsNullOrEmpty(ViewBag.Foto))
+            {
+                <img src="@ViewBag.Foto" class="img-thumbnail" alt="Foto del Solicitante" style="max-width: 200px; height: auto;" />
+            }
+            else
+            {
+                <div class="alert alert-warning">No se adjuntó fotografía.</div>
+            }
+        </div>
 
-        <a asp-action="Index" class="btn btn-secondary">
-            <i class="fa-solid fa-arrow-left"></i> Volver al Listado
-        </a>
     </div>
 </div>
+
+<div class="d-flex justify-content-between mb-5">
+    <button id="btnDescargarPdf" class="btn btn-danger btn-lg">
+        <i class="fa-solid fa-file-pdf me-2"></i> Descargar Solicitud (PDF)
+    </button>
+    
+    <a asp-action="Index" class="btn btn-secondary btn-lg">
+        <i class="fa-solid fa-arrow-left"></i> Volver al Listado
+    </a>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            $('#btnDescargarPdf').on('click', function () {
+                var element = document.getElementById('contentToPdf');
+                var opt = {
+                    margin: 1,
+                    filename: 'Solicitud-@Model.Id-@Model.NombreSolicitante.Replace(" ", "_").Replace(",", "").ToLower().Substring(0, Math.Min(Model.NombreSolicitante.Length, 15))' + '.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+
+                // Ocultar botones antes de generar (para que no salgan en el PDF)
+                $('#btnDescargarPdf').hide();
+                $('.btn-secondary').hide();
+
+                // Generar el PDF
+                html2pdf().set(opt).from(element).save().finally(function() {
+                    // Mostrar los botones después de la generación
+                    $('#btnDescargarPdf').show();
+                    $('.btn-secondary').show();
+                });
+            });
+        });
+    </script>
+}

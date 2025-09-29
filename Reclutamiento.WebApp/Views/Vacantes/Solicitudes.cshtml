@@ -3,7 +3,8 @@
 
 @{
     var vacanteTitulo = ViewData["VacanteTitulo"] as string ?? "Vacante Desconocida";
-    var vacanteId = Model.FirstOrDefault()?.VacanteId ?? 0;
+    // El ID de vacante ya no es estrictamente necesario en la vista, pero lo mantenemos para contexto.
+    var vacanteId = ViewData["VacanteId"] as int? ?? 0;
 
     ViewData["Title"] = $"Solicitudes para: {vacanteTitulo}";
 }
@@ -15,6 +16,7 @@
         Gestión de postulaciones para la vacante: <strong class="text-dark">@vacanteTitulo</strong>
     </p>
 
+    @* --- Mensajes TempData (Mantener) --- *@
     @if (TempData["SuccessMessage"] != null)
     {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -30,8 +32,8 @@
         </div>
     }
 
-    <div class="mb-4">
-        <a asp-action="Index" class="btn btn-secondary btn-sm">
+    <div class="mb-4 d-flex justify-content-start">
+        <a asp-controller="Vacantes" asp-action="Index" class="btn btn-secondary btn-sm">
             <i class="fa-solid fa-arrow-left"></i> Volver a Vacantes
         </a>
     </div>
@@ -46,14 +48,13 @@
     }
     else
     {
-        <div class="table-responsive d-none d-md-block">
-            <table class="table table-hover align-middle bg-white shadow-lg rounded">
+        <div class="table-responsive">
+            <table id="solicitudesTable" class="table table-hover align-middle bg-white shadow-lg rounded">
                 <thead class="bg-light text-muted border-bottom border-secondary border-2">
                     <tr>
-                        <th style="width: 25%;" class="py-3">Nombre del Solicitante</th>
-                        <th style="width: 25%;" class="py-3">Correo Electrónico</th>
-                        <th style="width: 15%;" class="py-3 text-center">Estado</th>
-                        <th style="width: 10%;" class="py-3">Fecha</th>
+                        <th style="width: 30%;" class="py-3">Nombre del Solicitante</th>
+                        <th style="width: 30%;" class="py-3">Correo Electrónico</th>
+                        <th style="width: 15%;" class="py-3">Fecha</th>
                         <th class="text-center py-3" style="width: 25%;">Acciones</th>
                     </tr>
                 </thead>
@@ -63,23 +64,13 @@
                         <tr class="border-bottom">
                             <td class="fw-bold text-primary">@solicitud.NombreSolicitante</td>
                             <td>@solicitud.EmailSolicitante</td>
-                            <td class="text-center">
-                                @{
-                                    var badgeClass = solicitud.EstadoSolicitud switch
-                                    {
-                                        "Aceptada" => "bg-success",
-                                        "Rechazada" => "bg-danger",
-                                        "Respondida" => "bg-warning text-dark",
-                                        _ => "bg-secondary" // Pendiente o Desconocida
-                                    };
-                                }
-                                <span class="badge @badgeClass py-2 px-3">@solicitud.EstadoSolicitud</span>
-                            </td>
+                            <td>@("Fecha No disponible")</td> 
                             <td class="text-center">
                                 <div class="btn-group btn-group-sm" role="group">
-                                    <a asp-action="DetallesSolicitud" asp-route-id="@solicitud.Id" class="btn btn-outline-info" title="Ver CV/Experiencia">
-                                        <i class="fa-solid fa-eye"></i> Experiencia
+                                    <a asp-controller="Solicitudes" asp-action="Details" asp-route-id="@solicitud.Id" class="btn btn-info" title="Ver Solicitud Completa y Foto">
+                                        <i class="fa-solid fa-file-alt"></i> Detalles
                                     </a>
+                                    
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#responderModal-@solicitud.Id" title="Enviar respuesta al candidato">
                                         <i class="fa-solid fa-reply"></i> Responder
                                     </button>
@@ -91,15 +82,16 @@
             </table>
         </div>
 
-        }
+    }
 </div>
 
+@* MODAL SIMPLIFICADO DE RESPUESTA (Sin campo de Estado) *@
 @foreach (var solicitud in Model)
 {
     <div class="modal fade" id="responderModal-@solicitud.Id" tabindex="-1" aria-labelledby="responderModalLabel-@solicitud.Id" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form asp-action="Responder" method="post" novalidate>
+                <form asp-controller="Vacantes" asp-action="ResponderSolicitud" method="post" novalidate>
                     
                     <div class="modal-header bg-success text-white">
                         <h5 class="modal-title" id="responderModalLabel-@solicitud.Id">
@@ -109,28 +101,16 @@
                     </div>
                     
                     <div class="modal-body">
+                        <input type="hidden" name="SolicitudId" value="@solicitud.Id" />
                         
-                        <input type="hidden" name="@nameof(RespuestaSolicitudViewModel.SolicitudId)" value="@solicitud.Id" />
-                        <input type="hidden" name="@nameof(RespuestaSolicitudViewModel.VacanteId)" value="@vacanteId" />
-
                         <div class="alert alert-info py-2 small">
-                            Estás respondiendo la solicitud de **@solicitud.NombreSolicitante** (<a href="mailto:@solicitud.EmailSolicitante" class="alert-link">@solicitud.EmailSolicitante</a>)
+                            Estás enviando un mensaje a **@solicitud.NombreSolicitante** (<a href="mailto:@solicitud.EmailSolicitante" class="alert-link">@solicitud.EmailSolicitante</a>)
                         </div>
 
                         <div class="mb-3">
-                            <label for="@nameof(RespuestaSolicitudViewModel.NuevoEstado)" class="form-label fw-bold">Decisión <span class="text-danger">*</span></label>
-                            <select name="@nameof(RespuestaSolicitudViewModel.NuevoEstado)" class="form-select" required>
-                                <option value="" disabled selected>-- Seleccione una decisión --</option>
-                                <option value="Aceptada">Aceptar/Avanzar en el proceso</option>
-                                <option value="Rechazada">Rechazar</option>
-                                <option value="Respondida">Marcar como Respondida</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="@nameof(RespuestaSolicitudViewModel.MensajeRespuesta)" class="form-label fw-bold">Mensaje al Solicitante <span class="text-danger">*</span></label>
-                            <textarea name="@nameof(RespuestaSolicitudViewModel.MensajeRespuesta)" class="form-control" rows="4" placeholder="Escriba un mensaje profesional para el candidato..." required></textarea>
-                            <div class="form-text">Este mensaje se guardará como la respuesta oficial.</div>
+                            <label for="ContenidoMensaje" class="form-label fw-bold">Mensaje al Solicitante <span class="text-danger">*</span></label>
+                            <textarea name="ContenidoMensaje" class="form-control" rows="4" placeholder="Escriba el mensaje para el candidato..." required></textarea>
+                            <div class="form-text">Este mensaje se enviará por correo electrónico y se guardará como la respuesta.</div>
                         </div>
 
                     </div>
@@ -147,4 +127,25 @@
             </div>
         </div>
     </div>
+}
+
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#solicitudesTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json" // Traducción al español
+                },
+                // Deshabilitar la columna 3 (Acciones) para que no sea ordenable
+                "columnDefs": [
+                    { "orderable": false, "targets": 3 } 
+                ],
+                "order": [[0, "asc"]] 
+            });
+        });
+    </script>
 }

@@ -1,155 +1,176 @@
+// VacantesController.cs (Proyecto Frontend)
+
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ReclutamientoFrontend.WebApp.Services;
 using ReclutamientoFrontend.WebApp.Models.Dtos;
+using ReclutamientoFrontend.WebApp.Models.ViewModels; // Necesario para SolicitudRespuestaViewModel
+using System.Linq; 
 
 namespace ReclutamientoFrontend.WebApp.Controllers
 {
     public class VacantesController : Controller
     {
         private readonly VacanteService _vacanteService;
+        private readonly SolicitudService _solicitudService; // ✅ Inyección de SolicitudService
 
-        public VacantesController(VacanteService vacanteService)
+        // Constructor con SolicitudService inyectado
+        public VacantesController(VacanteService vacanteService, SolicitudService solicitudService)
         {
             _vacanteService = vacanteService;
+            _solicitudService = solicitudService;
         }
 
-        // 1. INDEX: Ahora usa el método para obtener todas (Admin) y corrige el nombre del método
-       public async Task<IActionResult> Index(string titulo) // ACEPTAMOS EL PARÁMETRO DE FILTRO
+        // --- ACCIONES DE GESTIÓN DE VACANTES (Se mantienen sin cambios) ---
+
+        public async Task<IActionResult> Index(string titulo)
         {
-            // 1. OBTENER TODAS LAS VACANTES DEL ADMINISTRADOR
             var vacantes = await _vacanteService.ObtenerVacantesAdminAsync();
-            
-            // 2. APLICAR FILTRO SI EL PARÁMETRO 'titulo' ESTÁ PRESENTE
             if (!string.IsNullOrEmpty(titulo))
             {
-                // Limpiamos y convertimos a minúsculas para una búsqueda sin distinción de mayúsculas/minúsculas
                 var filtro = titulo.Trim().ToLower();
                 vacantes = vacantes.Where(v => v.Titulo.ToLower().Contains(filtro)).ToList();
-                
-                // 3. PASAR EL VALOR DEL FILTRO A LA VISTA para mantenerlo en el input
                 ViewData["FiltroActual"] = titulo; 
             }
-            
-            // 4. DEVOLVER EL MODELO FILTRADO (o el modelo completo si no hay filtro)
             return View(vacantes);
         }
 
-        // 2. DETAILS: Corregimos el nombre del método a 'Details' (convención) y target de la vista
-        public async Task<IActionResult> Details(int id) 
+        public async Task<IActionResult> Details(int id)
         {
             var vacante = await _vacanteService.ObtenerVacantePorIdAsync(id);
-            // El backend devuelve null si no existe
-            if (vacante == null) return NotFound(); 
-            // La vista a renderizar es Views/Vacantes/Details.cshtml
-            return View(vacante); 
+            if (vacante == null) return NotFound();
+            return View(vacante);
         }
 
         [HttpGet]
-        public IActionResult Create() // Corregimos el nombre del método a 'Create' (convención)
+        public IActionResult Create()
         {
-            // La vista a renderizar es Views/Vacantes/Create.cshtml
-            return View(new VacanteDto { EstaActiva = true }); // Inicializamos el DTO
+            return View(new VacanteDto { EstaActiva = true });
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken] // Añadido por seguridad
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(VacanteDto vacante)
         {
-            // 3. CREAR POST: Forzamos la vacante a estar activa al crearse
-            vacante.EstaActiva = true; 
-            
-            if (!ModelState.IsValid) 
-            {
-                // Aseguramos que se devuelva a la vista de Create si hay error de validación
-                return View(vacante);
-            }
+            vacante.EstaActiva = true;
+            if (!ModelState.IsValid) return View(vacante);
 
             var ok = await _vacanteService.CrearVacanteAsync(vacante);
             if (ok) return RedirectToAction(nameof(Index));
 
             ModelState.AddModelError("", "No se pudo crear la vacante.");
-            return View(vacante); // Aseguramos que se devuelva a la vista de Create si hay error del Service
+            return View(vacante);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int id) // Corregimos el nombre del método a 'Edit'
+        public async Task<IActionResult> Edit(int id)
         {
             var vacante = await _vacanteService.ObtenerVacantePorIdAsync(id);
             if (vacante == null) return NotFound();
-            // La vista a renderizar es Views/Vacantes/Edit.cshtml
-            return View(vacante); 
+            return View(vacante);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken] // Añadido por seguridad
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, VacanteDto vacante)
         {
-             // 4. EDITAR POST: Si el estado se ha quitado de la vista (como pediste), 
-             // debemos asegurar que el 'EstaActiva' se mantenga al editar.
-             // Para esto, en la vista Edit, deberás usar un campo oculto (hidden)
-             // para el valor actual de EstaActiva, o recuperarlo del backend aquí
-             // antes de enviar el PUT.
-             
-             // Si el DTO no es válido, volvemos a la vista de edición
             if (!ModelState.IsValid) return View(vacante); 
-
             var ok = await _vacanteService.EditarVacanteAsync(id, vacante);
             if (ok) return RedirectToAction(nameof(Index));
-
             ModelState.AddModelError("", "No se pudo editar la vacante.");
             return View(vacante);
         }
 
-        // 5. DESHABILITAR: Acción específica para cambiar el estado a Inactivo (usando el DELETE del Service)
-        // Se llama 'Deshabilitar' para reflejar mejor su propósito
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Deshabilitar(int id)
         {
-            // Usamos el método renombrado en el service
-            var ok = await _vacanteService.DeshabilitarVacanteAsync(id); 
-            
-            if (!ok) 
-            {
-                // Puedes usar un TempData para mostrar un error en la vista Index
-                TempData["ErrorMessage"] = "No se pudo deshabilitar la vacante.";
-            }
-
+            var ok = await _vacanteService.DeshabilitarVacanteAsync(id);
+            if (!ok) TempData["ErrorMessage"] = "No se pudo deshabilitar la vacante.";
             return RedirectToAction(nameof(Index));
         }
 
-        // 5. NUEVA ACCIÓN: HABILITAR VACANTE
         [HttpPost]
-        [ActionName("Habilitar")] // Nombre de la acción para el ruteo
+        [ActionName("Habilitar")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Habilitar(int id)
         {
-            // Para Habilitar, debemos obtener la vacante, establecer EstaActiva a true y usar el método de Editar (PUT)
             var vacante = await _vacanteService.ObtenerVacantePorIdAsync(id);
-            
             if (vacante == null) return NotFound();
-
-            // Configuramos el estado a activa
             vacante.EstaActiva = true;
-
-            // Usamos el método de editar (PUT) para actualizar el estado a activa
             var ok = await _vacanteService.EditarVacanteAsync(id, vacante);
             
-            if (!ok) 
-            {
+            if (!ok) {
                 TempData["ErrorMessage"] = "No se pudo habilitar la vacante.";
             } else {
                 TempData["SuccessMessage"] = "La vacante ha sido re-activada correctamente.";
             }
-
             return RedirectToAction(nameof(Index));
         }
 
+
+        // ----------------------------------------------------
+        // ACCIONES DE SOLICITUDES (Para el Administrador)
+        // ----------------------------------------------------
+
+        // 6. SOLICITUDES: Muestra la lista de solicitudes para una vacante específica
         public async Task<IActionResult> Solicitudes(int vacanteId)
         {
-            var solicitudes = await _vacanteService.ObtenerSolicitudesPorVacanteAsync(vacanteId);
+            var vacante = await _vacanteService.ObtenerVacantePorIdAsync(vacanteId);
+            if (vacante == null)
+            {
+                TempData["ErrorMessage"] = "La vacante no existe o fue eliminada.";
+                return RedirectToAction(nameof(Index));
+            }
+            
+            ViewData["VacanteTitulo"] = vacante.Titulo;
+            ViewData["VacanteId"] = vacanteId; 
+            
+            // ✅ Usa el método que apunta al endpoint de backend
+            var solicitudes = await _solicitudService.ObtenerSolicitudesPorVacanteAsync(vacanteId);
+            
             return View(solicitudes);
+        }
+
+        // 7. RESPONDER SOLICITUD: Procesa el POST del modal
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResponderSolicitud(SolicitudRespuestaViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["ErrorMessage"] = "El mensaje de respuesta no puede estar vacío.";
+                return RedirectToAction(nameof(Index)); 
+            }
+
+            var respuestaDto = new RespuestaCreateDto
+            {
+                ContenidoMensaje = model.ContenidoMensaje
+            };
+
+            // Llama al servicio para enviar la respuesta
+            var ok = await _solicitudService.EnviarRespuestaAsync(model.SolicitudId, respuestaDto);
+
+            // 💡 MEJORA: Obtenemos el VacanteId antes o después de la respuesta
+            var solicitudActualizada = await _solicitudService.ObtenerSolicitudPorIdAsync(model.SolicitudId);
+
+            if (ok)
+            {
+                TempData["SuccessMessage"] = $"Respuesta enviada con éxito al solicitante ID: {model.SolicitudId}.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Ocurrió un error al enviar la respuesta. Inténtelo de nuevo.";
+            }
+            
+            // Redirigir de vuelta a la lista de solicitudes de la misma vacante si el ID está disponible
+            if (solicitudActualizada != null && solicitudActualizada.VacanteId > 0)
+            {
+                return RedirectToAction(nameof(Solicitudes), new { vacanteId = solicitudActualizada.VacanteId });
+            }
+            
+            // Fallback
+            return RedirectToAction(nameof(Index)); 
         }
     }
 }

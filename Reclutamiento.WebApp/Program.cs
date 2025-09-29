@@ -50,10 +50,6 @@ builder.Services.AddHttpClient<SolicitudService>(client =>
     client.BaseAddress = new Uri(apiBase);
 }).AddHttpMessageHandler<AuthHeaderHandler>();
 
-builder.Services.AddHttpClient<RespuestaService>(client =>
-{
-    client.BaseAddress = new Uri(apiBase);
-}).AddHttpMessageHandler<AuthHeaderHandler>();
 
 // Auth service (for login endpoints). It may not need the handler, but we can still attach it.
 builder.Services.AddHttpClient< ApiServiceBase>(client =>

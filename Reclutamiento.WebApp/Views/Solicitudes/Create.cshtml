@@ -1,38 +1,128 @@
-﻿@model ReclutamientoFrontend.WebApp.Models.Dtos.SolicitudDto
+﻿@model ReclutamientoFrontend.WebApp.Models.Dtos.SolicitudCreateDto
 
 @{
     ViewData["Title"] = "Aplicar a Vacante";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    // Título de la vacante pasado desde el SolicitudesController
+    var vacanteTitulo = ViewBag.VacanteTitulo as string ?? "Vacante Desconocida";
 }
 
-<h1 class="mb-4 text-success"><i class="fa-solid fa-paper-plane"></i> Aplicar a Vacante</h1>
+<h1 class="mb-4 text-success"><i class="fa-solid fa-paper-plane"></i> Aplicar a @vacanteTitulo</h1>
 
-<div class="card shadow-sm">
-    <div class="card-body">
-        <form asp-action="Create" method="post">
-            <div class="mb-3">
-                <label asp-for="VacanteId" class="form-label">Vacante</label>
-                <input asp-for="VacanteTitulo" class="form-control" readonly />
+<div class="card shadow-lg border-0">
+    <div class="card-body p-4">
+        
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+            <input type="hidden" asp-for="IdVacante" />
+            <input type="hidden" asp-for="Foto" id="FotoBase64" />
+
+            <div class="mb-4 p-3 bg-light rounded border">
+                <label class="form-label fw-bold">Aplicando a:</label>
+                <input type="text" class="form-control" value="@vacanteTitulo" readonly />
             </div>
 
-            <div class="mb-3">
-                <label asp-for="NombreSolicitante" class="form-label">Nombre</label>
-                <input asp-for="NombreSolicitante" class="form-control" required />
-                <span asp-validation-for="NombreSolicitante" class="text-danger"></span>
+            <h5 class="text-primary mb-3"><i class="fa-solid fa-user me-2"></i> Datos de Contacto</h5>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="NombreCompleto" class="form-label">Nombre Completo</label>
+                    <input asp-for="NombreCompleto" class="form-control" placeholder="Ej: Juan Pérez" />
+                    <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="NumeroTelefono" class="form-label">Número de Teléfono</label>
+                    <input asp-for="NumeroTelefono" class="form-control" placeholder="Ej: 503-xxxx-xxxx" />
+                    <span asp-validation-for="NumeroTelefono" class="text-danger"></span>
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label asp-for="EmailSolicitante" class="form-label">Correo Electrónico</label>
-                <input asp-for="EmailSolicitante" type="email" class="form-control" required />
-                <span asp-validation-for="EmailSolicitante" class="text-danger"></span>
+            <div class="mb-4">
+                <label asp-for="CorreoElectronico" class="form-label">Correo Electrónico</label>
+                <input asp-for="CorreoElectronico" type="email" class="form-control" placeholder="user@example.com" />
+                <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
             </div>
 
-            <button type="submit" class="btn btn-success">
-                <i class="fa-solid fa-paper-plane"></i> Enviar Solicitud
-            </button>
-            <a asp-action="Index" class="btn btn-secondary">
-                <i class="fa-solid fa-arrow-left"></i> Volver
-            </a>
+            <h5 class="text-primary mb-3 mt-4"><i class="fa-solid fa-info-circle me-2"></i> Experiencia y Habilidades</h5>
+            <div class="mb-4">
+                <label asp-for="CamposPersonalizados" class="form-label">Cuéntanos sobre tu Experiencia (requerido)</label>
+                <textarea asp-for="CamposPersonalizados" rows="6" class="form-control" 
+                          placeholder="Describe tu experiencia laboral relevante y habilidades."></textarea>
+                <span asp-validation-for="CamposPersonalizados" class="text-danger"></span>
+            </div>
+
+            <h5 class="text-primary mb-3 mt-4"><i class="fa-solid fa-image me-2"></i> Fotografía Personal</h5>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="fileInput" class="form-label">Subir Foto (JPG, PNG)</label>
+                    <input type="file" id="fileInput" accept="image/png, image/jpeg" class="form-control" required />
+                    <small class="text-muted">Por favor, sube una foto clara y profesional.</small>
+                    </div>
+                <div class="col-md-6 mb-3 text-center">
+                    <label class="form-label">Vista Previa</label>
+                    <div class="border p-2 rounded d-flex justify-content-center align-items-center" style="height: 150px; width: 150px; margin: auto;">
+                        <img id="imagePreview" src="" alt="Vista Previa de Foto" class="img-fluid rounded" style="max-height: 100%; max-width: 100%; display: none;" />
+                        <span id="previewPlaceholder" class="text-muted"><i class="fa-solid fa-camera fa-2x"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" asp-controller="Home" class="btn btn-danger">
+                    <i class="fa-solid fa-xmark me-1"></i> Cancelar
+                </a>
+                
+                <button type="submit" class="btn btn-success">
+                    <i class="fa-solid fa-floppy-disk me-1"></i> Guardar y Enviar
+                </button>
+            </div>
         </form>
     </div>
 </div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function () {
+            // Manejador del cambio de archivo
+            $('#fileInput').on('change', function (event) {
+                var file = event.target.files[0];
+                if (file) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        // 1. Mostrar vista previa de la imagen
+                        $('#imagePreview').attr('src', e.target.result).show();
+                        $('#previewPlaceholder').hide();
+                        
+                        // 2. Convertir la imagen a Base64 para el campo oculto
+                        // El resultado de e.target.result ya es Base64 (data:image/...)
+                        $('#FotoBase64').val(e.target.result);
+                    };
+
+                    // Lee el archivo como una URL de datos (Base64)
+                    reader.readAsDataURL(file);
+                } else {
+                    // Limpiar si no hay archivo
+                    $('#imagePreview').attr('src', '').hide();
+                    $('#previewPlaceholder').show();
+                    $('#FotoBase64').val('');
+                }
+            });
+            
+            // Asegurar que el campo oculto de la foto tenga contenido al enviar
+            $('form').on('submit', function (e) {
+                if ($('#FotoBase64').val() === "") {
+                    alert('Por favor, sube una foto para completar la solicitud.');
+                    e.preventDefault(); // Detiene el envío del formulario
+                }
+            });
+        });
+    </script>
+}
