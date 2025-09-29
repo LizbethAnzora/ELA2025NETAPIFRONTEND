@@ -3,7 +3,6 @@
 
 @{
     var vacanteTitulo = ViewData["VacanteTitulo"] as string ?? "Vacante Desconocida";
-    // El ID de vacante ya no es estrictamente necesario en la vista, pero lo mantenemos para contexto.
     var vacanteId = ViewData["VacanteId"] as int? ?? 0;
 
     ViewData["Title"] = $"Solicitudes para: {vacanteTitulo}";
@@ -16,7 +15,7 @@
         Gestión de postulaciones para la vacante: <strong class="text-dark">@vacanteTitulo</strong>
     </p>
 
-    @* --- Mensajes TempData (Mantener) --- *@
+    @* --- Mensajes TempData --- *@
     @if (TempData["SuccessMessage"] != null)
     {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -54,7 +53,7 @@
                     <tr>
                         <th style="width: 30%;" class="py-3">Nombre del Solicitante</th>
                         <th style="width: 30%;" class="py-3">Correo Electrónico</th>
-                        <th style="width: 15%;" class="py-3">Fecha</th>
+                        <th style="width: 15%;" class="py-3">Teléfono</th> 
                         <th class="text-center py-3" style="width: 25%;">Acciones</th>
                     </tr>
                 </thead>
@@ -62,14 +61,17 @@
                     @foreach (var solicitud in Model)
                     {
                         <tr class="border-bottom">
-                            <td class="fw-bold text-primary">@solicitud.NombreSolicitante</td>
-                            <td>@solicitud.EmailSolicitante</td>
-                            <td>@("Fecha No disponible")</td> 
+                            
+                            <td class="fw-bold text-primary">@solicitud.NombreCompleto</td>
+                            <td>@solicitud.CorreoElectronico</td>
+                            <td>@solicitud.NumeroTelefono</td> 
                             <td class="text-center">
                                 <div class="btn-group btn-group-sm" role="group">
-                                    <a asp-controller="Solicitudes" asp-action="Details" asp-route-id="@solicitud.Id" class="btn btn-info" title="Ver Solicitud Completa y Foto">
+                               
+                                    <a asp-controller="Solicitudes" asp-action="Details" asp-route-id="@solicitud.Id" class="btn btn-info" title="Ver Solicitud Completa">
                                         <i class="fa-solid fa-file-alt"></i> Detalles
                                     </a>
+                                    
                                     
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#responderModal-@solicitud.Id" title="Enviar respuesta al candidato">
                                         <i class="fa-solid fa-reply"></i> Responder
@@ -81,13 +83,13 @@
                 </tbody>
             </table>
         </div>
-
     }
 </div>
 
-@* MODAL SIMPLIFICADO DE RESPUESTA (Sin campo de Estado) *@
+@* MODAL SIMPLIFICADO DE RESPUESTA *@
 @foreach (var solicitud in Model)
 {
+   
     <div class="modal fade" id="responderModal-@solicitud.Id" tabindex="-1" aria-labelledby="responderModalLabel-@solicitud.Id" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -95,16 +97,17 @@
                     
                     <div class="modal-header bg-success text-white">
                         <h5 class="modal-title" id="responderModalLabel-@solicitud.Id">
-                            <i class="fa-solid fa-hand-paper me-2"></i> Responder a @solicitud.NombreSolicitante
+                            <i class="fa-solid fa-hand-paper me-2"></i> Responder a @solicitud.NombreCompleto
                         </h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     
                     <div class="modal-body">
+                      
                         <input type="hidden" name="SolicitudId" value="@solicitud.Id" />
                         
                         <div class="alert alert-info py-2 small">
-                            Estás enviando un mensaje a **@solicitud.NombreSolicitante** (<a href="mailto:@solicitud.EmailSolicitante" class="alert-link">@solicitud.EmailSolicitante</a>)
+                            Estás enviando un mensaje a **@solicitud.NombreCompleto** (<a href="mailto:@solicitud.CorreoElectronico" class="alert-link">@solicitud.CorreoElectronico</a>)
                         </div>
 
                         <div class="mb-3">
@@ -132,6 +135,8 @@
 
 @section Scripts {
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
+    
+    
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <script>
@@ -140,7 +145,6 @@
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json" // Traducción al español
                 },
-                // Deshabilitar la columna 3 (Acciones) para que no sea ordenable
                 "columnDefs": [
                     { "orderable": false, "targets": 3 } 
                 ],

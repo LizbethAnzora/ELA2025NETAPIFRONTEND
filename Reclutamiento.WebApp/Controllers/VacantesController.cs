@@ -164,9 +164,9 @@ namespace ReclutamientoFrontend.WebApp.Controllers
             }
             
             // Redirigir de vuelta a la lista de solicitudes de la misma vacante si el ID está disponible
-            if (solicitudActualizada != null && solicitudActualizada.VacanteId > 0)
+            if (solicitudActualizada != null && solicitudActualizada.IdVacante > 0)
             {
-                return RedirectToAction(nameof(Solicitudes), new { vacanteId = solicitudActualizada.VacanteId });
+                return RedirectToAction(nameof(Solicitudes), new { vacanteId = solicitudActualizada.IdVacante });
             }
             
             // Fallback
