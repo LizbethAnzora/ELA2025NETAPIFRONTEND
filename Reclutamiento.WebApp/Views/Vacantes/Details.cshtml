@@ -44,14 +44,14 @@
                     <h5 class="card-title text-primary mb-3 border-bottom pb-2">Descripción del Puesto</h5>
                     
                     <div class="card bg-light border-0 mb-4 p-3">
-                        @* Uso de Html.Raw() para mantener saltos de línea al ver la descripción. *@
+                       
                         <p class="card-text text-dark">@Html.Raw(Model.Descripcion?.Replace("\n", "<br/>"))</p>
                     </div>
                     
                     <h5 class="card-title text-primary mb-3 border-bottom pb-2">Requisitos y Perfil</h5>
                     
                     <div class="card bg-light border-0 mb-4 p-3">
-                        @* Uso de Html.Raw() para mantener saltos de línea al ver los requisitos. *@
+                       
                         <p class="card-text text-dark">@Html.Raw(Model.Requisitos?.Replace("\n", "<br/>"))</p>
                     </div>
                     

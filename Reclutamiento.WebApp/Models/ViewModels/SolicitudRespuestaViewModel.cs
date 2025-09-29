@@ -4,7 +4,7 @@ namespace ReclutamientoFrontend.WebApp.Models.ViewModels
 {
     public class SolicitudRespuestaViewModel
     {
-        // Se pasa oculto para la llamada al SolicitudService
+       
         public int SolicitudId { get; set; }
 
         [Required(ErrorMessage = "El mensaje de respuesta es obligatorio")]

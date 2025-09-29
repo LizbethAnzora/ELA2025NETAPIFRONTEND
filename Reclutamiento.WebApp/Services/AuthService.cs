@@ -28,7 +28,7 @@ namespace Reclutamiento.WebApp.Services
 
 
 
-        // Llama al backend que a su vez maneja la integración con Supabase
+      
         public async Task<string> LoginWithGithub()
         {
             var id = 0;

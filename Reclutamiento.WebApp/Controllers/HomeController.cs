@@ -19,18 +19,15 @@ namespace ReclutamientoFrontend.WebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // Nota: Ya que [Authorize] está arriba, no necesitamos verificar IsAuthenticated aquí.
-            // Si el usuario llega aquí, está autenticado como Admin o Solicitante.
             
             if (User.IsInRole("Admin"))
             {
-                // Si es Admin, el Home muestra el mensaje de bienvenida
-                // (Se asume que la vista Home Index maneja este caso con un modelo vacío o nulo)
+                
                 return View(new List<VacanteDto>()); 
             }
             else
             {
-                // Si es Solicitante, utilizamos el método para obtener SOLO las vacantes activas (públicas)
+                
                 var vacantes = await _vacanteService.ObtenerVacantesPublicasAsync(); 
                 return View(vacantes);
             }

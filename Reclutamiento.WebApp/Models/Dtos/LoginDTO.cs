@@ -14,8 +14,7 @@ namespace ReclutamientoFrontend.WebApp.Models.Dtos
 
         public string? CorreoElectronico { get; set; }
 
-    public int? Rol { get; set; } // Ahora es un número que representa el rol
-        
+    public int? Rol { get; set; } 
          public string? Token { get; set; }
 
     }

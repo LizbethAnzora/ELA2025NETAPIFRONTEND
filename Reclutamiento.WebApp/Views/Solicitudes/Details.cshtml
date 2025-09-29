@@ -20,7 +20,7 @@
                 <div class="card-body text-center">
                     @if (!string.IsNullOrEmpty(Model.Foto))
                     {
-                        @* 🚨 NOTA: Si 'Foto' es una URL, se mostrará. Si es Base64, necesitarás el prefijo "data:image/jpeg;base64," *@
+                        
                         <img src="@Model.Foto" class="img-fluid rounded-circle mb-3" alt="Foto del Solicitante" style="width: 150px; height: 150px; object-fit: cover;">
                     }
                     else
@@ -44,19 +44,16 @@
          
                 <div class="card-body">
                     <dl class="row">
-                        <dt class="col-sm-12 mt-3 border-top pt-3 fw-bold text-primary">Contenido del Formulario (Experiencia)</dt>
+                        <dt class="col-sm-12 mt-3 border-top pt-3 fw-bold text-primary">Contenido del Formulario</dt>
                         <dd class="col-sm-12">
                             <div class="p-3 bg-light rounded border">
-                                @* 🚨 IMPORTANTE: CamposPersonalizados es el campo que contiene la experiencia *@
+                                @* CamposPersonalizados es el campo que contiene la experiencia *@
                                 @Html.Raw(Model.CamposPersonalizados?.Replace("\n", "<br/>"))
                             </div>
                         </dd>
                     </dl>
                 </div>
             </div>
-            
-            @* 💡 Aquí podrías agregar el historial de respuestas del administrador, si existiera *@
-            
         </div>
     </div>
 </div>

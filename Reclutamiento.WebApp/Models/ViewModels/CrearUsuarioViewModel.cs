@@ -13,7 +13,7 @@ namespace ReclutamientoFrontend.WebApp.Models.ViewModels
         public string? Email { get; set; }
 
         [Required(ErrorMessage = "Debe asignar un rol")]
-        public string? Rol { get; set; } // Admin / Solicitante
+        public string? Rol { get; set; } 
 
         [Required(ErrorMessage = "Debe asignar una contraseña")]
         [DataType(DataType.Password)]

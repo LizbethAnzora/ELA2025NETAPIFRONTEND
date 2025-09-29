@@ -1,36 +1,34 @@
-// VacantesController.cs (Proyecto Frontend)
 
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ReclutamientoFrontend.WebApp.Services;
 using ReclutamientoFrontend.WebApp.Models.Dtos;
-using ReclutamientoFrontend.WebApp.Models.ViewModels; // Necesario para SolicitudRespuestaViewModel
-using System.Linq; 
+using ReclutamientoFrontend.WebApp.Models.ViewModels; 
+using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ReclutamientoFrontend.WebApp.Controllers
 {
-    public class VacantesController : Controller
+
+    [Authorize(Roles = "Admin")] 
+   public class VacantesController : Controller
     {
         private readonly VacanteService _vacanteService;
-        private readonly SolicitudService _solicitudService; // ✅ Inyección de SolicitudService
-
-        // Constructor con SolicitudService inyectado
-        public VacantesController(VacanteService vacanteService, SolicitudService solicitudService)
+        private readonly SolicitudService _solicitudService; 
+                public VacantesController(VacanteService vacanteService, SolicitudService solicitudService)
         {
             _vacanteService = vacanteService;
             _solicitudService = solicitudService;
         }
 
-        // --- ACCIONES DE GESTIÓN DE VACANTES (Se mantienen sin cambios) ---
-
-        public async Task<IActionResult> Index(string titulo)
+              public async Task<IActionResult> Index(string titulo)
         {
             var vacantes = await _vacanteService.ObtenerVacantesAdminAsync();
             if (!string.IsNullOrEmpty(titulo))
             {
                 var filtro = titulo.Trim().ToLower();
                 vacantes = vacantes.Where(v => v.Titulo.ToLower().Contains(filtro)).ToList();
-                ViewData["FiltroActual"] = titulo; 
+                ViewData["FiltroActual"] = titulo;
             }
             return View(vacantes);
         }
@@ -74,7 +72,7 @@ namespace ReclutamientoFrontend.WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, VacanteDto vacante)
         {
-            if (!ModelState.IsValid) return View(vacante); 
+            if (!ModelState.IsValid) return View(vacante);
             var ok = await _vacanteService.EditarVacanteAsync(id, vacante);
             if (ok) return RedirectToAction(nameof(Index));
             ModelState.AddModelError("", "No se pudo editar la vacante.");
@@ -99,21 +97,20 @@ namespace ReclutamientoFrontend.WebApp.Controllers
             if (vacante == null) return NotFound();
             vacante.EstaActiva = true;
             var ok = await _vacanteService.EditarVacanteAsync(id, vacante);
-            
-            if (!ok) {
+
+            if (!ok)
+            {
                 TempData["ErrorMessage"] = "No se pudo habilitar la vacante.";
-            } else {
+            }
+            else
+            {
                 TempData["SuccessMessage"] = "La vacante ha sido re-activada correctamente.";
             }
             return RedirectToAction(nameof(Index));
         }
 
 
-        // ----------------------------------------------------
-        // ACCIONES DE SOLICITUDES (Para el Administrador)
-        // ----------------------------------------------------
-
-        // 6. SOLICITUDES: Muestra la lista de solicitudes para una vacante específica
+       
         public async Task<IActionResult> Solicitudes(int vacanteId)
         {
             var vacante = await _vacanteService.ObtenerVacantePorIdAsync(vacanteId);
@@ -122,17 +119,17 @@ namespace ReclutamientoFrontend.WebApp.Controllers
                 TempData["ErrorMessage"] = "La vacante no existe o fue eliminada.";
                 return RedirectToAction(nameof(Index));
             }
-            
+
             ViewData["VacanteTitulo"] = vacante.Titulo;
-            ViewData["VacanteId"] = vacanteId; 
+            ViewData["VacanteId"] = vacanteId;
+
             
-            // ✅ Usa el método que apunta al endpoint de backend
             var solicitudes = await _solicitudService.ObtenerSolicitudesPorVacanteAsync(vacanteId);
-            
+
             return View(solicitudes);
         }
 
-        // 7. RESPONDER SOLICITUD: Procesa el POST del modal
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResponderSolicitud(SolicitudRespuestaViewModel model)
@@ -140,7 +137,7 @@ namespace ReclutamientoFrontend.WebApp.Controllers
             if (!ModelState.IsValid)
             {
                 TempData["ErrorMessage"] = "El mensaje de respuesta no puede estar vacío.";
-                return RedirectToAction(nameof(Index)); 
+                return RedirectToAction(nameof(Index));
             }
 
             var respuestaDto = new RespuestaCreateDto
@@ -148,10 +145,10 @@ namespace ReclutamientoFrontend.WebApp.Controllers
                 ContenidoMensaje = model.ContenidoMensaje
             };
 
-            // Llama al servicio para enviar la respuesta
+
             var ok = await _solicitudService.EnviarRespuestaAsync(model.SolicitudId, respuestaDto);
 
-            // 💡 MEJORA: Obtenemos el VacanteId antes o después de la respuesta
+          
             var solicitudActualizada = await _solicitudService.ObtenerSolicitudPorIdAsync(model.SolicitudId);
 
             if (ok)
@@ -162,15 +159,15 @@ namespace ReclutamientoFrontend.WebApp.Controllers
             {
                 TempData["ErrorMessage"] = "Ocurrió un error al enviar la respuesta. Inténtelo de nuevo.";
             }
-            
-            // Redirigir de vuelta a la lista de solicitudes de la misma vacante si el ID está disponible
+
+          
             if (solicitudActualizada != null && solicitudActualizada.IdVacante > 0)
             {
                 return RedirectToAction(nameof(Solicitudes), new { vacanteId = solicitudActualizada.IdVacante });
             }
-            
-            // Fallback
-            return RedirectToAction(nameof(Index)); 
+
+          
+            return RedirectToAction(nameof(Index));
         }
     }
 }

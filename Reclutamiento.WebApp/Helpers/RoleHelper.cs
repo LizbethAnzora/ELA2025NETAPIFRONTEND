@@ -15,7 +15,7 @@ namespace FrontAuth.WebApp.Helpers
                 if (intRol == 1)
                     return "Admin";
             }
-            // Si el claim viene como JsonElement string
+            
             if (rol is System.Text.Json.JsonElement json)
             {
                 if (json.ValueKind == System.Text.Json.JsonValueKind.String && json.GetString() == "Admin")
@@ -28,6 +28,6 @@ namespace FrontAuth.WebApp.Helpers
             return "Solicitante";
         }
 
-        // Método recursivo eliminado: ya no es necesario
+        
     }
 }

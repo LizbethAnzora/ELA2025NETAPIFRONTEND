@@ -13,15 +13,15 @@
                 </div>
                 <div class="card-body p-4">
                     
-                    @* 1. Acción Corregida a "Edit" (convención) *@
+                  
                     <form asp-action="Edit" method="post" autocomplete="off" novalidate>
                         @Html.AntiForgeryToken()
                         
-                        @* 2. Campos Ocultos para mantener el ID y el Estado actual. ELIMINAMOS EL CAMPO DE ESTADO VISIBLE. *@
+                        
                         <input type="hidden" asp-for="Id" />
                         <input type="hidden" asp-for="EstaActiva" />
                         
-                        @* 3. Referencia al Administrador Creador ELIMINADA *@
+                        
                         
                         <div class="mb-3">
                             <label asp-for="Titulo" class="form-label fw-bold">Título de la Vacante <span class="text-danger">*</span></label>
@@ -29,7 +29,7 @@
                             <span asp-validation-for="Titulo" class="text-danger small"></span>
                         </div>
                         
-                        @* 4. Campo Ubicación Añadido *@
+                      
                         <div class="mb-3">
                             <label asp-for="Ubicacion" class="form-label fw-bold">Ubicación</label>
                             <input asp-for="Ubicacion" class="form-control" placeholder="Ej: Remoto, San Salvador, etc." />
@@ -42,14 +42,14 @@
                             <span asp-validation-for="Descripcion" class="text-danger small"></span>
                         </div>
                         
-                        @* 5. Campo Requisitos Añadido *@
+                      
                         <div class="mb-4">
                             <label asp-for="Requisitos" class="form-label fw-bold">Requisitos / Perfil</label>
                             <textarea asp-for="Requisitos" class="form-control" rows="4" placeholder="Lista de requisitos mínimos, tecnologías, experiencia, etc."></textarea>
                             <span asp-validation-for="Requisitos" class="text-danger small"></span>
                         </div>
                         
-                        @* 6. Campo de Estado Anterior ELIMINADO *@
+                      
                         
                         <div class="alert alert-info small py-2" role="alert">
                             <i class="fa-solid fa-info-circle"></i> El estado de la vacante (Activa/Inactiva) se gestiona únicamente desde la vista principal (Index).

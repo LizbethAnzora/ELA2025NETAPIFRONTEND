@@ -106,7 +106,7 @@
 
                                     @if (vacante.EstaActiva)
                                     {
-                                        @* BOTÓN DESHABILITAR: Activa el modal de confirmación *@
+                                       
                                         <button type="button" class="btn btn-outline-danger" title="Deshabilitar Vacante"
                                                 data-bs-toggle="modal" data-bs-target="#deshabilitarModal" 
                                                 data-vacante-id="@vacante.Id" data-vacante-titulo="@vacante.Titulo">
@@ -115,7 +115,7 @@
                                     }
                                     else
                                     {
-                                        @* BOTÓN HABILITAR: Activa el nuevo modal de confirmación *@
+                                       
                                         <button type="button" class="btn btn-outline-success" title="Habilitar Vacante (Re-activar)"
                                                 data-bs-toggle="modal" data-bs-target="#habilitarModal" 
                                                 data-vacante-id="@vacante.Id" data-vacante-titulo="@vacante.Titulo">
@@ -131,7 +131,7 @@
             </table>
         </div>
 
-        @* Versión Móvil: Se ajusta para usar el modal en ambas acciones *@
+        
         <div class="d-md-none">
             <h5 class="mb-3 text-muted">Vacantes:</h5>
             @foreach (var vacante in Model)
@@ -166,7 +166,7 @@
                                 
                                 @if (vacante.EstaActiva)
                                 {
-                                    @* MÓVIL: BOTÓN DESHABILITAR (Activa modal) *@
+                                    
                                     <button type="button" class="btn btn-outline-danger flex-fill" title="Deshabilitar Vacante"
                                             data-bs-toggle="modal" data-bs-target="#deshabilitarModal" 
                                             data-vacante-id="@vacante.Id" data-vacante-titulo="@vacante.Titulo">
@@ -175,7 +175,7 @@
                                 }
                                 else
                                 {
-                                    @* MÓVIL: BOTÓN HABILITAR (Activa modal) *@
+                                   
                                     <button type="button" class="btn btn-outline-success flex-fill" title="Habilitar Vacante (Re-activar)"
                                             data-bs-toggle="modal" data-bs-target="#habilitarModal" 
                                             data-vacante-id="@vacante.Id" data-vacante-titulo="@vacante.Titulo">
@@ -243,15 +243,9 @@
     </div>
 </div>
 
----
-
 @section Scripts {
     <script>
-        // Script para manejar los dos modales de confirmación (Bootstrap 5)
-
-        // ------------------------------------
-        // Lógica para el modal de DESHABILITAR
-        // ------------------------------------
+       
         var deshabilitarModal = document.getElementById('deshabilitarModal');
         if (deshabilitarModal) {
             deshabilitarModal.addEventListener('show.bs.modal', function (event) {
@@ -267,9 +261,7 @@
             });
         }
         
-        // ------------------------------------
-        // Lógica para el modal de HABILITAR (NUEVO)
-        // ------------------------------------
+       
         var habilitarModal = document.getElementById('habilitarModal');
         if (habilitarModal) {
             habilitarModal.addEventListener('show.bs.modal', function (event) {

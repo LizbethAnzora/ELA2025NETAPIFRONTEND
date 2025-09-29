@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ReclutamientoFrontend.WebApp.Services;
 using ReclutamientoFrontend.WebApp.Models.Dtos;
-using System.Security.Claims; // Necesario para acceder a los claims del usuario.
-using System.Linq; // Necesario para usar .FirstOrDefault()
+using System.Security.Claims; 
+using System.Linq; 
 using Microsoft.AspNetCore.Authorization;
 
 namespace ReclutamientoFrontend.WebApp.Controllers
@@ -12,7 +12,7 @@ namespace ReclutamientoFrontend.WebApp.Controllers
     public class SolicitudesController : Controller
     {
         private readonly SolicitudService _solicitudService;
-        private readonly VacanteService _vacanteService; // Inyección de VacanteService
+        private readonly VacanteService _vacanteService; 
 
         // Constructor modificado
         public SolicitudesController(SolicitudService solicitudService, VacanteService vacanteService)

@@ -14,13 +14,8 @@ namespace ReclutamientoFrontend.WebApp.Models.Dtos
         [StringLength(1000, ErrorMessage = "La descripción no puede exceder los 1000 caracteres")]
         public string? Descripcion { get; set; }
         
-        // Propiedad ajustada para reflejar el backend (bool)
-        // Usaremos esta propiedad para el listado, creación y edición
-        public bool EstaActiva { get; set; }
 
-        // El campo 'AdministradorNombre' se ha ELIMINADO.
-        
-        // Agregar las propiedades faltantes que el GET devuelve (solo para completar la info)
+        public bool EstaActiva { get; set; }
         public string? Requisitos { get; set; }
         public string? Ubicacion { get; set; }
         public DateTime FechaCreacion { get; set; }

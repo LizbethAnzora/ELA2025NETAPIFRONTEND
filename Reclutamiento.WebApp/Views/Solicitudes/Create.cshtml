@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Aplicar a Vacante";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    // Título de la vacante pasado desde el SolicitudesController
+    
     var vacanteTitulo = ViewBag.VacanteTitulo as string ?? "Vacante Desconocida";
 }
 
@@ -97,30 +97,29 @@
                     var reader = new FileReader();
 
                     reader.onload = function (e) {
-                        // 1. Mostrar vista previa de la imagen
+                        
                         $('#imagePreview').attr('src', e.target.result).show();
                         $('#previewPlaceholder').hide();
                         
-                        // 2. Convertir la imagen a Base64 para el campo oculto
-                        // El resultado de e.target.result ya es Base64 (data:image/...)
+                        
                         $('#FotoBase64').val(e.target.result);
                     };
 
-                    // Lee el archivo como una URL de datos (Base64)
+                  
                     reader.readAsDataURL(file);
                 } else {
-                    // Limpiar si no hay archivo
+                    
                     $('#imagePreview').attr('src', '').hide();
                     $('#previewPlaceholder').show();
                     $('#FotoBase64').val('');
                 }
             });
             
-            // Asegurar que el campo oculto de la foto tenga contenido al enviar
+           
             $('form').on('submit', function (e) {
                 if ($('#FotoBase64').val() === "") {
                     alert('Por favor, sube una foto para completar la solicitud.');
-                    e.preventDefault(); // Detiene el envío del formulario
+                    e.preventDefault();
                 }
             });
         });

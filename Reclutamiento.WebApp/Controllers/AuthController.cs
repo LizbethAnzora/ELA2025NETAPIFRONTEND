@@ -75,8 +75,7 @@ namespace ReclutamientoFrontend.WebApp.Controllers
             var email = user.FindFirstValue(ClaimTypes.Email);
             var name = user.Identity?.Name ?? "GitHub User";
 
-            // Aquí  registrar o autenticar en la base de datos
-            // var usuarioDto = await _authService.LoginOrRegisterExternalAsync(email, name);
+            
             var usuarioDto = new LoginResponseDTO
             {
                 Id = 1,
@@ -93,9 +92,9 @@ namespace ReclutamientoFrontend.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            // Limpiar sesión en frontend
+            
             HttpContext.Session.Clear();
-            // Cerrar cookie de autenticación
+            
             await HttpContext.SignOutAsync("AuthCookie");
             return RedirectToAction("Login", "Auth");
         }

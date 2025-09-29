@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-body p-4">
                     
-                    @* 1. Acción Corregida: asp-action="Create" *@
+                   
                     <form asp-action="Create" method="post" autocomplete="off" novalidate>
                         @Html.AntiForgeryToken()
                         
@@ -35,16 +35,14 @@
                             <span asp-validation-for="Descripcion" class="text-danger small"></span>
                         </div>
                         
-                        @* 2. Campo Requisitos añadido, que es parte del DTO y el POST del backend. *@
+                       
                         <div class="mb-4">
                             <label asp-for="Requisitos" class="form-label fw-bold">Requisitos / Perfil</label>
                             <textarea asp-for="Requisitos" class="form-control" rows="4" placeholder="Lista de requisitos mínimos, tecnologías, experiencia, etc."></textarea>
                             <span asp-validation-for="Requisitos" class="text-danger small"></span>
                         </div>
                         
-                        @* 3. Campo de Estado ELIMINADO: El controlador VacantesController lo fuerza a 'true' al crear. *@
-                        
-                        @* Campo oculto para asegurar que 'EstaActiva' se envíe como 'true' si el Controller no lo setea, aunque ya lo forzamos en el Controller. *@
+                       
                         <input type="hidden" asp-for="EstaActiva" value="true" />
 
 
@@ -69,7 +67,6 @@
 
 @section Scripts {
     @{
-        // Asegura que la validación del lado del cliente funcione
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }

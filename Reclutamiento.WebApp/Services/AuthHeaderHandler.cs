@@ -26,7 +26,7 @@ namespace ReclutamientoFrontend.WebApp.Services
             }
             catch
             {
-                // En caso de no tener contexto o sesión, omitimos agregar token.
+                
             }
             return base.SendAsync(request, cancellationToken);
         }
