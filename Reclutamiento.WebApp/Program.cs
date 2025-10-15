@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Configuration
 var configuration = builder.Configuration;
-var apiBase = configuration["ApiBaseUrl"] ?? "http://localhost:5148/";
+var apiBase = configuration["ApiBaseUrl"] ?? "https://localhost:44335/";
 
 // Add services
 builder.Services.AddControllersWithViews();

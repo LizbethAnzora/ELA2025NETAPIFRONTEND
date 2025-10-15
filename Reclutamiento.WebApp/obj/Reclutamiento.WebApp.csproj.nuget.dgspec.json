@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ELA2025NETAPIFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj": {}
+    "C:\\Users\\ilein\\OneDrive\\Desktop\\ReclutamientoFrontend\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj": {}
   },
   "projects": {
-    "D:\\ELA2025NETAPIFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj": {
+    "C:\\Users\\ilein\\OneDrive\\Desktop\\ReclutamientoFrontend\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ELA2025NETAPIFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj",
+        "projectUniqueName": "C:\\Users\\ilein\\OneDrive\\Desktop\\ReclutamientoFrontend\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj",
         "projectName": "Reclutamiento.WebApp",
-        "projectPath": "D:\\ELA2025NETAPIFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\ELA2025NETAPIFRONTEND\\ELA2025NETAPIFRONTEND\\Reclutamiento.WebApp\\obj\\",
+        "projectPath": "C:\\Users\\ilein\\OneDrive\\Desktop\\ReclutamientoFrontend\\Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj",
+        "packagesPath": "C:\\Users\\ilein\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ilein\\OneDrive\\Desktop\\ReclutamientoFrontend\\Reclutamiento.WebApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ilein\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
