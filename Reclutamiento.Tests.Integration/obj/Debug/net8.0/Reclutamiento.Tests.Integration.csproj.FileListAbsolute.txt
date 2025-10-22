@@ -173,3 +173,4 @@ C:\Users\ilein\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.Tests.Integr
 C:\Users\ilein\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.Tests.Integration\obj\Debug\net8.0\Reclutamiento.Tests.Integration.pdb
 C:\Users\ilein\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.Tests.Integration\obj\Debug\net8.0\Reclutamiento.Tests.Integration.genruntimeconfig.cache
 C:\Users\ilein\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.Tests.Integration\obj\Debug\net8.0\ref\Reclutamiento.Tests.Integration.dll
+C:\Users\ilein\OneDrive\Desktop\ReclutamientoFrontend\Reclutamiento.Tests.Integration\bin\Debug\net8.0\SeleniumExtras.WaitHelpers.dll

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Reclutamiento.Tests.Integration")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2eb6112250aad9825969c3fa3279b0f8f7a6cf70")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a320279455e0870cfa857ae75e1dd09f0f76aad")]
 [assembly: System.Reflection.AssemblyProductAttribute("Reclutamiento.Tests.Integration")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Reclutamiento.Tests.Integration")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
