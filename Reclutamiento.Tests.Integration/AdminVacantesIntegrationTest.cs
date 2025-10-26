@@ -36,7 +36,7 @@ public class AdminVacantesIntegrationTest
         _driver.Quit();
     }
 
-    
+
     /// Método auxiliar para realizar el Login del Administrador.
     private void PerformAdminLogin()
     {
@@ -59,15 +59,15 @@ public class AdminVacantesIntegrationTest
     public void HU03_VerSolicitudes_DebeSerVisibleYRedirigirAListado()
     {
         // ARRANGE
-        
+
         PerformAdminLogin();
 
         var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
 
-        
+
         _driver.Navigate().GoToUrl(BaseUrl + "/Vacantes");
 
-        
+
         wait.Until(ExpectedConditions.UrlContains("/Vacantes"));
         wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("table-responsive")));
 
@@ -81,7 +81,7 @@ public class AdminVacantesIntegrationTest
         }
         catch (NoSuchElementException)
         {
-            
+
             botonVerSolicitudes = _driver.FindElement(By.CssSelector(".d-grid.gap-2 a.btn-info.btn-sm"));
         }
 

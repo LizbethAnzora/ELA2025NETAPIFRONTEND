@@ -1,14 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ilein\\OneDrive\\Desktop\\ReclutamientoFrontend\\",
+  "WorkspaceRootPath": "C:\\Users\\esmer\\source\\repos\\ELA2025NETAPIFRONTEND\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamientofrontend\\reclutamiento.tests.integration\\adminvacantesintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|solutionrelative:reclutamiento.tests.integration\\adminvacantesintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamientofrontend\\reclutamiento.tests.integration\\loginintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|solutionrelative:reclutamiento.tests.integration\\loginintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|c:\\users\\esmer\\source\\repos\\ela2025netapifrontend\\reclutamiento.tests.integration\\solicitudesvacantesintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|solutionrelative:reclutamiento.tests.integration\\solicitudesvacantesintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,37 +14,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AdminVacantesIntegrationTest.cs",
-              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\AdminVacantesIntegrationTest.cs",
-              "RelativeDocumentMoniker": "Reclutamiento.Tests.Integration\\AdminVacantesIntegrationTest.cs",
-              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\AdminVacantesIntegrationTest.cs",
-              "RelativeToolTip": "Reclutamiento.Tests.Integration\\AdminVacantesIntegrationTest.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAADgvz8AAAAFAAAAAAAAAA==",
+              "Title": "SolicitudesVacantesIntegrationTest.cs",
+              "DocumentMoniker": "C:\\Users\\esmer\\source\\repos\\ELA2025NETAPIFRONTEND\\Reclutamiento.Tests.Integration\\SolicitudesVacantesIntegrationTest.cs",
+              "RelativeDocumentMoniker": "Reclutamiento.Tests.Integration\\SolicitudesVacantesIntegrationTest.cs",
+              "ToolTip": "C:\\Users\\esmer\\source\\repos\\ELA2025NETAPIFRONTEND\\Reclutamiento.Tests.Integration\\SolicitudesVacantesIntegrationTest.cs",
+              "RelativeToolTip": "Reclutamiento.Tests.Integration\\SolicitudesVacantesIntegrationTest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T20:26:20.956Z",
+              "WhenOpened": "2025-10-26T04:10:54.897Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "LoginIntegrationTest.cs",
-              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\LoginIntegrationTest.cs",
-              "RelativeDocumentMoniker": "Reclutamiento.Tests.Integration\\LoginIntegrationTest.cs",
-              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\LoginIntegrationTest.cs",
-              "RelativeToolTip": "Reclutamiento.Tests.Integration\\LoginIntegrationTest.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAUwDgAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-17T04:33:01.864Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             }
           ]
         }
