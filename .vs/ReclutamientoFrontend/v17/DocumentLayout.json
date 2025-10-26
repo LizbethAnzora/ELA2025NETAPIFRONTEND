@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|c:\\users\\admin\\documents\\reclutamientofrontend\\reclutamiento.tests.integration\\visualizacionsolicitudintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|solutionrelative:reclutamiento.tests.integration\\visualizacionsolicitudintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|c:\\users\\admin\\documents\\reclutamientofrontend\\reclutamiento.tests.integration\\crudadministradoresintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|solutionrelative:reclutamiento.tests.integration\\crudadministradoresintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,6 +31,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "VisualizacionSolicitudIntegrationTest.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\VisualizacionSolicitudIntegrationTest.cs",
+              "RelativeDocumentMoniker": "Reclutamiento.Tests.Integration\\VisualizacionSolicitudIntegrationTest.cs",
+              "ToolTip": "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\VisualizacionSolicitudIntegrationTest.cs",
+              "RelativeToolTip": "Reclutamiento.Tests.Integration\\VisualizacionSolicitudIntegrationTest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T04:44:59.429Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "CRUDAdministradoresIntegrationTest.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\CRUDAdministradoresIntegrationTest.cs",
               "RelativeDocumentMoniker": "Reclutamiento.Tests.Integration\\CRUDAdministradoresIntegrationTest.cs",
@@ -39,7 +56,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ResponderSolicitudesIntegrationTest.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\ResponderSolicitudesIntegrationTest.cs",
               "RelativeDocumentMoniker": "Reclutamiento.Tests.Integration\\ResponderSolicitudesIntegrationTest.cs",
@@ -47,8 +64,7 @@
               "RelativeToolTip": "Reclutamiento.Tests.Integration\\ResponderSolicitudesIntegrationTest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T04:26:31.291Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-26T04:26:31.291Z"
             }
           ]
         }
