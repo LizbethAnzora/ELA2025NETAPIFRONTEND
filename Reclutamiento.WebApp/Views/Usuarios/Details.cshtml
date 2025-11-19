@@ -4,36 +4,113 @@
     ViewData["Title"] = "Detalles del Administrador";
 }
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<style>
+    :root {
+        --navy: #0b1f3a;
+        --blue-mid: #1c3d6e;
+        --cream: #f5f5f0;
+        --beige: #e2d8c3;
+        --olive: #6b7c4f;
+        --muted: #9aa3b2;
+    }
+
+    body {
+        background-color: var(--navy);
+        font-family: 'Poppins', sans-serif;
+        color: var(--cream);
+    }
+
+    .container {
+        padding-top: 1.5rem;
+        padding-bottom: 2rem;
+    }
+
+    .card {
+        border-radius: 14px;
+        background-color: var(--beige);
+        box-shadow: 0 14px 38px rgba(2,10,20,0.35);
+    }
+
+    .card-header {
+        background: linear-gradient(90deg, var(--blue-mid), #153255);
+        color: var(--cream);
+        padding: 1rem 1.25rem;
+    }
+
+    .card-body {
+        padding: 1.25rem 1.5rem;
+        color: var(--cream);
+    }
+
+    h5.card-title {
+        color: var(--blue-mid);
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .detalle-usuario dt {
+        color: rgba(245,245,240,0.8);
+        font-weight: 600;
+    }
+
+    .detalle-usuario dd {
+        color: var(--olive);
+        font-weight: 700;
+        margin-bottom: .75rem;
+    }
+
+    .badge-role {
+        background: linear-gradient(90deg, var(--olive), #55683f);
+        color: var(--cream);
+        padding: .45rem .75rem;
+        border-radius: 8px;
+    }
+
+    .btn-warning {
+        background: linear-gradient(90deg,#d4a11a,#c48e16);
+        color: #0b1f3a;
+        border: none;
+    }
+
+    .btn-secondary {
+        background-color: rgba(245,245,240,0.12);
+        color: var(--olive);
+        border: 1px solid rgba(255,255,255,0.04);
+    }
+</style>
+
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8 col-sm-12">
             <div class="card shadow-lg border-0">
-                <div class="card-header bg-info text-white">
+                <div class="card-header">
                     <h4 class="mb-0"><i class="fa-solid fa-address-card me-2"></i> Perfil del Administrador</h4>
                 </div>
                 <div class="card-body p-4">
-                    
-                    <h5 class="card-title text-primary mb-4 border-bottom pb-2">Datos Principales</h5>
+                    <h5 class="card-title mb-4 border-bottom pb-2">Datos Principales</h5>
 
                     <dl class="row mb-5 detalle-usuario">
                         <dt class="col-sm-4 fw-normal text-muted">Nombre Completo</dt>
-                        <dd class="col-sm-8 fw-bold text-dark">@Model.NombreCompleto</dd>
+                        <dd class="col-sm-8 fw-bold">@Model.NombreCompleto</dd>
 
                         <dt class="col-sm-4 fw-normal text-muted">Correo Electrónico</dt>
-                        <dd class="col-sm-8 fw-bold text-dark">@Model.CorreoElectronico</dd>
+                        <dd class="col-sm-8 fw-bold">@Model.CorreoElectronico</dd>
 
                         <dt class="col-sm-4 fw-normal text-muted">Rol del Sistema</dt>
                         <dd class="col-sm-8">
-                            <span class="badge bg-info text-white fw-bold py-2 px-3">ADMINISTRADOR</span>
+                            <span class="badge-role">ADMINISTRADOR</span>
                         </dd>
                     </dl>
-                    
+
                     <div class="d-flex flex-column flex-md-row justify-content-end gap-2 pt-3 border-top">
                         <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-warning order-2 order-md-1">
-                            <i class="fa-solid fa-edit"></i> Editar Nombre
+                            <i class="fa-solid fa-edit me-2"></i> Editar Nombre
                         </a>
                         <a asp-action="Index" class="btn btn-secondary order-1 order-md-2">
-                            <i class="fa-solid fa-arrow-left"></i> Regresar a la Lista
+                            <i class="fa-solid fa-arrow-left me-2"></i> Regresar a la Lista
                         </a>
                     </div>
                 </div>

@@ -4,54 +4,190 @@
     ViewData["Title"] = $"Detalles de Solicitud de {Model.NombreCompleto}";
 }
 
-<div class="container py-5">
-    <h2 class="text-primary border-bottom pb-3 mb-4">
-        <i class="fa-solid fa-user-check me-2"></i> Detalles de la Solicitud
-    </h2>
-    
-    <div class="row">
-        
+<!-- Google Fonts y Font Awesome -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<style>
+    :root {
+        --navy: #0b1f3a;
+        --blue-mid: #1c3d6e;
+        --cream: #f5f5f0;
+        --beige: #e2d8c3;
+        --olive: #6b7c4f;
+        --muted: #8f99a7;
+        --glass-border: rgba(0,0,0,0.04);
+        --shadow: rgba(2,10,20,0.28);
+    }
+
+    body {
+        background-color: var(--navy);
+        font-family: 'Poppins', sans-serif;
+        color: var(--cream);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        padding-top: 2rem;
+        padding-bottom: 2.5rem;
+    }
+
+    h2.page-title {
+        color: var(--cream);
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: .6rem;
+    }
+
+    /* Layout cards */
+    .card {
+        border-radius: 14px;
+        background-color: var(--beige);
+        color: var(--navy);
+        box-shadow: 0 18px 40px var(--shadow);
+        border: 1px solid var(--glass-border);
+        overflow: hidden;
+    }
+
+    .card-header {
+        background: linear-gradient(90deg, var(--blue-mid), #153255);
+        color: var(--cream);
+        padding: 0.75rem 1rem;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .card .card-body {
+        padding: 1.25rem;
+        color: var(--navy);
+    }
+
+    /* Candidate card specifics */
+    .candidate-card .card-body {
+        text-align: center;
+    }
+
+    .candidate-photo {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 999px;
+        border: 4px solid var(--cream);
+        box-shadow: 0 8px 18px rgba(2,10,20,0.15);
+        display: inline-block;
+    }
+
+    .candidate-placeholder {
+        font-size: 5rem;
+        color: var(--muted);
+    }
+
+    .candidate-name {
+        margin-top: .75rem;
+        font-weight: 700;
+        color: var(--blue-mid);
+    }
+
+    .candidate-meta {
+        color: var(--muted);
+        margin-bottom: .25rem;
+    }
+
+    /* Content area */
+    .content-panel {
+        background-color: var(--cream);
+        color: var(--navy);
+        border-radius: 10px;
+        padding: 1rem;
+        box-shadow: 0 8px 20px rgba(2,10,20,0.12);
+        border: 1px solid rgba(28,61,110,0.06);
+    }
+
+    .section-title {
+        color: var(--blue-mid);
+        font-weight: 700;
+        margin-top: 0.25rem;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+    }
+
+    .field-box {
+        background-color: transparent;
+        color: var(--navy);
+        padding: .75rem;
+        border-radius: 8px;
+        border: 1px solid rgba(28,61,110,0.06);
+    }
+
+    .btn {
+        border-radius: 10px;
+        font-weight: 600;
+        padding: .5rem .9rem;
+    }
+
+    .btn-secondary {
+        background-color: rgba(245,245,240,0.12);
+        color: var(--olive);
+        border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .back-link {
+        display: block;
+        width: 100%;
+        margin-top: .75rem;
+    }
+
+
+    .container {
+        padding-top: 1rem;
+        padding-bottom: 1.5rem;
+    }
+
+    }
+</style>
+
+<div class="container">
+    <h2 class="page-title mb-4"><i class="fa-solid fa-user-check me-2"></i> Detalles de la Solicitud</h2>
+
+    <div class="row g-4">
         <div class="col-md-4">
-            
-            <div class="card shadow-sm mb-4">
-                <div class="card-header bg-light fw-bold text-center">
-                    Candidato
-                </div>
-                <div class="card-body text-center">
+            <div class="card candidate-card shadow-sm">
+                <div class="card-header">Candidato</div>
+                <div class="card-body">
                     @if (!string.IsNullOrEmpty(Model.Foto))
                     {
-                        
-                        <img src="@Model.Foto" class="img-fluid rounded-circle mb-3" alt="Foto del Solicitante" style="width: 150px; height: 150px; object-fit: cover;">
+                        <img src="@Model.Foto" alt="Foto del Solicitante" class="candidate-photo mb-3" />
                     }
                     else
                     {
-                        <i class="fa-solid fa-user-circle fa-5x text-muted mb-3"></i>
+                        <div class="candidate-placeholder mb-3"><i class="fa-solid fa-user-circle"></i></div>
                     }
-                    
-                    <h5 class="fw-bold">@Model.NombreCompleto</h5>
-                    <p class="text-muted mb-1">@Model.CorreoElectronico</p>
-                    <p class="text-muted">Tel: @Model.NumeroTelefono</p>
+
+                    <h5 class="candidate-name">@Model.NombreCompleto</h5>
+                    <p class="candidate-meta mb-1">@Model.CorreoElectronico</p>
+                    <p class="candidate-meta">Tel: <span style="color:var(--olive); font-weight:700;">@Model.NumeroTelefono</span></p>
+
+                    <a asp-controller="Vacantes" asp-action="Solicitudes" asp-route-vacanteId="@Model.IdVacante" class="btn btn-secondary back-link">
+                        <i class="fa-solid fa-arrow-left me-2"></i> Volver al Listado
+                    </a>
                 </div>
             </div>
-            
-            @* Botón de Retorno *@
-            <a asp-controller="Vacantes" asp-action="Solicitudes" asp-route-vacanteId="@Model.IdVacante" class="btn btn-secondary w-100">
-                <i class="fa-solid fa-arrow-left"></i> Volver al Listado
-            </a>
         </div>
-        
+
         <div class="col-md-8">
-         
+            <div class="card shadow-sm">
+                <div class="card-header">Contenido del Formulario</div>
                 <div class="card-body">
-                    <dl class="row">
-                        <dt class="col-sm-12 mt-3 border-top pt-3 fw-bold text-primary">Contenido del Formulario</dt>
-                        <dd class="col-sm-12">
-                            <div class="p-3 bg-light rounded border">
-                                @* CamposPersonalizados es el campo que contiene la experiencia *@
-                                @Html.Raw(Model.CamposPersonalizados?.Replace("\n", "<br/>"))
-                            </div>
-                        </dd>
-                    </dl>
+                    <div class="content-panel">
+                        <div class="section-title"><i class="fa-solid fa-file-lines"></i> Formulario y Experiencia</div>
+                        <div class="field-box">
+                            @Html.Raw(Model.CamposPersonalizados?.Replace("\n", "<br/>"))
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

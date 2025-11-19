@@ -1,17 +1,93 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\",
+  "WorkspaceRootPath": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|c:\\users\\admin\\documents\\reclutamientofrontend\\reclutamiento.tests.integration\\visualizacionsolicitudintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\views\\solicitudes\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\views\\solicitudes\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\controllers\\vacantescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\controllers\\vacantescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\controllers\\solicitudescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\controllers\\solicitudescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\views\\vacantes\\solicitudes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\views\\vacantes\\solicitudes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\views\\vacantes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\views\\vacantes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\views\\vacantes\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\views\\vacantes\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\views\\vacantes\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\views\\vacantes\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\views\\vacantes\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\views\\vacantes\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\views\\usuarios\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\views\\usuarios\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\views\\usuarios\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\views\\usuarios\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\views\\usuarios\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\views\\usuarios\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\views\\usuarios\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\views\\usuarios\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\views\\usuarios\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\views\\usuarios\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\views\\solicitudes\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\views\\solicitudes\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\views\\shared\\_sidebar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\views\\shared\\_sidebar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.webapp\\models\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{66010606-80EC-4F77-A02F-443A851407F8}|Reclutamiento.WebApp\\Reclutamiento.WebApp.csproj|solutionrelative:reclutamiento.webapp\\models\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.tests.integration\\visualizacionsolicitudintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|solutionrelative:reclutamiento.tests.integration\\visualizacionsolicitudintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|c:\\users\\admin\\documents\\reclutamientofrontend\\reclutamiento.tests.integration\\crudadministradoresintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.tests.integration\\crudadministradoresintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|solutionrelative:reclutamiento.tests.integration\\crudadministradoresintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|c:\\users\\admin\\documents\\reclutamientofrontend\\reclutamiento.tests.integration\\respondersolicitudesintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|c:\\users\\ilein\\onedrive\\desktop\\reclutamiento frontend\\reclutamiento.tests.integration\\respondersolicitudesintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B368616F-ADCC-4C7E-A3CF-7322EEF67E1E}|Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj|solutionrelative:reclutamiento.tests.integration\\respondersolicitudesintegrationtest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -31,23 +107,251 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "VisualizacionSolicitudIntegrationTest.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\VisualizacionSolicitudIntegrationTest.cs",
-              "RelativeDocumentMoniker": "Reclutamiento.Tests.Integration\\VisualizacionSolicitudIntegrationTest.cs",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\VisualizacionSolicitudIntegrationTest.cs",
-              "RelativeToolTip": "Reclutamiento.Tests.Integration\\VisualizacionSolicitudIntegrationTest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-26T04:44:59.429Z",
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Solicitudes\\Details.cshtml",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Views\\Solicitudes\\Details.cshtml",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Solicitudes\\Details.cshtml",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Views\\Solicitudes\\Details.cshtml",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAAAIUAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-15T21:10:59.736Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "VacantesController.cs",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Controllers\\VacantesController.cs",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Controllers\\VacantesController.cs",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Controllers\\VacantesController.cs",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Controllers\\VacantesController.cs",
+              "ViewState": "AgIAAJIAAAAAAAAAAAAswJsAAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-15T21:08:15.414Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SolicitudesController.cs",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Controllers\\SolicitudesController.cs",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Controllers\\SolicitudesController.cs",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Controllers\\SolicitudesController.cs",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Controllers\\SolicitudesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-15T21:07:37.942Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Solicitudes.cshtml",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Vacantes\\Solicitudes.cshtml",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Views\\Vacantes\\Solicitudes.cshtml",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Vacantes\\Solicitudes.cshtml",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Views\\Vacantes\\Solicitudes.cshtml",
+              "ViewState": "AgIAADYBAAAAAAAAAAAIwEMBAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-15T20:18:02.691Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Vacantes\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Views\\Vacantes\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Vacantes\\Edit.cshtml",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Views\\Vacantes\\Edit.cshtml",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAwwHgAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-15T20:16:54.896Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Vacantes\\Details.cshtml",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Views\\Vacantes\\Details.cshtml",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Vacantes\\Details.cshtml",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Views\\Vacantes\\Details.cshtml",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAEIAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-15T20:15:34.526Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Vacantes\\Create.cshtml",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Views\\Vacantes\\Create.cshtml",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Vacantes\\Create.cshtml",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Views\\Vacantes\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-10T05:01:57.099Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Vacantes\\Index.cshtml",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Views\\Vacantes\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Vacantes\\Index.cshtml",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Views\\Vacantes\\Index.cshtml",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAFAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-10T04:31:19.367Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Usuarios\\Delete.cshtml",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Views\\Usuarios\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Usuarios\\Delete.cshtml",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Views\\Usuarios\\Delete.cshtml",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAEIAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-09T05:40:42.9Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Usuarios\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Views\\Usuarios\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Usuarios\\Edit.cshtml",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Views\\Usuarios\\Edit.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-09T05:39:51.587Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Usuarios\\Details.cshtml",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Views\\Usuarios\\Details.cshtml",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Usuarios\\Details.cshtml",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Views\\Usuarios\\Details.cshtml",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAAHMAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-09T05:36:56.175Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Usuarios\\Create.cshtml",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Views\\Usuarios\\Create.cshtml",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Usuarios\\Create.cshtml",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Views\\Usuarios\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-08T20:01:28.793Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Usuarios\\Index.cshtml",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Views\\Usuarios\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Usuarios\\Index.cshtml",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Views\\Usuarios\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-08T20:01:30.538Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Solicitudes\\Create.cshtml",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Views\\Solicitudes\\Create.cshtml",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Solicitudes\\Create.cshtml",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Views\\Solicitudes\\Create.cshtml",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAACgAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-08T19:35:33.385Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-08T19:14:37.633Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Auth\\Login.cshtml",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Views\\Auth\\Login.cshtml",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Auth\\Login.cshtml",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Views\\Auth\\Login.cshtml",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAUwAwAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-08T19:13:41.859Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "_Sidebar.cshtml",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Shared\\_Sidebar.cshtml",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Views\\Shared\\_Sidebar.cshtml",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Shared\\_Sidebar.cshtml",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Views\\Shared\\_Sidebar.cshtml",
+              "ViewState": "AgIAADkAAAAAAAAAAAAUwE8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-08T19:18:25.219Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAACwAAAAAAAAAAAAUwDoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-08T19:21:25.208Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "LoginDTO.cs",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Models\\Dtos\\LoginDTO.cs",
+              "RelativeDocumentMoniker": "Reclutamiento.WebApp\\Models\\Dtos\\LoginDTO.cs",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.WebApp\\Models\\Dtos\\LoginDTO.cs",
+              "RelativeToolTip": "Reclutamiento.WebApp\\Models\\Dtos\\LoginDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-08T20:20:11.965Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "VisualizacionSolicitudIntegrationTest.cs",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.Tests.Integration\\VisualizacionSolicitudIntegrationTest.cs",
+              "RelativeDocumentMoniker": "Reclutamiento.Tests.Integration\\VisualizacionSolicitudIntegrationTest.cs",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.Tests.Integration\\VisualizacionSolicitudIntegrationTest.cs",
+              "RelativeToolTip": "Reclutamiento.Tests.Integration\\VisualizacionSolicitudIntegrationTest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-26T04:44:59.429Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
               "Title": "CRUDAdministradoresIntegrationTest.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\CRUDAdministradoresIntegrationTest.cs",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.Tests.Integration\\CRUDAdministradoresIntegrationTest.cs",
               "RelativeDocumentMoniker": "Reclutamiento.Tests.Integration\\CRUDAdministradoresIntegrationTest.cs",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\CRUDAdministradoresIntegrationTest.cs",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.Tests.Integration\\CRUDAdministradoresIntegrationTest.cs",
               "RelativeToolTip": "Reclutamiento.Tests.Integration\\CRUDAdministradoresIntegrationTest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -55,11 +359,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 21,
               "Title": "ResponderSolicitudesIntegrationTest.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\ResponderSolicitudesIntegrationTest.cs",
+              "DocumentMoniker": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.Tests.Integration\\ResponderSolicitudesIntegrationTest.cs",
               "RelativeDocumentMoniker": "Reclutamiento.Tests.Integration\\ResponderSolicitudesIntegrationTest.cs",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\ResponderSolicitudesIntegrationTest.cs",
+              "ToolTip": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.Tests.Integration\\ResponderSolicitudesIntegrationTest.cs",
               "RelativeToolTip": "Reclutamiento.Tests.Integration\\ResponderSolicitudesIntegrationTest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

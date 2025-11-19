@@ -1,5 +1,9 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\images\edificio.jpeg
+wwwroot\images\empresarial.jpg
+wwwroot\images\fondo empresarial.jpg
+wwwroot\images\imagen empresarial.jpg
 wwwroot\js\site.js
 wwwroot\js\supabase-auth.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css

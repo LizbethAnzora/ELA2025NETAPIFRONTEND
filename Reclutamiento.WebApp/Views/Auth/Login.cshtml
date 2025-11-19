@@ -3,18 +3,122 @@
     ViewData["Title"] = "Iniciar Sesión";
 }
 
+<!-- Google Fonts y Font Awesome -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<!-- Estilos embebidos con paleta personalizada -->
+<style>
+    body {
+        background-color: #0b1f3a;
+        font-family: 'Poppins', sans-serif;
+        color: #f5f5f0;
+    }
+
+    .card {
+        background-color: #e2d8c3;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8);
+        }
+
+    .card-header {
+        background-color: #1c3d6e;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+        padding: 1.25rem;
+        color: #f5f5f0;
+        text-align: center;
+    }
+
+    .card-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: #1c3d6e;
+    }
+
+    .form-control {
+        background-color: #f5f5f0;
+        border: 1px solid #ccc;
+        color: #1c3d6e;
+        border-radius: 10px;
+        padding: 0.75rem;
+        transition: box-shadow 0.3s ease, background-color 0.3s ease;
+    }
+
+        .form-control::placeholder {
+            color: #999;
+        }
+
+        .form-control:focus {
+            background-color: #ffffff;
+            box-shadow: 0 0 0 0.25rem rgba(28, 61, 110, 0.25);
+        }
+
+    .btn-primary {
+        background-color: #1c3d6e;
+        border: none;
+        color: #f5f5f0;
+    }
+
+        .btn-primary:hover {
+            background-color: #16345c;
+            transform: scale(1.02);
+        }
+
+    .btn-dark {
+        background-color: #6b7c4f;
+        border: none;
+        color: #f5f5f0;
+    }
+
+        .btn-dark:hover {
+            background-color: #5a6a42;
+            transform: scale(1.02);
+        }
+
+    .btn {
+        border-radius: 10px;
+        font-weight: 500;
+        padding: 0.6rem 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .alert {
+        border-radius: 10px;
+        font-size: 0.95rem;
+        background-color: #f8d7da;
+        color: #842029;
+        border: 1px solid #842029;
+    }
+
+    hr {
+        border-top: 1px solid #ccc;
+    }
+</style>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
-            <div class="card shadow-sm border-0 mt-5">
-                <div class="card-header bg-primary text-white text-center">
+            <div class="card mt-5">
+                <div class="card-header">
                     <h3 class="card-title mb-0">Iniciar Sesión</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body p-4">
                     @if (ViewBag.Error != null)
                     {
-                        <div class="alert alert-danger">
-                            <i class="fas fa-exclamation-triangle me-2"></i>@ViewBag.Error
+                        <div class="alert alert-danger d-flex align-items-center mb-4">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <span>@ViewBag.Error</span>
                         </div>
                     }
                     <form asp-action="Login" method="post">
@@ -36,16 +140,13 @@
                         <button type="submit" class="btn btn-primary w-100">Ingresar</button>
                     </form>
                     <hr class="my-4" />
-                    <div class="d-grid mb-3">
+                    <div class="d-grid">
                         <a class="btn btn-dark" href="@Url.Action("LoginWithGitHub", "Auth")">
                             <i class="fab fa-github me-2"></i> Iniciar sesión con GitHub
                         </a>
                     </div>
-                   
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />

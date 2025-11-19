@@ -5,14 +5,244 @@
     var filtroActual = ViewData["FiltroActual"] as string;
 }
 
-<div class="container py-4">
-    
-    <h3 class="mb-4 text-primary fw-bold"><i class="fa-solid fa-briefcase me-2"></i> Panel de Gestión de Vacantes</h3>
+<!-- Google Fonts y Font Awesome -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-    <div class="card shadow-lg mb-4 border-0">
+<style>
+    :root {
+        --navy: #0b1f3a;
+        --blue-mid: #1c3d6e;
+        --cream: #f5f5f0;
+        --beige: #e2d8c3;
+        --olive: #6b7c4f;
+        --muted: #9aa3b2;
+        --success: #6b7c4f;
+        --danger: #dc3545;
+        --glass-border: rgba(255,255,255,0.06);
+    }
+
+    body {
+        background-color: var(--navy);
+        font-family: 'Poppins', sans-serif;
+        color: var(--cream);
+    }
+
+    .container {
+        padding-top: 1.5rem;
+        padding-bottom: 2rem;
+    }
+
+    h3.page-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--cream);
+        display: flex;
+        gap: .6rem;
+        align-items: center;
+    }
+
+    /* Panel superior: tarjeta semitransparente para dejar ver el fondo */
+    .card.panel {
+        border-radius: 14px;
+        background: rgba(226,216,195,0.08); /* ligero glass sobre fondo marino */
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 10px 30px rgba(2,10,20,0.45);
+    }
+
+        .card.panel .card-body {
+            padding: 0.8rem 1rem;
+            color: var(--blue-mid);
+        }
+
+    .input-group .form-control {
+        border-radius: 10px 0 0 10px;
+        border: 1px solid rgba(28,61,110,0.12);
+        background-color: var(--cream);
+        color: var(--blue-mid);
+    }
+
+    .input-group .btn {
+        border-radius: 0 10px 10px 0;
+    }
+
+    .btn-success {
+        background-color: var(--success);
+        border: none;
+        color: var(--cream);
+    }
+
+    .btn-primary {
+        background-color: var(--blue-mid);
+        border: none;
+        color: var(--cream);
+    }
+
+    .btn-outline-secondary {
+        color: var(--cream);
+        border-color: rgba(28,61,110,0.12);
+        background: transparent;
+    }
+
+    .alert {
+        border-radius: 10px;
+    }
+
+    /* Tabla / lista */
+    .table-wrapper {
+        margin-top: .75rem;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 12px 30px rgba(2,10,20,0.28);
+        background-color: var(--beige);
+    }
+
+    table.table {
+        margin-bottom: 0;
+        color: var(--blue-mid);
+        background: transparent;
+    }
+
+        table.table thead th {
+            background: rgba(28,61,110,0.06);
+            color: var(--blue-mid);
+            font-weight: 700;
+            border-bottom: 1px solid rgba(28,61,110,0.08);
+        }
+
+        table.table tbody tr {
+            transition: background-color .12s ease, transform .12s ease;
+        }
+
+            table.table tbody tr:hover {
+                background: rgba(28,61,110,0.03);
+                transform: translateY(-2px);
+            }
+
+    .text-primary {
+        color: var(--blue-mid) !important;
+        font-weight: 700;
+    }
+
+    .badge-activa {
+        background-color: var(--success);
+        color: var(--cream);
+        padding: .35rem .6rem;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+
+    .badge-inactiva {
+        background-color: rgba(28,61,110,0.12);
+        color: var(--blue-mid);
+        padding: .35rem .6rem;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+
+    /* Action buttons */
+    .btn-outline-info {
+        color: var(--blue-mid);
+        border-color: rgba(28,61,110,0.12);
+        background: rgba(28,61,110,0.03);
+    }
+
+        .btn-outline-info:hover {
+            background: var(--blue-mid);
+            color: var(--cream);
+            border-color: transparent;
+        }
+
+    .btn-outline-warning {
+        color: #8a6d1c;
+        border-color: rgba(138,109,28,0.15);
+        background: rgba(138,109,28,0.03);
+    }
+
+        .btn-outline-warning:hover {
+            background: #d7b84a;
+            color: #0b1f3a;
+            border-color: transparent;
+        }
+
+    .btn-outline-danger {
+        color: var(--danger);
+        border-color: rgba(220,53,69,0.12);
+        background: rgba(220,53,69,0.03);
+    }
+
+        .btn-outline-danger:hover {
+            background: var(--danger);
+            color: var(--cream);
+            border-color: transparent;
+        }
+
+    .btn-outline-success {
+        color: var(--success);
+        border-color: rgba(107,124,79,0.12);
+        background: rgba(107,124,79,0.03);
+    }
+
+        .btn-outline-success:hover {
+            background: var(--success);
+            color: var(--cream);
+            border-color: transparent;
+        }
+
+    /* Mobile cards */
+    .mobile-card {
+        background-color: var(--beige);
+        border-radius: 12px;
+        padding: 0.75rem;
+        box-shadow: 0 8px 20px rgba(2,10,20,0.18);
+    }
+
+        .mobile-card .card-title {
+            color: var(--blue-mid);
+            font-weight: 700;
+        }
+
+    .small-muted {
+        color: var(--muted);
+        font-size: 0.95rem;
+    }
+
+    /* Modal customization to match palette */
+    .modal-content {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .modal-header.bg-danger {
+        background: linear-gradient(90deg, rgba(220,53,69,0.95), #b02a37);
+        color: var(--cream);
+    }
+
+    .modal-header.bg-success {
+        background: linear-gradient(90deg, var(--success), #55704a);
+        color: var(--cream);
+    }
+
+    .modal-body {
+        color: rgba(11,31,58,0.95);
+    }
+
+    .modal-footer .btn-secondary {
+        background-color: rgba(245,245,240,0.12);
+        color: var(--cream);
+        border: 1px solid rgba(255,255,255,0.04);
+    }
+
+</style>
+
+<div class="container py-4">
+    <h3 class="page-title mb-4"><i class="fa-solid fa-briefcase"></i> Panel de Gestión de Vacantes</h3>
+
+    <div class="card panel shadow-sm mb-4 border-0">
         <div class="card-body py-3">
             <div class="row g-2 align-items-center justify-content-between">
-                
                 <div class="col-12 col-md-3 order-md-2 d-grid">
                     <a asp-action="Create" class="btn btn-success shadow-sm btn-md">
                         <i class="fa-solid fa-plus me-2"></i> Crear Vacante
@@ -21,14 +251,12 @@
 
                 <div class="col-12 col-md-9 order-md-1">
                     <form method="get" asp-action="Index" class="input-group">
-                        <input 
-                            type="text" 
-                            id="filtroTitulo" 
-                            name="titulo" 
-                            class="form-control" 
-                            placeholder="Buscar por Título..." 
-                            value="@filtroActual" 
-                        />
+                        <input type="text"
+                               id="filtroTitulo"
+                               name="titulo"
+                               class="form-control"
+                               placeholder="Buscar por Título..."
+                               value="@filtroActual" />
                         <button type="submit" class="btn btn-primary btn-md" title="Aplicar filtro">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -58,7 +286,7 @@
 
     @if (!Model.Any())
     {
-        <div class="alert alert-info text-center mt-5 p-4 shadow-lg" role="alert">
+        <div class="alert alert-info text-center mt-5 p-4 shadow-lg" role="alert" style="background-color: rgba(226,216,195,0.12); color: var(--cream); border:1px solid var(--glass-border);">
             <i class="fa-solid fa-box-open fa-2x mb-2"></i><br>
             <h4 class="alert-heading">No hay Vacantes</h4>
             <p class="mb-0">No se encontraron vacantes con los criterios de búsqueda.</p>
@@ -66,134 +294,129 @@
     }
     else
     {
-        <div class="table-responsive d-none d-md-block">
-            <table class="table table-hover align-middle bg-white shadow-lg rounded">
-                <thead class="bg-light text-muted border-bottom border-secondary border-2">
-                    <tr>
-                        <th style="width: 45%;" class="py-3">Título</th>
-                        <th style="width: 15%;" class="py-3 text-center">Estado</th>
-                        <th class="text-center py-3" style="width: 40%;">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var vacante in Model)
-                    {
-                        <tr class="border-bottom">
-                            <td class="fw-bold text-primary">@vacante.Titulo</td>
-                            <td class="text-center">
+        <div class="table-wrapper mt-2">
+            <div class="table-responsive d-none d-md-block">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th style="width: 45%;" class="py-3">Título</th>
+                            <th style="width: 15%;" class="py-3 text-center">Estado</th>
+                            <th class="text-center py-3" style="width: 40%;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var vacante in Model)
+                        {
+                            <tr class="border-bottom">
+                                <td class="fw-bold text-primary">@vacante.Titulo</td>
+                                <td class="text-center">
+                                    @if (vacante.EstaActiva)
+                                    {
+                                        <span class="badge-activa">Activa</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge-inactiva">Inactiva</span>
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Acciones de vacante">
+                                        <a asp-action="Solicitudes" asp-route-vacanteId="@vacante.Id" class="btn btn-info text-white" title="Ver Solicitudes">
+                                            <i class="fa-solid fa-users"></i>
+                                        </a>
+
+                                        <a asp-action="Details" asp-route-id="@vacante.Id" class="btn btn-outline-info" title="Ver Detalles">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+
+                                        <a asp-action="Edit" asp-route-id="@vacante.Id" class="btn btn-outline-warning" title="Editar Vacante">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+
+                                        @if (vacante.EstaActiva)
+                                        {
+                                            <button type="button" class="btn btn-outline-danger" title="Deshabilitar Vacante"
+                                                    data-bs-toggle="modal" data-bs-target="#deshabilitarModal"
+                                                    data-vacante-id="@vacante.Id" data-vacante-titulo="@vacante.Titulo">
+                                                <i class="fa-solid fa-ban"></i>
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="btn btn-outline-success" title="Habilitar Vacante (Re-activar)"
+                                                    data-bs-toggle="modal" data-bs-target="#habilitarModal"
+                                                    data-vacante-id="@vacante.Id" data-vacante-titulo="@vacante.Titulo">
+                                                <i class="fa-solid fa-circle-check"></i>
+                                            </button>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="d-md-none mt-3">
+                <h5 class="mb-3 small-muted">Vacantes:</h5>
+                @foreach (var vacante in Model)
+                {
+                    <div class="mobile-card mb-3 @(vacante.EstaActiva ? "border-start border-success border-4" : "border-start border-secondary border-4")">
+                        <div class="card-body p-3">
+                            <h5 class="card-title text-primary mb-2"><i class="fa-solid fa-tag me-2"></i> @vacante.Titulo</h5>
+
+                            <div class="mb-3">
+                                <strong class="me-2">Estado:</strong>
                                 @if (vacante.EstaActiva)
                                 {
-                                    <span class="badge bg-success py-2 px-3">Activa</span>
+                                    <span class="badge-activa py-1 px-2">Activa</span>
                                 }
                                 else
                                 {
-                                    <span class="badge bg-secondary py-2 px-3">Inactiva</span>
+                                    <span class="badge-inactiva py-1 px-2">Inactiva</span>
                                 }
-                            </td>
-                            <td class="text-center">
-                                <div class="btn-group btn-group-sm" role="group" aria-label="Acciones de vacante">
-                                    
-                                    <a asp-action="Solicitudes" asp-route-vacanteId="@vacante.Id" class="btn btn-info text-white" title="Ver Solicitudes">
-                                        <i class="fa-solid fa-users"></i>
-                                    </a>
-                                    
-                                    <a asp-action="Details" asp-route-id="@vacante.Id" class="btn btn-outline-info" title="Ver Detalles">
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <a asp-action="Solicitudes" asp-route-vacanteId="@vacante.Id" class="btn btn-info text-white btn-sm">
+                                    <i class="fa-solid fa-users me-2"></i> Ver Solicitudes
+                                </a>
+
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a asp-action="Details" asp-route-id="@vacante.Id" class="btn btn-outline-info flex-fill">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
-                                    <a asp-action="Edit" asp-route-id="@vacante.Id" class="btn btn-outline-warning" title="Editar Vacante">
+                                    <a asp-action="Edit" asp-route-id="@vacante.Id" class="btn btn-outline-warning flex-fill">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
 
                                     @if (vacante.EstaActiva)
                                     {
-                                       
-                                        <button type="button" class="btn btn-outline-danger" title="Deshabilitar Vacante"
-                                                data-bs-toggle="modal" data-bs-target="#deshabilitarModal" 
+                                        <button type="button" class="btn btn-outline-danger flex-fill" title="Deshabilitar Vacante"
+                                                data-bs-toggle="modal" data-bs-target="#deshabilitarModal"
                                                 data-vacante-id="@vacante.Id" data-vacante-titulo="@vacante.Titulo">
                                             <i class="fa-solid fa-ban"></i>
                                         </button>
                                     }
                                     else
                                     {
-                                       
-                                        <button type="button" class="btn btn-outline-success" title="Habilitar Vacante (Re-activar)"
-                                                data-bs-toggle="modal" data-bs-target="#habilitarModal" 
+                                        <button type="button" class="btn btn-outline-success flex-fill" title="Habilitar Vacante (Re-activar)"
+                                                data-bs-toggle="modal" data-bs-target="#habilitarModal"
                                                 data-vacante-id="@vacante.Id" data-vacante-titulo="@vacante.Titulo">
                                             <i class="fa-solid fa-circle-check"></i>
                                         </button>
                                     }
-
                                 </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-
-        
-        <div class="d-md-none">
-            <h5 class="mb-3 text-muted">Vacantes:</h5>
-            @foreach (var vacante in Model)
-            {
-                <div class="card mb-3 shadow-sm border-start @(vacante.EstaActiva ? "border-success" : "border-secondary") border-4">
-                    <div class="card-body">
-                        <h5 class="card-title text-primary"><i class="fa-solid fa-tag me-2"></i> @vacante.Titulo</h5>
-                        
-                        <div class="mb-3">
-                            <strong class="me-2">Estado:</strong>
-                            @if (vacante.EstaActiva)
-                            {
-                                <span class="badge bg-success py-1 px-2">Activa</span>
-                            }
-                            else
-                            {
-                                <span class="badge bg-secondary py-1 px-2">Inactiva</span>
-                            }
-                        </div>
-
-                        <div class="d-grid gap-2">
-                            <a asp-action="Solicitudes" asp-route-vacanteId="@vacante.Id" class="btn btn-info text-white btn-sm">
-                                <i class="fa-solid fa-users me-2"></i> Ver Solicitudes
-                            </a>
-                            <div class="btn-group btn-group-sm" role="group">
-                                <a asp-action="Details" asp-route-id="@vacante.Id" class="btn btn-outline-info flex-fill">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
-                                <a asp-action="Edit" asp-route-id="@vacante.Id" class="btn btn-outline-warning flex-fill">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                                
-                                @if (vacante.EstaActiva)
-                                {
-                                    
-                                    <button type="button" class="btn btn-outline-danger flex-fill" title="Deshabilitar Vacante"
-                                            data-bs-toggle="modal" data-bs-target="#deshabilitarModal" 
-                                            data-vacante-id="@vacante.Id" data-vacante-titulo="@vacante.Titulo">
-                                        <i class="fa-solid fa-ban"></i>
-                                    </button>
-                                }
-                                else
-                                {
-                                   
-                                    <button type="button" class="btn btn-outline-success flex-fill" title="Habilitar Vacante (Re-activar)"
-                                            data-bs-toggle="modal" data-bs-target="#habilitarModal" 
-                                            data-vacante-id="@vacante.Id" data-vacante-titulo="@vacante.Titulo">
-                                        <i class="fa-solid fa-circle-check"></i>
-                                    </button>
-                                }
                             </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
     }
 </div>
 
-@* ======================================== *@
-@* MODAL DE CONFIRMACIÓN PARA DESHABILITAR *@
-@* ======================================== *@
+<!-- Modales -->
 <div class="modal fade" id="deshabilitarModal" tabindex="-1" aria-labelledby="deshabilitarModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -202,7 +425,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p id="deshabilitar-modal-message"></p>
+                <p id="deshabilitar-modal-message" class="small-muted"></p>
                 <p class="small text-muted">Esta acción oculta el puesto de los solicitantes. Puede reactivarlo más tarde.</p>
             </div>
             <div class="modal-footer">
@@ -217,9 +440,6 @@
     </div>
 </div>
 
-@* ======================================== *@
-@* MODAL DE CONFIRMACIÓN PARA HABILITAR (NUEVO) *@
-@* ======================================== *@
 <div class="modal fade" id="habilitarModal" tabindex="-1" aria-labelledby="habilitarModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -228,7 +448,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p id="habilitar-modal-message"></p>
+                <p id="habilitar-modal-message" class="small-muted"></p>
                 <p class="small text-muted">Esta acción reactivará el puesto, haciéndolo visible inmediatamente para los solicitantes.</p>
             </div>
             <div class="modal-footer">
@@ -245,36 +465,36 @@
 
 @section Scripts {
     <script>
-       
-        var deshabilitarModal = document.getElementById('deshabilitarModal');
-        if (deshabilitarModal) {
-            deshabilitarModal.addEventListener('show.bs.modal', function (event) {
-                var button = event.relatedTarget; 
-                var vacanteId = button.getAttribute('data-vacante-id');
-                var vacanteTitulo = button.getAttribute('data-vacante-titulo');
+        (function () {
+            var deshabilitarModal = document.getElementById('deshabilitarModal');
+            if (deshabilitarModal) {
+                deshabilitarModal.addEventListener('show.bs.modal', function (event) {
+                    var button = event.relatedTarget;
+                    var vacanteId = button.getAttribute('data-vacante-id');
+                    var vacanteTitulo = button.getAttribute('data-vacante-titulo');
 
-                var modalMessage = deshabilitarModal.querySelector('#deshabilitar-modal-message');
-                var vacanteIdInput = deshabilitarModal.querySelector('#deshabilitarIdInput');
+                    var modalMessage = deshabilitarModal.querySelector('#deshabilitar-modal-message');
+                    var vacanteIdInput = deshabilitarModal.querySelector('#deshabilitarIdInput');
 
-                modalMessage.innerHTML = `¿Está seguro de querer **Deshabilitar** la vacante: <strong>${vacanteTitulo}</strong>?`;
-                vacanteIdInput.value = vacanteId;
-            });
-        }
-        
-       
-        var habilitarModal = document.getElementById('habilitarModal');
-        if (habilitarModal) {
-            habilitarModal.addEventListener('show.bs.modal', function (event) {
-                var button = event.relatedTarget; 
-                var vacanteId = button.getAttribute('data-vacante-id');
-                var vacanteTitulo = button.getAttribute('data-vacante-titulo');
+                    modalMessage.textContent = `¿Está seguro de querer Deshabilitar la vacante: ${vacanteTitulo}?`;
+                    vacanteIdInput.value = vacanteId;
+                });
+            }
 
-                var modalMessage = habilitarModal.querySelector('#habilitar-modal-message');
-                var vacanteIdInput = habilitarModal.querySelector('#habilitarIdInput');
+            var habilitarModal = document.getElementById('habilitarModal');
+            if (habilitarModal) {
+                habilitarModal.addEventListener('show.bs.modal', function (event) {
+                    var button = event.relatedTarget;
+                    var vacanteId = button.getAttribute('data-vacante-id');
+                    var vacanteTitulo = button.getAttribute('data-vacante-titulo');
 
-                modalMessage.innerHTML = `¿Está seguro de querer **Habilitar** (Re-activar) la vacante: <strong>${vacanteTitulo}</strong>?`;
-                vacanteIdInput.value = vacanteId;
-            });
-        }
+                    var modalMessage = habilitarModal.querySelector('#habilitar-modal-message');
+                    var vacanteIdInput = habilitarModal.querySelector('#habilitarIdInput');
+
+                    modalMessage.textContent = `¿Está seguro de querer Habilitar (Re-activar) la vacante: ${vacanteTitulo}?`;
+                    vacanteIdInput.value = vacanteId;
+                });
+            }
+        })();
     </script>
 }

@@ -1,29 +1,79 @@
 ﻿@model string
 
-<div class="bg-dark border-end text-white" id="sidebar-wrapper">
-    <div class="sidebar-heading text-center py-4 border-bottom bg-primary">
-        <i class="fa-solid fa-briefcase fa-lg"></i> EteriumTech
+<!-- Estilos embebidos con paleta personalizada -->
+<style>
+    #sidebar-wrapper {
+        min-height: 100vh;
+        background-color: #0b1f3a;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.4);
+        transition: all 0.3s ease;
+    }
+
+    .sidebar-heading {
+        font-size: 1.5rem;
+        font-weight: 600;
+        background-color: #1c3d6e;
+        color: #f5f5f0;
+        border-bottom: 1px solid #16345c;
+        padding: 1rem;
+    }
+
+    .list-group-item {
+        background-color: transparent;
+        color: #f5f5f0;
+        border: none;
+        padding: 1rem 1.25rem;
+        font-size: 1rem;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+        .list-group-item:hover {
+            background-color: #1c3d6e;
+            color: #f5f5f0;
+            transform: translateX(5px);
+        }
+
+        .list-group-item i {
+            margin-right: 0.5rem;
+        }
+
+    .badge-role {
+        background-color: #6b7c4f;
+        color: #f5f5f0;
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 6px;
+        margin-left: 0.5rem;
+    }
+</style>
+
+<div id="sidebar-wrapper">
+    <div class="sidebar-heading text-center">
+        <i class="fa-solid fa-briefcase fa-lg me-2"></i> EteriumTech
     </div>
     <div class="list-group list-group-flush">
         <a asp-controller="Home" asp-action="Index"
-           class="list-group-item list-group-item-action bg-dark text-white">
-           <i class="fa-solid fa-house"></i> Inicio
+           class="list-group-item list-group-item-action">
+            <i class="fa-solid fa-house"></i> Inicio
         </a>
 
         @if (Model == "Admin")
         {
             <a asp-controller="Usuarios" asp-action="Index"
-               class="list-group-item list-group-item-action bg-dark text-white">
-               <i class="fa-solid fa-users"></i> Usuarios
+               class="list-group-item list-group-item-action">
+                <i class="fa-solid fa-users"></i> Usuarios
             </a>
             <a asp-controller="Vacantes" asp-action="Index"
-               class="list-group-item list-group-item-action bg-dark text-white">
-               <i class="fa-solid fa-clipboard-list"></i> Vacantes
+               class="list-group-item list-group-item-action">
+                <i class="fa-solid fa-clipboard-list"></i> Vacantes
             </a>
         }
         else if (Model == "Solicitante")
         {
-            
+            <!-- Puedes agregar ítems específicos para solicitantes aquí -->
         }
     </div>
 </div>
+
+<!-- Font Awesome para íconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />

@@ -9,7 +9,7 @@ namespace ReclutamientoFrontend.WebApp.Models.Dtos
     {
         public int Id { get; set; }
 
-
+        [Required(ErrorMessage = "El nombre completo es obligatorio")]
         public string? NombreCompleto { get; set; }
 
         public string? CorreoElectronico { get; set; }

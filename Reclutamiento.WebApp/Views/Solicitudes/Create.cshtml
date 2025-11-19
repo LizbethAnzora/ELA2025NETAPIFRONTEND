@@ -3,35 +3,198 @@
 @{
     ViewData["Title"] = "Aplicar a Vacante";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
+
     var vacanteTitulo = ViewBag.VacanteTitulo as string ?? "Vacante Desconocida";
 }
 
-<h1 class="mb-4 text-success"><i class="fa-solid fa-paper-plane"></i> Aplicar a @vacanteTitulo</h1>
+<!-- Google Fonts y Font Awesome -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<!-- Estilos embebidos con paleta personalizada y tarjeta semitransparente -->
+<style>
+    :root {
+        --navy: #0b1f3a;
+        --blue-mid: #1c3d6e;
+        --cream: #f5f5f0;
+        --beige: #e2d8c3;
+        --olive: #6b7c4f;
+        --muted: #999;
+        --danger: #dc3545;
+    }
+
+    body {
+        background-color: var(--navy);
+        font-family: 'Poppins', sans-serif;
+        color: var(--cream);
+    }
+
+    h1 {
+        font-weight: 700;
+        color: var(--cream);
+    }
+
+    /* Tarjeta semitransparente: overlay beige con transparencia y desenfoque de fondo */
+    .card {
+        border-radius: 16px;
+        background: rgba(226, 216, 195, 0.88); /* beige translúcido */
+        backdrop-filter: blur(6px); /* desenfoque sutil del fondo (soporta navegadores modernos) */
+        -webkit-backdrop-filter: blur(6px);
+        border: 1px solid rgba(255,255,255,0.06);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        box-shadow: 0 12px 30px rgba(2,10,20,0.45);
+    }
+
+
+    .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 50px rgba(2,10,20,0.55);
+    }
+
+    .card-body {
+        padding: 1.5rem;
+        color: var(--blue-mid);
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: var(--blue-mid);
+    }
+
+    .form-control {
+        border-radius: 10px;
+        background-color: var(--cream);
+        color: var(--blue-mid);
+        border: 1px solid rgba(28,61,110,0.12);
+        padding: 0.6rem 0.75rem;
+        transition: box-shadow 0.2s ease, transform 0.15s ease;
+    }
+
+        .form-control::placeholder {
+            color: var(--muted);
+        }
+
+        .form-control:focus {
+            background-color: #ffffff;
+            box-shadow: 0 0 0 0.2rem rgba(28,61,110,0.16);
+            outline: none;
+        }
+
+    .section-heading {
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin-top: 1.75rem;
+        margin-bottom: 1rem;
+        color: var(--blue-mid);
+    }
+
+    .preview-box {
+        height: 150px;
+        width: 150px;
+        margin: auto;
+        border: 2px dashed rgba(28,61,110,0.18);
+        border-radius: 10px;
+        background-color: var(--cream);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: box-shadow 0.2s ease, transform 0.15s ease;
+    }
+
+        .preview-box:hover {
+            box-shadow: 0 8px 20px rgba(2,10,20,0.25);
+            transform: translateY(-4px);
+        }
+
+        .preview-box img {
+            max-height: 100%;
+            max-width: 100%;
+            display: none;
+            border-radius: 8px;
+        }
+
+    .preview-placeholder {
+        color: rgba(28,61,110,0.7);
+    }
+
+    .btn {
+        border-radius: 10px;
+        font-weight: 600;
+        padding: 0.6rem 1rem;
+        transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+    .btn-success {
+        background-color: var(--olive);
+        border: none;
+        color: var(--cream);
+        box-shadow: 0 6px 18px rgba(107,124,79,0.18);
+    }
+
+        .btn-success:hover {
+            background-color: #5a6a42;
+        }
+
+    .btn-danger {
+        background-color: var(--danger);
+        border: none;
+        color: var(--cream);
+        box-shadow: 0 6px 18px rgba(220,53,69,0.14);
+    }
+
+        .btn-danger:hover {
+            background-color: #b02a37;
+        }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #842029;
+        border: 1px solid #842029;
+        border-radius: 10px;
+    }
+
+    .applied-note {
+        font-size: 0.95rem;
+        color: rgba(28,61,110,0.9);
+    }
+
+    .muted-small {
+        color: var(--muted);
+    }
+
+    hr {
+        border-top: 1px solid rgba(28,61,110,0.12);
+    }
+
+   
+</style>
+
+<h1 class="mb-4"><i class="fa-solid fa-paper-plane"></i> Aplicar a @vacanteTitulo</h1>
 
 <div class="card shadow-lg border-0">
     <div class="card-body p-4">
-        
         <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
             <input type="hidden" asp-for="IdVacante" />
             <input type="hidden" asp-for="Foto" id="FotoBase64" />
 
-            <div class="mb-4 p-3 bg-light rounded border">
+            <div class="mb-4 p-3 rounded" style="background-color:var(--cream);">
                 <label class="form-label fw-bold">Aplicando a:</label>
                 <input type="text" class="form-control" value="@vacanteTitulo" readonly />
             </div>
 
-            <h5 class="text-primary mb-3"><i class="fa-solid fa-user me-2"></i> Datos de Contacto</h5>
-            
+            <div class="section-heading"><i class="fa-solid fa-user me-2"></i> Datos de Contacto</div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label asp-for="NombreCompleto" class="form-label">Nombre Completo</label>
                     <input asp-for="NombreCompleto" class="form-control" placeholder="Ej: Juan Pérez" />
                     <span asp-validation-for="NombreCompleto" class="text-danger"></span>
                 </div>
-
                 <div class="col-md-6 mb-3">
                     <label asp-for="NumeroTelefono" class="form-label">Número de Teléfono</label>
                     <input asp-for="NumeroTelefono" class="form-control" placeholder="Ej: 503-xxxx-xxxx" />
@@ -45,27 +208,27 @@
                 <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
             </div>
 
-            <h5 class="text-primary mb-3 mt-4"><i class="fa-solid fa-info-circle me-2"></i> Experiencia y Habilidades</h5>
+            <div class="section-heading"><i class="fa-solid fa-info-circle me-2"></i> Experiencia y Habilidades</div>
             <div class="mb-4">
                 <label asp-for="CamposPersonalizados" class="form-label">Cuéntanos sobre tu Experiencia (requerido)</label>
-                <textarea asp-for="CamposPersonalizados" rows="6" class="form-control" 
-                          placeholder="Describe tu experiencia laboral relevante y habilidades."></textarea>
+                <textarea asp-for="CamposPersonalizados" rows="6" class="form-control" placeholder="Describe tu experiencia laboral relevante y habilidades."></textarea>
                 <span asp-validation-for="CamposPersonalizados" class="text-danger"></span>
             </div>
 
-            <h5 class="text-primary mb-3 mt-4"><i class="fa-solid fa-image me-2"></i> Fotografía Personal</h5>
-            <div class="row">
+            <div class="section-heading"><i class="fa-solid fa-image me-2"></i> Fotografía Personal</div>
+            <div class="row align-items-center">
                 <div class="col-md-6 mb-3">
                     <label for="fileInput" class="form-label">Subir Foto (JPG, PNG)</label>
                     <input type="file" id="fileInput" accept="image/png, image/jpeg" class="form-control" required />
-                    <small class="text-muted">Por favor, sube una foto clara y profesional.</small>
-                    </div>
+                    <small class="text-muted muted-small">Por favor, sube una foto clara y profesional.</small>
+                </div>
                 <div class="col-md-6 mb-3 text-center">
                     <label class="form-label">Vista Previa</label>
-                    <div class="border p-2 rounded d-flex justify-content-center align-items-center" style="height: 150px; width: 150px; margin: auto;">
-                        <img id="imagePreview" src="" alt="Vista Previa de Foto" class="img-fluid rounded" style="max-height: 100%; max-width: 100%; display: none;" />
-                        <span id="previewPlaceholder" class="text-muted"><i class="fa-solid fa-camera fa-2x"></i></span>
+                    <div class="preview-box">
+                        <img id="imagePreview" src="" alt="Vista Previa de Foto" class="img-fluid rounded" />
+                        <span id="previewPlaceholder" class="preview-placeholder"><i class="fa-solid fa-camera fa-2x"></i></span>
                     </div>
+                    <div class="applied-note mt-2">Formato recomendado: JPG/PNG; tamaño máximo sugerido 2MB</div>
                 </div>
             </div>
 
@@ -75,7 +238,6 @@
                 <a asp-action="Index" asp-controller="Home" class="btn btn-danger">
                     <i class="fa-solid fa-xmark me-1"></i> Cancelar
                 </a>
-                
                 <button type="submit" class="btn btn-success">
                     <i class="fa-solid fa-floppy-disk me-1"></i> Guardar y Enviar
                 </button>
@@ -84,38 +246,29 @@
     </div>
 </div>
 
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     <script>
         $(document).ready(function () {
-            // Manejador del cambio de archivo
             $('#fileInput').on('change', function (event) {
                 var file = event.target.files[0];
                 if (file) {
                     var reader = new FileReader();
-
                     reader.onload = function (e) {
-                        
                         $('#imagePreview').attr('src', e.target.result).show();
                         $('#previewPlaceholder').hide();
-                        
-                        
                         $('#FotoBase64').val(e.target.result);
                     };
-
-                  
                     reader.readAsDataURL(file);
                 } else {
-                    
                     $('#imagePreview').attr('src', '').hide();
                     $('#previewPlaceholder').show();
                     $('#FotoBase64').val('');
                 }
             });
-            
-           
+
             $('form').on('submit', function (e) {
                 if ($('#FotoBase64').val() === "") {
                     alert('Por favor, sube una foto para completar la solicitud.');

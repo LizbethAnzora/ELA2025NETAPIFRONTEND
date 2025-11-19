@@ -4,30 +4,225 @@
     ViewData["Title"] = "Gestión de Administradores";
 }
 
-<div class="container py-4">
-    
-    <h3 class="mb-4 text-primary fw-bold"><i class="fa-solid fa-users-cog me-2"></i> Panel de Administradores</h3>
+<!-- Google Fonts y Font Awesome -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-    <div class="card shadow-lg mb-4 border-0">
+<!-- Estilos embebidos con paleta: azul marino, azul medio, crema, beige, verde oliva -->
+<style>
+    :root {
+        --navy: #0b1f3a;
+        --blue-mid: #1c3d6e;
+        --cream: #f5f5f0;
+        --beige: rgba(226,216,195,0.94);
+        --olive: #6b7c4f;
+        --muted: #9aa3b2;
+        --danger: #dc3545;
+        --glass-border: rgba(255,255,255,0.06);
+    }
+
+    body {
+        background-color: var(--navy);
+        font-family: 'Poppins', sans-serif;
+        color: var(--cream);
+    }
+
+    .container {
+        padding-top: 1.5rem;
+        padding-bottom: 2rem;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--cream);
+        display: flex;
+        align-items: center;
+        gap: .6rem;
+    }
+
+    /* Panel superior: tarjeta semitransparente para dejar ver el fondo */
+    .card.panel {
+        border-radius: 14px;
+        background: rgba(226,216,195,0.08); /* ligero glass sobre fondo marino */
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 10px 30px rgba(2,10,20,0.45);
+    }
+
+        .card.panel .btn-success {
+            background-color: var(--olive);
+            border: none;
+            color: var(--cream);
+        }
+
+        .card.panel .btn-primary {
+            background-color: var(--blue-mid);
+            border: none;
+            color: var(--cream);
+        }
+
+        .card.panel .form-control {
+            background-color: rgba(245,245,240,0.12);
+            color: var(--cream);
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+
+            .card.panel .form-control::placeholder {
+                color: rgba(245,245,240,0.6);
+            }
+
+    /* Tabla principal: tarjetas claras sobre vidrio para contraste y legibilidad */
+    .table-wrapper {
+        background: linear-gradient(180deg, rgba(226,216,195,0.97), rgba(226,216,195,0.94));
+        border-radius: 12px;
+        padding: 0.6rem;
+        box-shadow: 0 12px 30px rgba(2,10,20,0.35);
+        overflow: hidden;
+    }
+
+    table.table {
+        background: transparent;
+        margin-bottom: 0;
+        color: var(--blue-mid);
+    }
+
+        table.table thead th {
+            background: rgba(28,61,110,0.12);
+            color: var(--blue-mid);
+            font-weight: 700;
+            border-bottom: 1px solid rgba(28,61,110,0.08);
+        }
+
+        table.table tbody tr {
+            background: rgba(255,255,255,0.0);
+            transition: background-color 0.18s ease, transform 0.12s ease;
+        }
+
+            table.table tbody tr:hover {
+                background: rgba(28,61,110,0.04);
+                transform: translateY(-2px);
+            }
+
+    td, th {
+        vertical-align: middle;
+    }
+
+    .text-primary {
+        color: var(--blue-mid) !important;
+        font-weight: 700;
+    }
+
+    /* Botones de acción: estilos coherentes con paleta */
+    .btn-outline-info {
+        color: var(--blue-mid);
+        border-color: rgba(28,61,110,0.2);
+        background: rgba(28,61,110,0.04);
+    }
+
+    .btn-outline-warning {
+        color: #8a6d1c;
+        border-color: rgba(138,109,28,0.15);
+        background: rgba(138,109,28,0.03);
+    }
+
+    .btn-outline-danger {
+        color: var(--danger);
+        border-color: rgba(220,53,69,0.12);
+        background: rgba(220,53,69,0.03);
+    }
+
+    .btn-outline-info:hover {
+        background-color: var(--blue-mid);
+        color: var(--cream);
+        border-color: transparent;
+    }
+
+    .btn-outline-warning:hover {
+        background-color: #d7b84a;
+        color: #0b1f3a;
+        border-color: transparent;
+    }
+
+    .btn-outline-danger:hover {
+        background-color: var(--danger);
+        color: var(--cream);
+        border-color: transparent;
+    }
+
+    .btn-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(107,124,79,0.14);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(28,61,110,0.14);
+    }
+
+    /* Alertas y estados vacíos */
+    .alert-empty {
+        border-radius: 12px;
+        background: rgba(226,216,195,0.12);
+        color: var(--cream);
+        border: 1px solid var(--glass-border);
+        box-shadow: 0 8px 20px rgba(2,10,20,0.25);
+    }
+
+        .alert-empty h4 {
+            color: var(--cream);
+        }
+
+        .alert-empty p {
+            color: rgba(245,245,240,0.85);
+        }
+
+    /* Mobile cards */
+    .mobile-card {
+        background: linear-gradient(180deg, rgba(226,216,195,0.98), rgba(226,216,195,0.94));
+        border-radius: 12px;
+        padding: 0.75rem;
+        box-shadow: 0 8px 20px rgba(2,10,20,0.18);
+    }
+
+        .mobile-card .card-title {
+            color: var(--blue-mid);
+            font-weight: 700;
+        }
+
+    /* Small tweaks */
+    .small-muted {
+        color: var(--muted);
+        font-size: 0.9rem;
+    }
+
+    .gap-sm {
+        gap: .5rem;
+    }
+</style>
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3><i class="fa-solid fa-users-cog"></i> Panel de Administradores</h3>
+    </div>
+
+    <div class="card panel shadow-sm mb-4 border-0">
         <div class="card-body py-3">
             <div class="row g-2 align-items-center justify-content-between">
-                
                 <div class="col-12 col-md-3 order-md-2 d-grid">
                     <a asp-action="Crear" class="btn btn-success shadow-sm btn-md">
                         <i class="fa-solid fa-user-plus me-2"></i> Añadir Admin
                     </a>
                 </div>
-
                 <div class="col-12 col-md-9 order-md-1">
                     <form method="get" asp-action="Index" class="input-group">
-                        <input 
-                            type="text" 
-                            id="filtroNombre" 
-                            name="nombre" 
-                            class="form-control" 
-                            placeholder="Buscar por Nombre Completo..." 
-                            value="@Context.Request.Query["nombre"]" 
-                        />
+                        <input type="text"
+                               id="filtroNombre"
+                               name="nombre"
+                               class="form-control"
+                               placeholder="Buscar por Nombre Completo..."
+                               value="@Context.Request.Query["nombre"]" />
                         <button type="submit" class="btn btn-primary btn-md">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -42,7 +237,7 @@
 
     @if (!Model.Any())
     {
-        <div class="alert alert-info text-center mt-5 p-4 shadow-lg" role="alert">
+        <div class="alert-empty text-center mt-5 p-4 shadow-lg" role="alert">
             <i class="fa-solid fa-box-open fa-2x mb-2"></i><br>
             <h4 class="alert-heading">Sin Administradores Registrados</h4>
             <p class="mb-0">No se encontraron usuarios con los criterios de búsqueda aplicados.</p>
@@ -50,63 +245,66 @@
     }
     else
     {
-        <div class="table-responsive d-none d-md-block">
-            <table class="table table-hover align-middle bg-white shadow-lg rounded">
-                <thead class="bg-light text-muted border-bottom border-secondary border-2">
-                    <tr>
-                        <th style="width: 35%;" class="py-3">Nombre Completo</th>
-                        <th style="width: 35%;" class="py-3">Correo Electrónico</th>
-                        <th class="text-center py-3" style="width: 30%;">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var usuario in Model)
-                    {
-                        <tr class="border-bottom">
-                            <td class="fw-bold text-primary">@usuario.NombreCompleto</td>
-                            <td>@usuario.CorreoElectronico</td>
-                            <td class="text-center">
-                                <div class="btn-group btn-group-sm" role="group" aria-label="Acciones de usuario">
-                                    <a asp-action="Detalles" asp-route-id="@usuario.Id" class="btn btn-outline-info" title="Ver Detalles">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </a>
-                                    <a asp-action="Editar" asp-route-id="@usuario.Id" class="btn btn-outline-warning" title="Editar Nombre">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <a asp-action="Eliminar" asp-route-id="@usuario.Id" class="btn btn-outline-danger" title="Eliminar Usuario">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </a>
-                                </div>
-                            </td>
+        <div class="table-wrapper mt-2">
+            <div class="table-responsive d-none d-md-block">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th style="width: 35%;" class="py-3">Nombre Completo</th>
+                            <th style="width: 35%;" class="py-3">Correo Electrónico</th>
+                            <th class="text-center py-3" style="width: 30%;">Acciones</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        @foreach (var usuario in Model)
+                        {
+                            <tr class="border-bottom">
+                                <td class="fw-bold text-primary">@usuario.NombreCompleto</td>
+                                <td>@usuario.CorreoElectronico</td>
+                                <td class="text-center">
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="Acciones de usuario">
+                                        <a asp-action="Detalles" asp-route-id="@usuario.Id" class="btn btn-outline-info" title="Ver Detalles">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <a asp-action="Editar" asp-route-id="@usuario.Id" class="btn btn-outline-warning" title="Editar Nombre">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                                        <a asp-action="Eliminar" asp-route-id="@usuario.Id" class="btn btn-outline-danger" title="Eliminar Usuario">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
 
-        <div class="d-md-none">
-            <h5 class="mb-3 text-muted">Resultados:</h5>
-            @foreach (var usuario in Model)
-            {
-                <div class="card mb-3 shadow-sm border-start border-primary border-4">
-                    <div class="card-body">
-                        <h5 class="card-title text-primary"><i class="fa-solid fa-user me-2"></i> @usuario.NombreCompleto</h5>
-                        <p class="card-text text-muted mb-3 small"><i class="fa-solid fa-envelope me-2"></i> @usuario.CorreoElectronico</p>
-                        
-                        <div class="d-flex justify-content-between gap-2">
-                            <a asp-action="Detalles" asp-route-id="@usuario.Id" class="btn btn-info btn-sm flex-fill">
+            <div class="d-md-none mt-3">
+                <h5 class="mb-3 small-muted">Resultados:</h5>
+                @foreach (var usuario in Model)
+                {
+                    <div class="mobile-card mb-3">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h5 class="card-title mb-1"><i class="fa-solid fa-user me-2"></i> @usuario.NombreCompleto</h5>
+                                <p class="card-text small-muted mb-2"><i class="fa-solid fa-envelope me-2"></i> @usuario.CorreoElectronico</p>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-sm mt-2">
+                            <a asp-action="Detalles" asp-route-id="@usuario.Id" class="btn btn-outline-info btn-sm flex-fill">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
-                            <a asp-action="Editar" asp-route-id="@usuario.Id" class="btn btn-warning btn-sm flex-fill">
-                                <i class="fa-solid fa-edit"></i>
+                            <a asp-action="Editar" asp-route-id="@usuario.Id" class="btn btn-outline-warning btn-sm flex-fill">
+                                <i class="fa-solid fa-pen-to-square"></i>
                             </a>
-                            <a asp-action="Eliminar" asp-route-id="@usuario.Id" class="btn btn-danger btn-sm flex-fill">
-                                <i class="fa-solid fa-trash"></i>
+                            <a asp-action="Eliminar" asp-route-id="@usuario.Id" class="btn btn-outline-danger btn-sm flex-fill">
+                                <i class="fa-solid fa-trash-can"></i>
                             </a>
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
     }
 </div>

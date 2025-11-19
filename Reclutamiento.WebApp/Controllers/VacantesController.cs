@@ -153,7 +153,7 @@ namespace ReclutamientoFrontend.WebApp.Controllers
 
             if (ok)
             {
-                TempData["SuccessMessage"] = $"Respuesta enviada con éxito al solicitante ID: {model.SolicitudId}.";
+                TempData["SuccessMessage"] = $"Respuesta enviada con éxito al solicitante.";
             }
             else
             {

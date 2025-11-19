@@ -8,14 +8,199 @@
     ViewData["Title"] = $"Solicitudes para: {vacanteTitulo}";
 }
 
+<!-- Google Fonts y Font Awesome -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<style>
+    :root {
+        --navy: #0b1f3a;
+        --blue-mid: #1c3d6e;
+        --cream: #f5f5f0;
+        --beige: #e2d8c3;
+        --olive: #6b7c4f;
+        --muted: #9aa3b2;
+        --danger: #dc3545;
+    }
+
+    body {
+        background-color: var(--navy);
+        font-family: 'Poppins', sans-serif;
+        color: var(--cream);
+    }
+
+    .container {
+        padding-top: 1.5rem;
+        padding-bottom: 2rem;
+    }
+
+    h4.page-title {
+        font-weight: 700;
+        color: var(--cream);
+        display: flex;
+        align-items: center;
+        gap: .6rem;
+    }
+
+    p.sub-title {
+        color: var(--muted);
+        border-bottom: 1px solid rgba(255,255,255,0.10);
+        padding-bottom: .75rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .btn {
+        border-radius: 10px;
+        font-weight: 600;
+        padding: .5rem .9rem;
+    }
+
+    .btn-secondary {
+        background-color: rgba(245,245,240,0.12);
+        color: var(--cream);
+        border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .btn-success {
+        background-color: var(--olive);
+        color: var(--cream);
+        border: none;
+    }
+
+    .btn-info {
+        background-color: var(--blue-mid);
+        color: var(--cream);
+        border: none;
+    }
+
+    .alert {
+        border-radius: 10px;
+    }
+
+    .alert-success {
+        background-color: #d1e7dd;
+        color: #0f5132;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #842029;
+    }
+
+    .alert-info {
+        background-color: rgba(226,216,195,0.12);
+        color: var(--olive);
+        border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Tabla con apariencia de cards, fondo crema y texto navy/olive */
+    .table-card {
+        background-color: var(--beige);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 12px 30px rgba(2,10,20,0.28);
+        border: none;
+        margin-bottom: 0;
+    }
+
+        /* Head con alto contraste y tipografía fuerte */
+        .table-card thead th {
+            background-color: var(--cream);
+            color: var(--navy);
+            font-weight: 700;
+            font-size: .95rem;
+            border-bottom: 1px solid rgba(28,61,110,0.12);
+            padding: 1rem;
+        }
+
+        /* Filas como tarjetas planas sobre fondo beige */
+        .table-card tbody tr {
+            background-color: var(--beige);
+            transition: transform .12s ease, background-color .12s ease, box-shadow .12s ease;
+        }
+
+            .table-card tbody tr:hover {
+                background-color: #efe7d6;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(2,10,20,0.18);
+            }
+
+        .table-card td {
+            color: var(--navy);
+            padding: 1rem;
+            border-top: 1px solid rgba(28,61,110,0.08);
+            vertical-align: middle;
+        }
+
+        .table-card .cell-title {
+            font-weight: 700;
+            color: var(--blue-mid);
+        }
+
+        .table-card .cell-muted {
+            color: var(--muted);
+        }
+
+    .actions .btn {
+        padding: .45rem .7rem;
+    }
+
+    /* Modal coherente con paleta */
+    .modal-content {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .modal-header.bg-success {
+        background: linear-gradient(90deg, var(--olive), #55704a);
+        color: var(--cream);
+    }
+
+    .modal-body {
+        background-color: var(--cream);
+        color: var(--navy);
+    }
+
+    .modal-footer {
+        background-color: var(--beige);
+    }
+
+        .modal-footer .btn-secondary {
+            background-color: rgba(245,245,240,0.12);
+            color: var(--navy);
+            border: 1px solid rgba(28,61,110,0.12);
+        }
+
+    /* DataTables integration: mantener estilos y funcionalidad */
+    .dataTables_wrapper .dataTables_filter input,
+    .dataTables_wrapper .dataTables_length select {
+        background-color: var(--cream);
+        color: var(--navy);
+        border: 1px solid rgba(28,61,110,0.18);
+        border-radius: 8px;
+        padding: .35rem .5rem;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        color: var(--navy) !important;
+        border: 1px solid rgba(28,61,110,0.18);
+        background: var(--cream);
+        border-radius: 8px;
+        padding: .25rem .6rem;
+        margin: 0 .15rem;
+    }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: #e9e6df !important;
+        }
+</style>
+
 <div class="container py-4">
-    
-    <h4 class="mb-2 text-primary fw-bold"><i class="fa-solid fa-users me-2"></i> Solicitudes</h4>
-    <p class="text-muted border-bottom pb-3 mb-4">
-        Gestión de postulaciones para la vacante: <strong class="text-dark">@vacanteTitulo</strong>
+    <h4 class="page-title mb-2"><i class="fa-solid fa-users"></i> Solicitudes</h4>
+    <p class="sub-title">
+        Gestión de postulaciones para la vacante: <strong>@vacanteTitulo</strong>
     </p>
 
- 
     @if (TempData["SuccessMessage"] != null)
     {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -33,7 +218,7 @@
 
     <div class="mb-4 d-flex justify-content-start">
         <a asp-controller="Vacantes" asp-action="Index" class="btn btn-secondary btn-sm">
-            <i class="fa-solid fa-arrow-left"></i> Volver a Vacantes
+            <i class="fa-solid fa-arrow-left me-2"></i> Volver a Vacantes
         </a>
     </div>
 
@@ -48,33 +233,40 @@
     else
     {
         <div class="table-responsive">
-            <table id="solicitudesTable" class="table table-hover align-middle bg-white shadow-lg rounded">
-                <thead class="bg-light text-muted border-bottom border-secondary border-2">
+            <!-- Mantengo el ID y estructura para no romper DataTables -->
+            <table id="solicitudesTable" class="table table-card table-hover align-middle">
+                <thead>
                     <tr>
-                        <th style="width: 30%;" class="py-3">Nombre del Solicitante</th>
-                        <th style="width: 30%;" class="py-3">Correo Electrónico</th>
-                        <th style="width: 15%;" class="py-3">Teléfono</th> 
-                        <th class="text-center py-3" style="width: 25%;">Acciones</th>
+                        <th style="width: 30%;">Nombre del Solicitante</th>
+                        <th style="width: 30%;">Correo Electrónico</th>
+                        <th style="width: 15%;">Teléfono</th>
+                        <th class="text-center" style="width: 25%;">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var solicitud in Model)
                     {
-                        <tr class="border-bottom">
-                            
-                            <td class="fw-bold text-primary">@solicitud.NombreCompleto</td>
-                            <td>@solicitud.CorreoElectronico</td>
-                            <td>@solicitud.NumeroTelefono</td> 
-                            <td class="text-center">
+                        <tr>
+                            <td class="cell-title">
+                                <i class="fa-solid fa-id-badge me-2 text-primary"></i> @solicitud.NombreCompleto
+                            </td>
+                            <td>
+                                <a href="mailto:@solicitud.CorreoElectronico" class="text-decoration-none" style="color:var(--navy);">
+                                    <i class="fa-solid fa-envelope me-2"></i> @solicitud.CorreoElectronico
+                                </a>
+                            </td>
+                            <td>
+                                <span style="color:var(--olive); font-weight:600;">
+                                    <i class="fa-solid fa-phone me-2"></i> @solicitud.NumeroTelefono
+                                </span>
+                            </td>
+                            <td class="text-center actions">
                                 <div class="btn-group btn-group-sm" role="group">
-                               
                                     <a asp-controller="Solicitudes" asp-action="Details" asp-route-id="@solicitud.Id" class="btn btn-info" title="Ver Solicitud Completa">
-                                        <i class="fa-solid fa-file-alt"></i> Detalles
+                                        <i class="fa-solid fa-file-alt me-1"></i> Detalles
                                     </a>
-                                    
-                                    
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#responderModal-@solicitud.Id" title="Enviar respuesta al candidato">
-                                        <i class="fa-solid fa-reply"></i> Responder
+                                        <i class="fa-solid fa-reply me-1"></i> Responder
                                     </button>
                                 </div>
                             </td>
@@ -86,44 +278,36 @@
     }
 </div>
 
-
 @foreach (var solicitud in Model)
 {
-   
     <div class="modal fade" id="responderModal-@solicitud.Id" tabindex="-1" aria-labelledby="responderModalLabel-@solicitud.Id" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form asp-controller="Vacantes" asp-action="ResponderSolicitud" method="post" novalidate>
-                    
                     <div class="modal-header bg-success text-white">
                         <h5 class="modal-title" id="responderModalLabel-@solicitud.Id">
                             <i class="fa-solid fa-hand-paper me-2"></i> Responder a @solicitud.NombreCompleto
                         </h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    
                     <div class="modal-body">
-                      
                         <input type="hidden" name="SolicitudId" value="@solicitud.Id" />
-                        
                         <div class="alert alert-info py-2 small">
-                            Estás enviando un mensaje a **@solicitud.NombreCompleto** (<a href="mailto:@solicitud.CorreoElectronico" class="alert-link">@solicitud.CorreoElectronico</a>)
+                            Estás enviando un mensaje a <strong>@solicitud.NombreCompleto</strong>
+                            (<a href="mailto:@solicitud.CorreoElectronico" class="alert-link">@solicitud.CorreoElectronico</a>)
                         </div>
-
                         <div class="mb-3">
-                            <label for="ContenidoMensaje" class="form-label fw-bold">Mensaje al Solicitante <span class="text-danger">*</span></label>
+                            <label for="ContenidoMensaje" class="form-label fw-bold" style="color:var(--navy);">Mensaje al Solicitante <span class="text-danger">*</span></label>
                             <textarea name="ContenidoMensaje" class="form-control" rows="4" placeholder="Escriba el mensaje para el candidato..." required></textarea>
-                            <div class="form-text">Este mensaje se enviará por correo electrónico y se guardará como la respuesta.</div>
+                            <div class="form-text cell-muted">Este mensaje se enviará por correo electrónico y se guardará como la respuesta.</div>
                         </div>
-
                     </div>
-                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            <i class="fa-solid fa-xmark"></i> Cerrar
+                            <i class="fa-solid fa-xmark me-1"></i> Cerrar
                         </button>
                         <button type="submit" class="btn btn-success">
-                            <i class="fa-solid fa-paper-plane"></i> Enviar Respuesta
+                            <i class="fa-solid fa-paper-plane me-1"></i> Enviar Respuesta
                         </button>
                     </div>
                 </form>
@@ -132,23 +316,16 @@
     </div>
 }
 
-
 @section Scripts {
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
-    
-    
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#solicitudesTable').DataTable({
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json" // Traducción al español
-                },
-                "columnDefs": [
-                    { "orderable": false, "targets": 3 } 
-                ],
-                "order": [[0, "asc"]] 
+                language: { url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json" },
+                columnDefs: [{ orderable: false, targets: 3 }],
+                order: [[0, "asc"]]
             });
         });
     </script>

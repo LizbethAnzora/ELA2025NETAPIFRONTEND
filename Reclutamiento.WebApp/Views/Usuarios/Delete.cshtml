@@ -4,50 +4,123 @@
     ViewData["Title"] = "Confirmar Eliminación";
 }
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<style>
+    :root {
+        --navy: #0b1f3a;
+        --blue-mid: #1c3d6e;
+        --cream: #f5f5f0;
+        --beige: #e2d8c3;
+        --olive: #6b7c4f;
+        --danger: #dc3545;
+    }
+
+    body {
+        background-color: var(--navy);
+        font-family: 'Poppins',sans-serif;
+        color: var(--cream);
+    }
+
+    .container {
+        padding-top: 1.5rem;
+        padding-bottom: 2rem;
+    }
+
+    .card {
+        border-radius: 14px;
+        background-color: var(--beige);
+        box-shadow: 0 18px 40px rgba(2,10,20,0.35);
+    }
+
+    .card-header {
+        background: linear-gradient(90deg, rgba(220,53,69,0.95), #b02a37);
+        color: var(--cream);
+        padding: 1rem 1.25rem;
+    }
+
+    .card-body {
+        padding: 1.25rem 1.5rem;
+        color: var(--cream);
+    }
+
+    .alert-danger-panel {
+        border-radius: 12px;
+        background: linear-gradient(180deg, rgba(220,53,69,0.06), rgba(220,53,69,0.03));
+        color: #dc3545;
+        border: 1px solid rgba(220,53,69,0.12);
+    }
+
+    .detalle-list {
+        background: var(--blue-mid);
+        color: var(--blue-mid);
+        border-radius: 10px;
+        border: 1px solid rgba(28,61,110,0.06);
+    }
+
+        .detalle-list .list-group-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .9rem 1rem;
+            color: var(--cream);
+        }
+
+    .btn-danger {
+        background: linear-gradient(90deg,var(--danger),#b02a37);
+        border: none;
+        color: var(--cream);
+    }
+
+    .btn-secondary {
+        background-color: rgba(245,245,240,0.12);
+        color: var(--olive);
+        border: 1px solid rgba(255,255,255,0.04);
+    }
+</style>
+
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8 col-sm-12">
             <div class="card shadow-lg border-0">
-                <div class="card-header bg-danger text-white">
+                <div class="card-header">
                     <h4 class="mb-0"><i class="fa-solid fa-user-slash me-2"></i> Confirmar Eliminación</h4>
                 </div>
                 <div class="card-body p-4">
-                    
-                    <div class="alert alert-danger text-center mb-4 border-2 border-danger" role="alert">
-                        <h4 class="alert-heading text-danger"><i class="fa-solid fa-triangle-exclamation fa-lg me-2"></i> ¡Acción Irreversible!</h4>
+                    <div class="alert-danger-panel text-center mb-4 p-3" role="alert">
+                        <h4 class="alert-heading"><i class="fa-solid fa-triangle-exclamation fa-lg me-2"></i> ¡Acción Irreversible!</h4>
                         <p class="mb-0 fw-bold">¿Estás seguro de que quieres eliminar permanentemente a este administrador?</p>
                     </div>
 
                     <h5 class="text-muted mb-3">Detalles del Registro:</h5>
-                    
-                    <ul class="list-group list-group-flush mb-4 border rounded">
+
+                    <ul class="list-group list-group-flush mb-4 detalle-list">
                         <li class="list-group-item">
-                            <strong>Nombre Completo:</strong> 
-                            <span class="float-end text-dark">@Model.NombreCompleto</span>
+                            <span>Nombre Completo</span>
+                            <span class="fw-bold">@Model.NombreCompleto</span>
                         </li>
                         <li class="list-group-item">
-                            <strong>Correo Electrónico:</strong> 
-                            <span class="float-end text-dark">@Model.CorreoElectronico</span>
+                            <span>Correo Electrónico</span>
+                            <span class="fw-bold">@Model.CorreoElectronico</span>
                         </li>
                         <li class="list-group-item">
-                            <strong>Rol:</strong> 
-                            <span class="float-end text-danger fw-bold">ADMINISTRADOR</span>
+                            <span>Rol</span>
+                            <span class="fw-bold text-danger">ADMINISTRADOR</span>
                         </li>
                     </ul>
-                    
-                    <form asp-action="Eliminar" method="post">
-                        <input type="hidden" name="id" value="@Model.Id" /> 
 
+                    <form asp-action="Eliminar" method="post">
+                        <input type="hidden" name="id" value="@Model.Id" />
                         <div class="d-flex flex-column flex-md-row justify-content-end gap-2 pt-3 border-top">
                             <a asp-action="Index" class="btn btn-secondary order-2 order-md-1">
-                                <i class="fa-solid fa-arrow-left"></i> Cancelar
+                                <i class="fa-solid fa-arrow-left me-2"></i> Cancelar
                             </a>
-                            <button type="submit" class="btn btn-danger order-2 order-md-1">
-                                <i class="fa-solid fa-trash-can"></i> Eliminar
+                            <button type="submit" class="btn btn-danger order-1 order-md-2">
+                                <i class="fa-solid fa-trash-can me-2"></i> Eliminar
                             </button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>

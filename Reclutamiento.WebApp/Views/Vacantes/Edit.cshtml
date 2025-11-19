@@ -4,63 +4,185 @@
     ViewData["Title"] = "Editar Vacante";
 }
 
+<!-- Google Fonts y Font Awesome -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<style>
+    :root {
+        --navy: #0b1f3a;
+        --blue-mid: #1c3d6e;
+        --cream: #f5f5f0;
+        --beige: #e2d8c3;
+        --olive: #6b7c4f;
+        --muted: #9aa3b2;
+        --warning-acc: #c48e16;
+        --danger: #dc3545;
+    }
+
+    body {
+        background-color: var(--navy);
+        font-family: 'Poppins',sans-serif;
+        color: var(--cream);
+    }
+
+    .container {
+        padding-top: 1.5rem;
+        padding-bottom: 2rem;
+    }
+
+    .card {
+        border-radius: 14px;
+        background-color: var(--beige);
+        box-shadow: 0 18px 40px rgba(2,10,20,0.35);
+        border: none;
+        overflow: hidden;
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 26px 60px rgba(2,10,20,0.45);
+        }
+
+    .card-header {
+        background: linear-gradient(90deg,var(--warning-acc),#b57e10);
+        color: #0b1f3a;
+        padding: 1rem 1.25rem;
+    }
+
+        .card-header h4 {
+            margin: 0;
+            font-weight: 700;
+            display: flex;
+            gap: .6rem;
+            align-items: center;
+        }
+
+    .card-body {
+        padding: 1.25rem 1.5rem;
+        color: var(--blue-mid);
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: var(--blue-mid);
+    }
+
+    .form-control {
+        border-radius: 10px;
+        background-color: var(--cream);
+        color: var(--blue-mid);
+        border: 1px solid rgba(28,61,110,0.12);
+        padding: .6rem .75rem;
+    }
+
+        .form-control::placeholder {
+            color: var(--muted);
+        }
+
+        .form-control:focus {
+            background-color: #fff;
+            box-shadow: 0 0 0 0.18rem rgba(28,61,110,0.14);
+            outline: none;
+        }
+
+    textarea.form-control {
+        min-height: 120px;
+    }
+
+    .alert-info {
+        border-radius: 10px;
+        background-color: rgba(226,216,195,0.12);
+        color: var(--olive);
+        border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .btn {
+        border-radius: 10px;
+        font-weight: 600;
+        padding: .55rem .9rem;
+        transition: transform .12s ease, box-shadow .12s ease;
+    }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+    .btn-warning {
+        background: linear-gradient(90deg,#d4a11a,#c48e16);
+        border: none;
+        color: #0b1f3a;
+    }
+
+    .btn-secondary {
+        background-color: rgba(245,245,240,0.12);
+        color: var(--olive);
+        border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .text-danger {
+        color: var(--danger) !important;
+    }
+
+    .border-top {
+        border-top: 1px solid rgba(255,255,255,0.04);
+        padding-top: 1rem;
+    }
+</style>
+
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-lg-7 col-md-9 col-sm-12">
             <div class="card shadow-lg border-0">
-                <div class="card-header bg-warning text-dark">
+                <div class="card-header">
                     <h4 class="mb-0"><i class="fa-solid fa-pen-to-square me-2"></i> Editar Vacante</h4>
                 </div>
                 <div class="card-body p-4">
-                    
-                  
                     <form asp-action="Edit" method="post" autocomplete="off" novalidate>
                         @Html.AntiForgeryToken()
-                        
-                        
+
                         <input type="hidden" asp-for="Id" />
                         <input type="hidden" asp-for="EstaActiva" />
-                        
-                        
-                        
+
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert" style="display:@(ViewData.ModelState.IsValid ? "none" : "block")">
+                            <i class="fa-solid fa-triangle-exclamation me-2"></i> Por favor, corrige los errores antes de guardar.
+                        </div>
+
                         <div class="mb-3">
-                            <label asp-for="Titulo" class="form-label fw-bold">Título de la Vacante <span class="text-danger">*</span></label>
+                            <label asp-for="Titulo" class="form-label">Título de la Vacante <span class="text-danger">*</span></label>
                             <input asp-for="Titulo" class="form-control" placeholder="Título del puesto" />
                             <span asp-validation-for="Titulo" class="text-danger small"></span>
                         </div>
-                        
-                      
+
                         <div class="mb-3">
-                            <label asp-for="Ubicacion" class="form-label fw-bold">Ubicación</label>
+                            <label asp-for="Ubicacion" class="form-label">Ubicación</label>
                             <input asp-for="Ubicacion" class="form-control" placeholder="Ej: Remoto, San Salvador, etc." />
                             <span asp-validation-for="Ubicacion" class="text-danger small"></span>
                         </div>
-                        
+
                         <div class="mb-3">
-                            <label asp-for="Descripcion" class="form-label fw-bold">Descripción Completa <span class="text-danger">*</span></label>
+                            <label asp-for="Descripcion" class="form-label">Descripción Completa <span class="text-danger">*</span></label>
                             <textarea asp-for="Descripcion" class="form-control" rows="5" placeholder="Detalle las responsabilidades y el rol..."></textarea>
                             <span asp-validation-for="Descripcion" class="text-danger small"></span>
                         </div>
-                        
-                      
+
                         <div class="mb-4">
-                            <label asp-for="Requisitos" class="form-label fw-bold">Requisitos / Perfil</label>
+                            <label asp-for="Requisitos" class="form-label">Requisitos / Perfil</label>
                             <textarea asp-for="Requisitos" class="form-control" rows="4" placeholder="Lista de requisitos mínimos, tecnologías, experiencia, etc."></textarea>
                             <span asp-validation-for="Requisitos" class="text-danger small"></span>
                         </div>
-                        
-                      
-                        
+
                         <div class="alert alert-info small py-2" role="alert">
-                            <i class="fa-solid fa-info-circle"></i> El estado de la vacante (Activa/Inactiva) se gestiona únicamente desde la vista principal (Index).
+                            <i class="fa-solid fa-info-circle me-2"></i> El estado de la vacante (Activa/Inactiva) se gestiona únicamente desde la vista principal (Index).
                         </div>
 
                         <div class="d-flex flex-column flex-md-row justify-content-end gap-2 pt-3 border-top">
                             <a asp-action="Index" class="btn btn-secondary order-2 order-md-1">
-                                <i class="fa-solid fa-circle-xmark"></i> Cancelar
+                                <i class="fa-solid fa-circle-xmark me-2"></i> Cancelar
                             </a>
                             <button type="submit" class="btn btn-warning order-1 order-md-2">
-                                <i class="fa-solid fa-save"></i> Guardar Cambios
+                                <i class="fa-solid fa-save me-2"></i> Guardar Cambios
                             </button>
                         </div>
                     </form>

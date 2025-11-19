@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj": {}
+    "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj": {
+    "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj",
+        "projectUniqueName": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj",
         "projectName": "Reclutamiento.Tests.Integration",
-        "projectPath": "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Documents\\ReclutamientoFrontend\\Reclutamiento.Tests.Integration\\obj\\",
+        "projectPath": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.Tests.Integration\\Reclutamiento.Tests.Integration.csproj",
+        "packagesPath": "C:\\Users\\ilein\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ilein\\OneDrive\\Desktop\\Reclutamiento Frontend\\Reclutamiento.Tests.Integration\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ilein\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -103,7 +103,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
